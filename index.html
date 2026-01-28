@@ -196,24 +196,17 @@
       <input type="file" id="fileInput" accept=".csv,text/csv" />
     </label>
     <input type="text" id="searchInput" placeholder="Filtrar por nome, versão ou status..." />
-    <label>
-      Status:
-      <select id="statusFilter">
-        <option value="">Todos</option>
-        <option value="UpdateAvailable">UpdateAvailable</option>
-        <option value="UpToDate">UpToDate</option>
-        <option value="Unknown">Unknown</option>
-      </select>
-    </label>
-    <span class="badge">
-      <span class="dot dot-update"></span> UpdateAvailable
-    </span>
-    <span class="badge">
-      <span class="dot dot-ok"></span> UpToDate
-    </span>
-    <span class="badge">
-      <span class="dot dot-unknown"></span> Unknown
-    </span>
+    <div id="statusBadges" style="display: flex; gap: 0.5rem;">
+      <span class="badge" data-status="UpdateAvailable" style="cursor: pointer;">
+        <span class="dot dot-update"></span> UpdateAvailable
+      </span>
+      <span class="badge" data-status="UpToDate" style="cursor: pointer;">
+        <span class="dot dot-ok"></span> UpToDate
+      </span>
+      <span class="badge" data-status="Unknown" style="cursor: pointer;">
+        <span class="dot dot-unknown"></span> Unknown
+      </span>
+    </div>
   </div>
 
   <div style="overflow-x:auto; max-height: 70vh;">
@@ -307,12 +300,13 @@ function parseCsv(text) {
 const state = {
   data: [],
   filtered: [],
-  sort: { key: null, dir: 1 }
+  sort: { key: null, dir: 1 },
+  statusFilter: null,
+  statusDir: 1
 };
 
 const tableBody = document.querySelector('#appsTable tbody');
 const searchInput = document.getElementById('searchInput');
-const statusFilter = document.getElementById('statusFilter');
 
 function statusClass(status) {
   if (!status) return 'status-Unknown';
@@ -353,7 +347,7 @@ function renderTable() {
 
 function applyFilters() {
   const term = searchInput.value.trim().toLowerCase();
-  const status = statusFilter.value;
+  const status = state.statusFilter;
 
   state.filtered = state.data.filter(row => {
     const matchesStatus = !status || (row.Status || '') === status;
@@ -417,13 +411,51 @@ document.getElementById('fileInput').addEventListener('change', e => {
     state.data = data;
     state.filtered = [...state.data];
     state.sort = { key: null, dir: 1 };
+    state.statusFilter = null;
+    state.statusDir = 1;
+    updateBadgeStyles();
     renderTable();
   };
   reader.readAsText(file, 'utf-8');
 });
 
 searchInput.addEventListener('input', applyFilters);
-statusFilter.addEventListener('change', applyFilters);
+
+// Badge filter events
+document.querySelectorAll('#statusBadges .badge').forEach(badge => {
+  badge.addEventListener('click', () => {
+    const status = badge.dataset.status;
+    
+    // Ciclo: neutro -> crescente -> decrescente -> neutro
+    if (state.statusFilter === status) {
+      if (state.statusDir === 1) {
+        state.statusDir = -1;
+      } else {
+        state.statusFilter = null;
+        state.statusDir = 1;
+      }
+    } else {
+      state.statusFilter = status;
+      state.statusDir = 1;
+    }
+    
+    updateBadgeStyles();
+    applyFilters();
+  });
+});
+
+function updateBadgeStyles() {
+  document.querySelectorAll('#statusBadges .badge').forEach(badge => {
+    badge.style.opacity = '0.6';
+    badge.innerHTML = badge.innerHTML.replace(' ↓', '').replace(' ↑', '');
+    
+    if (state.statusFilter === badge.dataset.status) {
+      badge.style.opacity = '1';
+      const arrow = state.statusDir === 1 ? ' ↓' : ' ↑';
+      badge.innerHTML += arrow;
+    }
+  });
+}
 
 document.querySelectorAll('#appsTable thead th').forEach(th => {
   th.addEventListener('click', () => {
