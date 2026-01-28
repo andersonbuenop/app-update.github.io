@@ -298,13 +298,13 @@ function statusClass(status) {
 
 function renderTable() {
   tableBody.innerHTML = '';
-  state.filtered.forEach(row => {
+  state.filtered.forEach((row, index) => {
     const tr = document.createElement('tr');
 
     const websiteLink = row.Website ? `<a href="${row.Website}" target="_blank" rel="noopener noreferrer">link</a>` : '';
 
     tr.innerHTML = `
-      <td style="text-align: center; color: #6b7280;">${row._originalIndex}</td>
+      <td style="text-align: center; color: #6b7280;">${index + 1}</td>
       <td>${row.AppName || ''}</td>
       <td>${row.appversion || ''}</td>
       <td>${row.LatestVersion || ''}</td>
