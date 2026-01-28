@@ -144,12 +144,12 @@
     .dot-ok { background: #4ade80; }
     .dot-unknown { background: #60a5fa; }
     @media (max-width: 768px) {
-      th:nth-child(2),
       th:nth-child(3),
-      th:nth-child(5),
-      td:nth-child(2),
+      th:nth-child(4),
+      th:nth-child(6),
       td:nth-child(3),
-      td:nth-child(5) {
+      td:nth-child(4),
+      td:nth-child(6) {
         display: none;
       }
       table {
@@ -195,6 +195,7 @@
     <table id="appsTable">
       <thead>
         <tr>
+          <th style="width: 50px;">Nº</th>
           <th data-key="AppName">Aplicação</th>
           <th data-key="appversion">AppVersion</th>
           <th data-key="LatestVersion">LatestVersion</th>
@@ -270,8 +271,8 @@ function parseCsv(text) {
   });
 
   const headers = rows[0].map(h => h.replace(/^"|"$/g, ''));
-  const data = rows.slice(1).map(row => {
-    const obj = {};
+  const data = rows.slice(1).map((row, rowIndex) => {
+    const obj = { _originalIndex: rowIndex + 1 };
     headers.forEach((h, idx) => {
       obj[h] = (row[idx] || '').replace(/^"|"$/g, '');
     });
@@ -303,6 +304,7 @@ function renderTable() {
     const websiteLink = row.Website ? `<a href="${row.Website}" target="_blank" rel="noopener noreferrer">link</a>` : '';
 
     tr.innerHTML = `
+      <td style="text-align: center; color: #6b7280;">${row._originalIndex}</td>
       <td>${row.AppName || ''}</td>
       <td>${row.appversion || ''}</td>
       <td>${row.LatestVersion || ''}</td>
