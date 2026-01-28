@@ -101,6 +101,35 @@
       font-size: 0.75rem;
       font-weight: 600;
     }
+    .status-button {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .status-button:hover {
+      opacity: 0.8;
+    }
+    .status-button.status-UpdateAvailable {
+      background: rgba(248, 113, 113, 0.15);
+      color: #fecaca;
+      border: 1px solid rgba(248, 113, 113, 0.4);
+    }
+    .status-button.status-UpToDate {
+      background: rgba(52, 211, 153, 0.15);
+      color: #a7f3d0;
+      border: 1px solid rgba(52, 211, 153, 0.4);
+    }
+    .status-button.status-Unknown {
+      background: rgba(59, 130, 246, 0.15);
+      color: #bfdbfe;
+      border: 1px solid rgba(59, 130, 246, 0.4);
+    }
     .status-UpdateAvailable {
       background: rgba(248, 113, 113, 0.15);
       color: #fecaca;
@@ -144,12 +173,8 @@
     .dot-ok { background: #4ade80; }
     .dot-unknown { background: #60a5fa; }
     @media (max-width: 768px) {
-      th:nth-child(3),
       th:nth-child(4),
-      th:nth-child(6),
-      td:nth-child(3),
-      td:nth-child(4),
-      td:nth-child(6) {
+      td:nth-child(4) {
         display: none;
       }
       table {
@@ -197,11 +222,9 @@
         <tr>
           <th style="width: 50px;">Nº</th>
           <th data-key="AppName">Aplicação</th>
-          <th data-key="appversion">AppVersion</th>
-          <th data-key="LatestVersion">LatestVersion</th>
-          <th data-key="Website">Website</th>
-          <th data-key="InstalledVersion">InstalledVersion</th>
-          <th data-key="Status">Status</th>
+          <th>Versão Instalada</th>
+          <th data-key="LatestVersion">Latest Version</th>
+          <th>Status</th>
         </tr>
       </thead>
       <tbody>
@@ -305,20 +328,24 @@ function renderTable() {
   state.filtered.forEach((row, index) => {
     const tr = document.createElement('tr');
 
-    const websiteLink = row.Website ? `<a href="${row.Website}" target="_blank" rel="noopener noreferrer">link</a>` : '';
+    // Pega a maior versão entre InstalledVersion e appversion
+    const installedVer = parseFloat((row.InstalledVersion || '0').replace(/[^0-9.]/g, '')) || 0;
+    const appVer = parseFloat((row.appversion || '0').replace(/[^0-9.]/g, '')) || 0;
+    const maxVersion = Math.max(installedVer, appVer);
+    const mergedVersion = maxVersion > 0 ? (row.InstalledVersion || row.appversion || '') : '';
+
+    // Status como botão com link para website
+    let statusButton = `<span class="status-pill ${statusClass(row.Status)}">${row.Status || 'Unknown'}</span>`;
+    if (row.Website) {
+      statusButton = `<a href="${row.Website}" target="_blank" rel="noopener noreferrer" class="status-button ${statusClass(row.Status)}">${row.Status || 'Unknown'}</a>`;
+    }
 
     tr.innerHTML = `
       <td style="text-align: center; color: #6b7280;">${index + 1}</td>
       <td>${toTitleCase(row.AppName || '')}</td>
-      <td>${row.appversion || ''}</td>
+      <td>${mergedVersion}</td>
       <td>${row.LatestVersion || ''}</td>
-      <td>${websiteLink}</td>
-      <td>${row.InstalledVersion || ''}</td>
-      <td>
-        <span class="status-pill ${statusClass(row.Status)}">
-          ${row.Status || 'Unknown'}
-        </span>
-      </td>
+      <td>${statusButton}</td>
     `;
     tableBody.appendChild(tr);
   });
