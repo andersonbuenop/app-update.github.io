@@ -296,6 +296,10 @@ function statusClass(status) {
   return 'status-' + status.replace(/\s+/g, '');
 }
 
+function toTitleCase(str) {
+  return str.replace(/\b\w/g, char => char.toUpperCase());
+}
+
 function renderTable() {
   tableBody.innerHTML = '';
   state.filtered.forEach((row, index) => {
@@ -305,7 +309,7 @@ function renderTable() {
 
     tr.innerHTML = `
       <td style="text-align: center; color: #6b7280;">${index + 1}</td>
-      <td>${row.AppName || ''}</td>
+      <td>${toTitleCase(row.AppName || '')}</td>
       <td>${row.appversion || ''}</td>
       <td>${row.LatestVersion || ''}</td>
       <td>${websiteLink}</td>
