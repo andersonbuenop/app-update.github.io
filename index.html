@@ -215,9 +215,9 @@
         <tr>
           <th style="width: 50px;">Nº</th>
           <th data-key="AppName">Aplicação</th>
-          <th>Versão Instalada</th>
+          <th data-key="MergedVersion">Versão Instalada</th>
           <th data-key="LatestVersion">Última Versão Disponível</th>
-          <th>Status</th>
+          <th data-key="Status">Status</th>
         </tr>
       </thead>
       <tbody>
@@ -292,6 +292,11 @@ function parseCsv(text) {
     headers.forEach((h, idx) => {
       obj[h] = (row[idx] || '').replace(/^"|"$/g, '');
     });
+    // Calcula versão mesclada para sorting
+    const installedVer = parseFloat((obj.InstalledVersion || '0').replace(/[^0-9.]/g, '')) || 0;
+    const appVer = parseFloat((obj.appversion || '0').replace(/[^0-9.]/g, '')) || 0;
+    const maxVersion = Math.max(installedVer, appVer);
+    obj.MergedVersion = maxVersion > 0 ? (obj.InstalledVersion || obj.appversion || '') : '';
     return obj;
   });
   return { headers, data };
