@@ -117,19 +117,19 @@
       opacity: 0.8;
     }
     .status-button.status-UpdateAvailable {
-      background: #ff8a65;
+      background: #f553537a;
       color: #ffffff;
-      border: 1px solid #ff7043;
+      border: 1px solid #ffffff;
     }
     .status-button.status-UpToDate {
-      background: #10b981;
+      background: #10b9816c;
       color: #ffffff;
-      border: 1px solid #0f9c6a;
+      border: 1px solid #ffffff;
     }
     .status-button.status-Unknown {
-      background: #3b82f6;
+      background: #458bfc67;
       color: #ffffff;
-      border: 1px solid #2563eb;
+      border: 1px solid #ffffff;
     }
     .status-UpdateAvailable {
       background: #ff8a65;
@@ -142,9 +142,9 @@
       border: 1px solid #0f9c6a;
     }
     .status-Unknown {
-      background: #3b82f6;
+      background: #458bfc67;
       color: #ffffff;
-      border: 1px solid #2563eb;
+      border: 1px solid #ffffff;
     }
     a {
       color: #c2c2c2;
@@ -162,7 +162,7 @@
       padding: 0.1rem 0.6rem;
       font-size: 0.75rem;
       color: #f0f0f0;
-      background: #6d6d6d;
+      background: #929090;
     }
     .dot {
       width: 7px;
@@ -170,14 +170,14 @@
       border-radius: 999px;
       display: inline-block;
     }
-    .dot-update { background: #ec0000; }
+    .dot-update { background: #ff0000; }
     .dot-ok { background: #10b981; }
-    .dot-unknown { background: #3b82f6; }
+    .dot-unknown { background: #0c24fc67; }
 
     /* Badge color accents */
-    .badge[data-status="UpdateAvailable"] { border-color: #ec0000; color: #ec0000; }
-    .badge[data-status="UpToDate"] { border-color: #0f9c6a; color: #0f9c6a; }
-    .badge[data-status="Unknown"] { border-color: #2563eb; color: #2563eb; }
+    .badge[data-status="UpdateAvailable"] { border-color: #ffffff; color: #ffffff; }
+    .badge[data-status="UpToDate"] { border-color: #ffffff; color: #ffffff; }
+    .badge[data-status="Unknown"] { border-color: #ffffff; color: #ffffff; }
     @media (max-width: 768px) {
       th:nth-child(4),
       td:nth-child(4) {
@@ -191,8 +191,8 @@
 </head>
 <body>
 <header>
-  <h1>Inventário de Aplicações</h1>
-  <p>Visualização do CSV de versões instaladas e disponíveis.</p>
+  <h1>Inventário de Aplicações - SCCM Team</h1>
+  <p>Visualização das applications disponiveis no Software Center, versões instaladas e disponíveis.</p>
 </header>
 
 <main>
@@ -346,7 +346,7 @@ function renderTable() {
     }
 
     tr.innerHTML = `
-      <td style="text-align: center; color: #6b7280;">${index + 1}</td>
+      <td style="text-align: center; color: #ffffff;">${index + 1}</td>
       <td>${toTitleCase(row.AppName || '')}</td>
       <td>${mergedVersion}</td>
       <td>${row.LatestVersion || ''}</td>
