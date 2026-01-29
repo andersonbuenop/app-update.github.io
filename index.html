@@ -14,18 +14,18 @@
     header {
       padding: 1.5rem 1rem;
       text-align: center;
-      background: #6d6d6d;
+      background: #f0f0f0;
       border-bottom: 1px solid #c2c2c2;
     }
     header h1 {
       margin: 0;
       font-size: 1.6rem;
-      color: #f0f0f0;
+      color: #ec0000;
     }
     header p {
       margin: 0.3rem 0 0;
       font-size: 0.9rem;
-      color: #c2c2c2;
+      color: #333333;
     }
     main {
       padding: 1rem;
@@ -89,7 +89,7 @@
       background: #6d6d6d;
     }
     tr:nth-child(odd) td {
-      background: #7a7a7a;
+      background: #555555;
     }
     tr:hover td {
       background: #333333;
@@ -117,34 +117,34 @@
       opacity: 0.8;
     }
     .status-button.status-UpdateAvailable {
-      background: rgba(236, 0, 0, 0.15);
-      color: #f0f0f0;
-      border: 1px solid rgba(236, 0, 0, 0.4);
+      background: #ff8a65;
+      color: #ffffff;
+      border: 1px solid #ff7043;
     }
     .status-button.status-UpToDate {
-      background: rgba(109, 109, 109, 0.15);
-      color: #f0f0f0;
-      border: 1px solid rgba(109, 109, 109, 0.4);
+      background: #10b981;
+      color: #ffffff;
+      border: 1px solid #0f9c6a;
     }
     .status-button.status-Unknown {
-      background: rgba(194, 194, 194, 0.15);
-      color: #f0f0f0;
-      border: 1px solid rgba(194, 194, 194, 0.4);
+      background: #3b82f6;
+      color: #ffffff;
+      border: 1px solid #2563eb;
     }
     .status-UpdateAvailable {
-      background: rgba(236, 0, 0, 0.15);
-      color: #f0f0f0;
-      border: 1px solid rgba(236, 0, 0, 0.4);
+      background: #ff8a65;
+      color: #ffffff;
+      border: 1px solid #ff7043;
     }
     .status-UpToDate {
-      background: rgba(109, 109, 109, 0.15);
-      color: #f0f0f0;
-      border: 1px solid rgba(109, 109, 109, 0.4);
+      background: #10b981;
+      color: #ffffff;
+      border: 1px solid #0f9c6a;
     }
     .status-Unknown {
-      background: rgba(194, 194, 194, 0.15);
-      color: #f0f0f0;
-      border: 1px solid rgba(194, 194, 194, 0.4);
+      background: #3b82f6;
+      color: #ffffff;
+      border: 1px solid #2563eb;
     }
     a {
       color: #c2c2c2;
@@ -170,9 +170,14 @@
       border-radius: 999px;
       display: inline-block;
     }
-    .dot-update { background: #ec0000; }
-    .dot-ok { background: #6d6d6d; }
-    .dot-unknown { background: #c2c2c2; }
+    .dot-update { background: #ff8a65; }
+    .dot-ok { background: #10b981; }
+    .dot-unknown { background: #3b82f6; }
+
+    /* Badge color accents */
+    .badge[data-status="UpdateAvailable"] { border-color: #ff7043; color: #ff7043; }
+    .badge[data-status="UpToDate"] { border-color: #0f9c6a; color: #0f9c6a; }
+    .badge[data-status="Unknown"] { border-color: #2563eb; color: #2563eb; }
     @media (max-width: 768px) {
       th:nth-child(4),
       td:nth-child(4) {
