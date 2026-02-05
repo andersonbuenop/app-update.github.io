@@ -223,6 +223,7 @@
           <th data-key="AppName">Aplicação</th>
           <th data-key="MergedVersion">Versão Instalada</th>
           <th data-key="LatestVersion">Última Versão Disponível</th>
+          <th data-key="License">Licença</th>
           <th data-key="Status">Status</th>
         </tr>
       </thead>
@@ -350,6 +351,7 @@ function renderTable() {
       <td>${toTitleCase(row.AppName || '')}</td>
       <td>${mergedVersion}</td>
       <td>${row.LatestVersion || ''}</td>
+      <td>${(row.License || '').toLowerCase()}</td>
       <td>${statusButton}</td>
     `;
     tableBody.appendChild(tr);
@@ -368,7 +370,8 @@ function applyFilters() {
       (row.LatestVersion || '') + ' ' +
       (row.Website || '') + ' ' +
       (row.InstalledVersion || '') + ' ' +
-      (row.Status || '')
+      (row.Status || '') + ' ' +
+      (row.License || '')
     ).toLowerCase();
     const matchesTerm = !term || text.includes(term);
     return matchesStatus && matchesTerm;
