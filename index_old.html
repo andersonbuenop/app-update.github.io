@@ -2,30 +2,29 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8" />
-  <title>SCCM Team</title>
+  <title>Inventário de Aplicações</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       margin: 0;
-      background: #333333;
-      color: #f0f0f0;
+      background: #0f172a;
+      color: #e5e7eb;
     }
     header {
       padding: 1.5rem 1rem;
       text-align: center;
-      background: #f0f0f0;
-      border-bottom: 1px solid #c2c2c2;
+      background: #020617;
+      border-bottom: 1px solid #1f2937;
     }
     header h1 {
       margin: 0;
       font-size: 1.6rem;
-      color: #ec0000;
     }
     header p {
       margin: 0.3rem 0 0;
       font-size: 0.9rem;
-      color: #333333;
+      color: #9ca3af;
     }
     main {
       padding: 1rem;
@@ -42,9 +41,9 @@
     .controls input[type="file"],
     .controls input[type="text"],
     .controls select {
-      background: #6d6d6d;
-      color: #f0f0f0;
-      border: 1px solid #c2c2c2;
+      background: #020617;
+      color: #e5e7eb;
+      border: 1px solid #374151;
       padding: 0.4rem 0.6rem;
       border-radius: 4px;
       font-size: 0.9rem;
@@ -54,25 +53,25 @@
     }
     .controls label {
       font-size: 0.85rem;
-      color: #c2c2c2;
+      color: #9ca3af;
     }
     table {
       width: 100%;
       border-collapse: collapse;
-      background: #6d6d6d;
+      background: #020617;
       border-radius: 6px;
       overflow: hidden;
       font-size: 0.9rem;
     }
     thead {
-      background: #333333;
+      background: #111827;
       position: sticky;
       top: 0;
       z-index: 1;
     }
     th, td {
       padding: 0.5rem 0.6rem;
-      border-bottom: 1px solid #c2c2c2;
+      border-bottom: 1px solid #1f2937;
       text-align: left;
       white-space: nowrap;
     }
@@ -83,16 +82,16 @@
       font-size: 0.78rem;
       text-transform: uppercase;
       letter-spacing: 0.03em;
-      color: #c2c2c2;
+      color: #9ca3af;
     }
     tr:nth-child(even) td {
-      background: #6d6d6d;
+      background: #020617;
     }
     tr:nth-child(odd) td {
-      background: #555555;
+      background: #030712;
     }
     tr:hover td {
-      background: #333333;
+      background: #111827;
     }
     .status-pill {
       display: inline-flex;
@@ -102,52 +101,23 @@
       font-size: 0.75rem;
       font-weight: 600;
     }
-    .status-button {
-      display: inline-flex;
-      align-items: center;
-      padding: 0.3rem 0.8rem;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-decoration: none;
-      cursor: pointer;
-      transition: opacity 0.2s;
-    }
-    .status-button:hover {
-      opacity: 0.8;
-    }
-    .status-button.status-UpdateAvailable {
-      background: #f553537a;
-      color: #ffffff;
-      border: 1px solid #ffffff;
-    }
-    .status-button.status-UpToDate {
-      background: #10b9816c;
-      color: #ffffff;
-      border: 1px solid #ffffff;
-    }
-    .status-button.status-Unknown {
-      background: #458bfc67;
-      color: #ffffff;
-      border: 1px solid #ffffff;
-    }
     .status-UpdateAvailable {
-      background: #ff8a65;
-      color: #ffffff;
-      border: 1px solid #ff7043;
+      background: rgba(248, 113, 113, 0.15);
+      color: #fecaca;
+      border: 1px solid rgba(248, 113, 113, 0.4);
     }
     .status-UpToDate {
-      background: #10b981;
-      color: #ffffff;
-      border: 1px solid #0f9c6a;
+      background: rgba(52, 211, 153, 0.15);
+      color: #a7f3d0;
+      border: 1px solid rgba(52, 211, 153, 0.4);
     }
     .status-Unknown {
-      background: #458bfc67;
-      color: #ffffff;
-      border: 1px solid #ffffff;
+      background: rgba(59, 130, 246, 0.15);
+      color: #bfdbfe;
+      border: 1px solid rgba(59, 130, 246, 0.4);
     }
     a {
-      color: #c2c2c2;
+      color: #60a5fa;
       text-decoration: none;
     }
     a:hover {
@@ -158,11 +128,11 @@
       align-items: center;
       gap: 0.35rem;
       border-radius: 999px;
-      border: 1px solid #c2c2c2;
+      border: 1px solid #1f2937;
       padding: 0.1rem 0.6rem;
       font-size: 0.75rem;
-      color: #f0f0f0;
-      background: #929090;
+      color: #9ca3af;
+      background: #020617;
     }
     .dot {
       width: 7px;
@@ -170,17 +140,16 @@
       border-radius: 999px;
       display: inline-block;
     }
-    .dot-update { background: #ff0000; }
-    .dot-ok { background: #10b981; }
-    .dot-unknown { background: #0c24fc67; }
-
-    /* Badge color accents */
-    .badge[data-status="UpdateAvailable"] { border-color: #ffffff; color: #ffffff; }
-    .badge[data-status="UpToDate"] { border-color: #ffffff; color: #ffffff; }
-    .badge[data-status="Unknown"] { border-color: #ffffff; color: #ffffff; }
+    .dot-update { background: #f97373; }
+    .dot-ok { background: #4ade80; }
+    .dot-unknown { background: #60a5fa; }
     @media (max-width: 768px) {
-      th:nth-child(4),
-      td:nth-child(4) {
+      th:nth-child(2),
+      th:nth-child(3),
+      th:nth-child(5),
+      td:nth-child(2),
+      td:nth-child(3),
+      td:nth-child(5) {
         display: none;
       }
       table {
@@ -191,8 +160,8 @@
 </head>
 <body>
 <header>
-  <h1>SCCM App Status</h1>
-  <p>Visualização das applications disponiveis no Software Center, versões instaladas e disponíveis.</p>
+  <h1>Inventário de Aplicações</h1>
+  <p>Visualização do CSV de versões instaladas e disponíveis.</p>
 </header>
 
 <main>
@@ -202,27 +171,35 @@
       <input type="file" id="fileInput" accept=".csv,text/csv" />
     </label>
     <input type="text" id="searchInput" placeholder="Filtrar por nome, versão ou status..." />
-    <div id="statusBadges" style="display: flex; gap: 0.5rem;">
-      <span class="badge" data-status="UpdateAvailable" style="cursor: pointer;">
-        <span class="dot dot-update"></span> UpdateAvailable
-      </span>
-      <span class="badge" data-status="UpToDate" style="cursor: pointer;">
-        <span class="dot dot-ok"></span> UpToDate
-      </span>
-      <span class="badge" data-status="Unknown" style="cursor: pointer;">
-        <span class="dot dot-unknown"></span> Unknown
-      </span>
-    </div>
+    <label>
+      Status:
+      <select id="statusFilter">
+        <option value="">Todos</option>
+        <option value="UpdateAvailable">UpdateAvailable</option>
+        <option value="UpToDate">UpToDate</option>
+        <option value="Unknown">Unknown</option>
+      </select>
+    </label>
+    <span class="badge">
+      <span class="dot dot-update"></span> UpdateAvailable
+    </span>
+    <span class="badge">
+      <span class="dot dot-ok"></span> UpToDate
+    </span>
+    <span class="badge">
+      <span class="dot dot-unknown"></span> Unknown
+    </span>
   </div>
 
   <div style="overflow-x:auto; max-height: 70vh;">
     <table id="appsTable">
       <thead>
         <tr>
-          <th style="width: 50px;">Nº</th>
           <th data-key="AppName">Aplicação</th>
-          <th data-key="MergedVersion">Versão Instalada</th>
-          <th data-key="LatestVersion">Última Versão Disponível</th>
+          <th data-key="appversion">AppVersion</th>
+          <th data-key="LatestVersion">LatestVersion</th>
+          <th data-key="Website">Website</th>
+          <th data-key="InstalledVersion">InstalledVersion</th>
           <th data-key="Status">Status</th>
         </tr>
       </thead>
@@ -293,16 +270,11 @@ function parseCsv(text) {
   });
 
   const headers = rows[0].map(h => h.replace(/^"|"$/g, ''));
-  const data = rows.slice(1).map((row, rowIndex) => {
-    const obj = { _originalIndex: rowIndex + 1 };
+  const data = rows.slice(1).map(row => {
+    const obj = {};
     headers.forEach((h, idx) => {
       obj[h] = (row[idx] || '').replace(/^"|"$/g, '');
     });
-    // Calcula versão mesclada para sorting
-    const installedVer = parseFloat((obj.InstalledVersion || '0').replace(/[^0-9.]/g, '')) || 0;
-    const appVer = parseFloat((obj.appversion || '0').replace(/[^0-9.]/g, '')) || 0;
-    const maxVersion = Math.max(installedVer, appVer);
-    obj.MergedVersion = maxVersion > 0 ? (obj.InstalledVersion || obj.appversion || '') : '';
     return obj;
   });
   return { headers, data };
@@ -311,46 +283,36 @@ function parseCsv(text) {
 const state = {
   data: [],
   filtered: [],
-  sort: { key: null, dir: 1 },
-  statusFilter: null,
-  statusDir: 1
+  sort: { key: null, dir: 1 }
 };
 
 const tableBody = document.querySelector('#appsTable tbody');
 const searchInput = document.getElementById('searchInput');
+const statusFilter = document.getElementById('statusFilter');
 
 function statusClass(status) {
   if (!status) return 'status-Unknown';
   return 'status-' + status.replace(/\s+/g, '');
 }
 
-function toTitleCase(str) {
-  return str.replace(/\b\w/g, char => char.toUpperCase());
-}
-
 function renderTable() {
   tableBody.innerHTML = '';
-  state.filtered.forEach((row, index) => {
+  state.filtered.forEach(row => {
     const tr = document.createElement('tr');
 
-    // Pega a maior versão entre InstalledVersion e appversion
-    const installedVer = parseFloat((row.InstalledVersion || '0').replace(/[^0-9.]/g, '')) || 0;
-    const appVer = parseFloat((row.appversion || '0').replace(/[^0-9.]/g, '')) || 0;
-    const maxVersion = Math.max(installedVer, appVer);
-    const mergedVersion = maxVersion > 0 ? (row.InstalledVersion || row.appversion || '') : '';
-
-    // Status como botão com link para website
-    let statusButton = `<span class="status-pill ${statusClass(row.Status)}">${row.Status || 'Unknown'}</span>`;
-    if (row.Website) {
-      statusButton = `<a href="${row.Website}" target="_blank" rel="noopener noreferrer" class="status-button ${statusClass(row.Status)}">${row.Status || 'Unknown'}</a>`;
-    }
+    const websiteLink = row.Website ? `<a href="${row.Website}" target="_blank" rel="noopener noreferrer">link</a>` : '';
 
     tr.innerHTML = `
-      <td style="text-align: center; color: #ffffff;">${index + 1}</td>
-      <td>${toTitleCase(row.AppName || '')}</td>
-      <td>${mergedVersion}</td>
+      <td>${row.AppName || ''}</td>
+      <td>${row.appversion || ''}</td>
       <td>${row.LatestVersion || ''}</td>
-      <td>${statusButton}</td>
+      <td>${websiteLink}</td>
+      <td>${row.InstalledVersion || ''}</td>
+      <td>
+        <span class="status-pill ${statusClass(row.Status)}">
+          ${row.Status || 'Unknown'}
+        </span>
+      </td>
     `;
     tableBody.appendChild(tr);
   });
@@ -358,7 +320,7 @@ function renderTable() {
 
 function applyFilters() {
   const term = searchInput.value.trim().toLowerCase();
-  const status = state.statusFilter;
+  const status = statusFilter.value;
 
   state.filtered = state.data.filter(row => {
     const matchesStatus = !status || (row.Status || '') === status;
@@ -422,51 +384,13 @@ document.getElementById('fileInput').addEventListener('change', e => {
     state.data = data;
     state.filtered = [...state.data];
     state.sort = { key: null, dir: 1 };
-    state.statusFilter = null;
-    state.statusDir = 1;
-    updateBadgeStyles();
     renderTable();
   };
   reader.readAsText(file, 'utf-8');
 });
 
 searchInput.addEventListener('input', applyFilters);
-
-// Badge filter events
-document.querySelectorAll('#statusBadges .badge').forEach(badge => {
-  badge.addEventListener('click', () => {
-    const status = badge.dataset.status;
-    
-    // Ciclo: neutro -> crescente -> decrescente -> neutro
-    if (state.statusFilter === status) {
-      if (state.statusDir === 1) {
-        state.statusDir = -1;
-      } else {
-        state.statusFilter = null;
-        state.statusDir = 1;
-      }
-    } else {
-      state.statusFilter = status;
-      state.statusDir = 1;
-    }
-    
-    updateBadgeStyles();
-    applyFilters();
-  });
-});
-
-function updateBadgeStyles() {
-  document.querySelectorAll('#statusBadges .badge').forEach(badge => {
-    badge.style.opacity = '0.6';
-    badge.innerHTML = badge.innerHTML.replace(' ↓', '').replace(' ↑', '');
-    
-    if (state.statusFilter === badge.dataset.status) {
-      badge.style.opacity = '1';
-      const arrow = state.statusDir === 1 ? ' ↓' : ' ↑';
-      badge.innerHTML += arrow;
-    }
-  });
-}
+statusFilter.addEventListener('change', applyFilters);
 
 document.querySelectorAll('#appsTable thead th').forEach(th => {
   th.addEventListener('click', () => {
@@ -476,31 +400,12 @@ document.querySelectorAll('#appsTable thead th').forEach(th => {
   });
 });
 
-// Inicializa tentando carregar apps_output.csv, com fallback para defaultCsv
+// Inicializa com o CSV default
 (function init() {
-  const loadData = () => {
-    fetch('apps_output.csv?t=' + Date.now()) // timestamp para evitar cache
-      .then(r => r.ok ? r.text() : Promise.reject())
-      .then(text => {
-        // Verifica se houve mudança para evitar re-renderizar sem necessidade (opcional, mas bom para UX)
-        if (state.lastCsvText !== text) {
-            state.lastCsvText = text;
-            initFromText(text);
-        }
-      })
-      .catch(() => {
-        // Se falhar e ainda não tiver dados carregados, usa o fallback
-        if (!state.data || state.data.length === 0) {
-            initFromText(defaultCsv);
-        }
-      });
-  };
-
-  // Carrega a primeira vez
-  loadData();
-
-  // Polling a cada 5 segundos
-  setInterval(loadData, 5000);
+  const { data } = parseCsv(defaultCsv);
+  state.data = data;
+  state.filtered = [...state.data];
+  renderTable();
 })();
 </script>
 </body>
