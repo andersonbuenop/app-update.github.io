@@ -97,6 +97,43 @@ const state = {
 const tableBody = document.querySelector('#appsTable tbody');
 const searchInput = document.getElementById('searchInput');
 
+// Botão de Atualizar Agora
+document.getElementById('updateBtn').addEventListener('click', () => {
+  const btn = document.getElementById('updateBtn');
+  // const feedback = document.getElementById('updateFeedback'); // Removido conforme solicitado
+  const originalText = 'Atualizar Agora';
+  
+  btn.disabled = true;
+  btn.innerText = 'Atualizando...';
+  
+  // Sem feedback externo
+  
+  fetch('/run-update', { method: 'POST' })
+    .then(r => r.json())
+    .then(data => {
+      if (data.status === 'success') {
+        // Sucesso: Atualiza dados e restaura botão
+        if (window.loadData) {
+            window.loadData();
+        } else {
+            location.reload(); // Fallback
+        }
+      } else {
+        console.error(data.output);
+        alert('Erro na atualização.');
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      alert('Erro de conexão.');
+    })
+    .finally(() => {
+      // Sempre restaura o estado do botão
+      btn.disabled = false;
+      btn.innerText = originalText;
+    });
+});
+
 // Inicializa o gráfico
 function initChart() {
   // Registra o plugin de datalabels se estiver disponível
@@ -114,7 +151,7 @@ function initChart() {
         backgroundColor: [
           '#f55353', // UpdateAvailable (Vermelho)
           '#10b981', // UpToDate (Verde)
-          '#458bfc'  // Unknown (Azul)
+          '#ffc107'  // Unknown (Amarelo)
         ],
         borderWidth: 0
       }]
@@ -251,7 +288,7 @@ function renderTable() {
       <td class="col-license">${toTitleCase(row.License || '')}</td>
       <td class="col-obs">${row.Observacao || ''}</td>
       <td class="col-actions">
-        <button onclick="openEditModal(${index})" class="btn-edit">Editar</button>
+        <button onclick="openEditModal(${index})" class="btn btn-primary btn-sm">Editar</button>
       </td>
     `;
     tableBody.appendChild(tr);
@@ -397,14 +434,14 @@ document.getElementById('editForm').addEventListener('submit', function(e) {
 
 function saveDataToServer() {
   // 1. Salvar CSV
-  const headers = ['AppName', 'appversion', 'LatestVersion', 'Website', 'InstalledVersion', 'Status', 'License', 'SourceKey', 'SearchUrl', 'Observacao'];
+  const headers = ['AppName', 'appversion', 'LatestVersion', 'Website', 'InstalledVersion', 'Status', 'License', 'SourceKey', 'SearchUrl', 'Observacao', 'IsNewVersion', 'SourceId', 'IconUrl'];
   
   let csvContent = headers.map(h => `"${h}"`).join(',') + '\n';
   
   state.data.forEach(row => {
     const line = headers.map(h => {
         const val = row[h] || '';
-        return `"${val.replace(/"/g, '""')}"`;
+        return `"${String(val).replace(/"/g, '""')}"`;
     }).join(',');
     csvContent += line + '\n';
   });
@@ -598,17 +635,7 @@ document.querySelectorAll('#appsTable thead th').forEach(th => {
 });
 
 // Inicializa tentando carregar apps_output.csv, com fallback para defaultCsv
-(function init() {
-  // Carrega appSources.json
-  fetch('appSources.json')
-      .then(r => r.ok ? r.json() : {})
-      .then(json => {
-          state.appSources = json;
-          console.log('appSources carregado:', Object.keys(json).length);
-      })
-      .catch(err => console.error('Erro ao carregar appSources.json:', err));
-
-  const loadData = () => {
+  window.loadData = () => {
     // Carrega Metadados (Timestamp)
     fetch('data/metadata.json?t=' + Date.now())
         .then(r => r.ok ? r.json() : {})
@@ -636,9 +663,19 @@ document.querySelectorAll('#appsTable thead th').forEach(th => {
       });
   };
 
+  (function init() {
+  // Carrega appSources.json
+  fetch('appSources.json')
+      .then(r => r.ok ? r.json() : {})
+      .then(json => {
+          state.appSources = json;
+          console.log('appSources carregado:', Object.keys(json).length);
+      })
+      .catch(err => console.error('Erro ao carregar appSources.json:', err));
+
   // Carrega a primeira vez
-  loadData();
+  window.loadData();
 
   // Polling a cada 5 segundos
-  setInterval(loadData, 5000);
+  setInterval(window.loadData, 5000);
 })();

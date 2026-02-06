@@ -2,61 +2,56 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8" />
-  <title>SCCM application Status</title>
+  <title>SCCM Application Status</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="assets/css/style.css?v=9" />
+  <link rel="stylesheet" href="assets/css/style.css?v=18" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 </head>
 <body>
-<div class="header-global">
-  <h1>SCCM application Status</h1>
-</div>
-
-<main>
-  <!-- Linha Superior: Controles e Data -->
-  <div class="top-bar">
-    <div class="controls-area">
-      <div class="controls">
-        <label>
-          CSV:
-          <input type="file" id="fileInput" accept=".csv,text/csv" />
-        </label>
-        <label>
-          Filtrar:
-          <input type="text" id="searchInput" placeholder="Nome, versão ou status..." />
-        </label>
-        <label>
-          Status:
-          <select id="statusFilter">
-            <option value="">Todos</option>
-            <option value="UpdateAvailable">UpdateAvailable</option>
-            <option value="UpToDate">UpToDate</option>
-            <option value="Unknown">Unknown</option>
-          </select>
-        </label>
-        
-        <div id="statusBadges" class="status-badges" style="display: inline-flex; margin-left: 10px; align-items: center;">
-          <span class="badge" data-status="UpdateAvailable">
-            <span class="dot dot-update"></span> UpdateAvailable
-          </span>
-          <span class="badge" data-status="UpToDate">
-            <span class="dot dot-ok"></span> UpToDate
-          </span>
-          <span class="badge" data-status="Unknown">
-            <span class="dot dot-unknown"></span> Unknown
-          </span>
-        </div>
-      </div>
-    </div>
-    
-    <div class="meta-area">
-      <div id="lastUpdate" class="last-update">Última Verificação: --/--/---- --:--:--</div>
-    </div>
+<div class="sticky-header">
+  <div class="header-global">
+    <h1>SCCM Application Status</h1>
   </div>
 
-  <!-- Área de Conteúdo: Tabela e Gráfico -->
-  <div class="content-area">
+  <div class="controls-container">
+    <div class="controls">
+      <label>
+        CSV:
+        <input type="file" id="fileInput" accept=".csv,text/csv" />
+      </label>
+      <label>
+        Filtrar:
+        <input type="text" id="searchInput" placeholder="Nome, versão ou status..." />
+      </label>
+      <label>
+        Status:
+        <select id="statusFilter">
+          <option value="">Todos</option>
+          <option value="UpdateAvailable">UpdateAvailable</option>
+          <option value="UpToDate">UpToDate</option>
+          <option value="Unknown">Unknown</option>
+        </select>
+      </label>
+      
+      <div id="statusBadges" class="status-badges" style="display: inline-flex; margin-left: 10px; align-items: center;">
+        <span class="badge" data-status="UpdateAvailable">
+          <span class="dot dot-update"></span> UpdateAvailable
+        </span>
+        <span class="badge" data-status="UpToDate">
+          <span class="dot dot-ok"></span> UpToDate
+        </span>
+        <span class="badge" data-status="Unknown">
+          <span class="dot dot-unknown"></span> Unknown
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main class="main-layout">
+  <!-- Coluna Esquerda: Tabela -->
+  <div class="left-panel">
     <div class="table-area">
       <div class="table-container">
         <table id="appsTable">
@@ -66,10 +61,10 @@
               <th class="col-icon">Ícone</th>
               <th data-key="AppName">Aplicações</th>
               <th data-key="appversion">Versão App</th>
-              <th data-key="LatestVersion">Última Versão</th>
-              <th>Website</th>
               <th data-key="InstalledVersion">Instalada</th>
+              <th data-key="LatestVersion">Última Versão</th>
               <th data-key="Status">Status</th>
+              <th data-key="License">Licença</th>
               <th data-key="Observation">Observação</th>
               <th>Ações</th>
             </tr>
@@ -79,6 +74,14 @@
           </tbody>
         </table>
       </div>
+    </div>
+  </div>
+
+  <!-- Coluna Direita: Ações e Gráfico -->
+  <div class="right-panel">
+    <div class="meta-actions">
+      <button id="updateBtn" class="btn btn-primary">Atualizar Agora</button>
+      <div id="lastUpdate" class="last-update">Última Verificação: --/--/---- --:--:--</div>
     </div>
 
     <div class="chart-area">

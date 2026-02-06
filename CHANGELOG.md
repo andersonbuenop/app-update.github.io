@@ -2,6 +2,30 @@
 
 Este documento mantém o registro de todas as alterações, melhorias e correções realizadas no projeto **App Update**.
 
+## [Melhorias de Layout e Funcionalidade] - 2026-02-06
+
+### Adicionado
+- **Layout Fixo (Sticky)**: Implementada experiência de "aplicativo desktop" na web.
+    - Cabeçalho global e filtros fixos no topo da tela.
+    - Cabeçalho da tabela fixo logo abaixo dos filtros durante a rolagem.
+    - Painel direito (Gráfico e Botão) fixo na tela enquanto a lista rola.
+    - Barras de rolagem independentes para a lista de aplicativos.
+- **Versionamento de Cache**: Adicionado parâmetro de versão (`?v=XX`) nas chamadas de CSS e JS para garantir carregamento imediato das alterações.
+
+### Alterado
+- **Interface Gráfica**:
+    - Ícones dos aplicativos aumentados em 75% para melhor visibilidade.
+    - Cores dos botões de status restauradas para o padrão (Vermelho, Verde, Amarelo).
+    - Badges do filtro de status sincronizados com as mesmas cores dos botões.
+    - Alinhamento corrigido da data "Última Verificação" ao lado do botão de ação.
+- **Comportamento do Botão "Atualizar"**:
+    - Não recarrega mais a página inteira (F5) ao concluir.
+    - Texto muda para "Atualizando..." e botão fica desabilitado durante o processo.
+    - Feedback visual de sucesso/erro integrado na interface.
+
+### Corrigido
+- **Persistência de Dados**: Corrigido bug onde colunas ocultas (`IconUrl`, `SourceId`, `IsNewVersion`) eram perdidas ao editar e salvar uma observação. O script agora preserva todos os campos do CSV original.
+
 ## [Não Lançado] - 2026-02-06
 
 ### Adicionado
