@@ -117,12 +117,18 @@ function renderTable() {
     if (row.Website) {
       statusButton = `<a href="${row.Website}" target="_blank" rel="noopener noreferrer" class="status-button ${statusClass(row.Status)}">${row.Status || 'Unknown'}</a>`;
     }
+    
+    // Badge de NOVA Versão
+    let latestVersionHtml = row.LatestVersion || '';
+    if (row.IsNewVersion && row.IsNewVersion.toLowerCase() === 'true') {
+        latestVersionHtml += ' <span class="badge-new">NEW</span>';
+    }
 
     tr.innerHTML = `
       <td class="col-num text-center text-white">${index + 1}</td>
       <td class="col-app">${toTitleCase(row.AppName || '')}</td>
       <td class="col-version">${mergedVersion}</td>
-      <td class="col-version">${row.LatestVersion || ''}</td>
+      <td class="col-version">${latestVersionHtml}</td>
       <td class="col-status">${statusButton}</td>
       <td class="col-license">${toTitleCase(row.License || '')}</td>
       <td class="col-obs">${row.Observacao || ''}</td>

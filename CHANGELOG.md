@@ -15,6 +15,10 @@ Este documento mantém o registro de todas as alterações, melhorias e correç�
 - **Persistência de Dados**:
     - Lógica no `apps_update.ps1` para ler o `apps_output.csv` existente antes de gerar um novo.
     - Preservação da coluna "Observacao" entre execuções do script (evita que anotações manuais sumam).
+- **Notificação de Nova Versão**:
+    - Implementada lógica no script PowerShell para detectar se a "Última Versão Disponível" mudou desde a execução anterior.
+    - Adicionada coluna `IsNewVersion` no CSV.
+    - Adicionado badge visual "NEW" (pulsante) na interface web ao lado da versão quando uma nova atualização é detectada.
 
 ### Alterado
 - **Layout Fluido**: Interface ajustada para ocupar 98% da largura da tela, removendo a barra de rolagem horizontal desnecessária.

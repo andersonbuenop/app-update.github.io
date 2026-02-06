@@ -538,25 +538,34 @@ function Get-LicenseForApp {
     return 'licensed'
 }
 
-# ---------------------- Carregar Observações Existentes ----------------------
-# Lê o arquivo de saída anterior para preservar observações manuais
+# ---------------------- Carregar Observações e Versões Anteriores ----------------------
+# Lê o arquivo de saída anterior para preservar observações e comparar versões
 $outPath = $PSScriptRoot + "\apps_output.csv"
 $existingObs = @{}
+$previousVersions = @{}
+
 if (Test-Path $outPath) {
-    Write-Host "[Info] Carregando observações existentes de apps_output.csv..." -ForegroundColor Cyan
+    Write-Host "[Info] Carregando dados existentes de apps_output.csv..." -ForegroundColor Cyan
     try {
         $oldCsv = Import-Csv -Path $outPath
         foreach ($item in $oldCsv) {
-            if ($item.AppName -and $item.Observacao) {
-                # Usa nome normalizado como chave para garantir match robusto
-                $normName = Get-NormalizedAppName -RawName $item.AppName
-                if ($normName) {
+            # Usa nome normalizado como chave para garantir match robusto
+            $normName = Get-NormalizedAppName -RawName $item.AppName
+            
+            if ($normName) {
+                # Preservar Observação
+                if ($item.Observacao) {
                     $existingObs[$normName] = $item.Observacao
+                }
+                
+                # Preservar Última Versão conhecida (para comparação de "Nova Versão")
+                if ($item.LatestVersion) {
+                    $previousVersions[$normName] = $item.LatestVersion
                 }
             }
         }
     } catch {
-        Write-Host "[Aviso] Não foi possível ler observações antigas: $($_.Exception.Message)" -ForegroundColor Yellow
+        Write-Host "[Aviso] Não foi possível ler dados antigos: $($_.Exception.Message)" -ForegroundColor Yellow
     }
 }
 
@@ -593,7 +602,7 @@ foreach ($row in $data) {
     }
 
     # garantir colunas
-    foreach ($col in 'LatestVersion','Website','InstalledVersion','Status','License','SourceKey','SearchUrl','Observacao') {
+    foreach ($col in 'LatestVersion','Website','InstalledVersion','Status','License','SourceKey','SearchUrl','Observacao','IsNewVersion') {
         if (-not ($row.PSObject.Properties.Name -contains $col)) {
             $row | Add-Member -NotePropertyName $col -NotePropertyValue $null
         }
@@ -606,6 +615,19 @@ foreach ($row in $data) {
     # Aqui, assumimos que o CSV antigo é a fonte da verdade para Observacao
     if ($normKey -and $existingObs.ContainsKey($normKey)) {
         $row.Observacao = $existingObs[$normKey]
+    }
+    
+    # Lógica de Detecção de NOVA Versão (Comparar com execução anterior)
+    $row.IsNewVersion = $false
+    if ($normKey -and $previousVersions.ContainsKey($normKey) -and $info.Version) {
+        $prevVer = $previousVersions[$normKey]
+        $currVer = $info.Version
+        
+        # Só marcar como novo se for diferente E se não for a primeira execução (prevVer existe)
+        if ($prevVer -and $prevVer -ne $currVer) {
+            Write-Host "    ★ NOVA VERSÃO DETECTADA! (Era: $prevVer, Agora: $currVer)" -ForegroundColor Magenta
+            $row.IsNewVersion = $true
+        }
     }
 
     $searchUrlVal = $null
@@ -634,6 +656,7 @@ foreach ($row in $data) {
     $row.SourceKey        = $normKey
     $row.SearchUrl        = $searchUrlVal
     $row.License          = Get-LicenseForApp -RawName $row.AppName
+    # IsNewVersion já foi definido acima
 
     # Adicionar à lista de dados únicos
     $uniqueData += $row
