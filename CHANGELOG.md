@@ -32,6 +32,22 @@ Este documento mantém o registro de todas as alterações, melhorias e correç�
 
 ---
 
+## [Iteração 2] - Melhorias de Usabilidade e Dados
+
+### Adicionado
+- **Coluna "Observacao"**: Inserida no CSV e na interface para permitir anotações manuais sobre cada aplicação.
+- **Edição de URLs**: Adicionada funcionalidade para editar as URLs de busca (JSON/Source) diretamente pelo modal na interface web.
+
+### Alterado
+- **Cálculo de Status**: Removido o campo "Status" estático do CSV. O status (UpToDate/UpdateAvailable) passou a ser calculado dinamicamente pelo JavaScript no frontend, comparando `InstalledVersion` e `LatestVersion`.
+- **Normalização de Licença**: O campo "License" passou a ser formatado automaticamente para *Title Case* (ex: "free" -> "Free") para consistência visual.
+
+### Refatoração (Backend)
+- **Regex no JSON**: Migração das expressões regulares (Regex) que estavam *hardcoded* no script PowerShell para o arquivo de configuração `appSources.json`.
+    - *Benefício*: Permite ajustar regras de extração de versão sem modificar o código do script.
+
+---
+
 ## [Versão Inicial] - Migração e Estrutura Base
 
 ### Adicionado
