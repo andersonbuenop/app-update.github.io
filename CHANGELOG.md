@@ -23,7 +23,10 @@ Este documento mantém o registro de todas as alterações, melhorias e correç�
     - Habilitada quebra de linha (wrapping) para a coluna "Aplicação" e outras colunas de texto, prevenindo estouro horizontal.
     - Definida largura de 25% para a coluna "Aplicação" para evitar que ocupe espaço excessivo quando a observação está vazia.
     - Removido `white-space: nowrap` global que forçava linhas infinitas.
-    - Alterado container da tabela para `overflow: auto` para garantir que o cabeçalho fixo (`sticky`) funcione corretamente na rolagem vertical.
+    - **Cabeçalho Fixo (Sticky Header)**:
+        - Movida a propriedade `position: sticky` do elemento `thead` para as células `th` individuais para maior compatibilidade.
+        - Removido `overflow: hidden` da tabela para evitar conflitos com a fixação do cabeçalho.
+        - Adicionado `z-index` e background opaco aos cabeçalhos para garantir que fiquem sempre sobrepostos ao conteúdo durante a rolagem.
 - **Coluna "Observacao"**: 
     - Agora permite quebra de linha (text-wrap), evitando que textos longos forcem a rolagem horizontal da tabela.
     - Largura ajustada para ser automática (baseada no conteúdo ou título), removendo restrições de largura fixa.
