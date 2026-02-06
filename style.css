@@ -200,6 +200,7 @@ a:hover {
 }
 
 .col-app {
+  width: 25%;
   min-width: 200px;
   word-break: break-word;
 }
@@ -220,7 +221,7 @@ a:hover {
 
 .col-obs {
   white-space: normal;
-  min-width: 150px;
+  min-width: 200px;
   max-width: none;
 }
 

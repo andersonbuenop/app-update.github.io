@@ -21,6 +21,7 @@ Este documento mantém o registro de todas as alterações, melhorias e correç�
 - **Tabela Ajustável**:
     - Definidas classes específicas para cada coluna (`.col-app`, `.col-version`, etc.) para controle preciso de largura.
     - Habilitada quebra de linha (wrapping) para a coluna "Aplicação" e outras colunas de texto, prevenindo estouro horizontal.
+    - Definida largura de 25% para a coluna "Aplicação" para evitar que ocupe espaço excessivo quando a observação está vazia.
     - Removido `white-space: nowrap` global que forçava linhas infinitas.
 - **Coluna "Observacao"**: 
     - Agora permite quebra de linha (text-wrap), evitando que textos longos forcem a rolagem horizontal da tabela.
