@@ -18,7 +18,9 @@ Este documento mantém o registro de todas as alterações, melhorias e correç�
 
 ### Alterado
 - **Layout Fluido**: Interface ajustada para ocupar 98% da largura da tela, removendo a barra de rolagem horizontal desnecessária.
-- **Coluna "Observacao"**: Agora permite quebra de linha (text-wrap), evitando que textos longos forcem a rolagem horizontal da tabela.
+- **Coluna "Observacao"**: 
+    - Agora permite quebra de linha (text-wrap), evitando que textos longos forcem a rolagem horizontal da tabela.
+    - Largura ajustada para ser automática (baseada no conteúdo ou título), removendo restrições de largura fixa.
 - **`index.html`**:
     - Removido todo CSS e JS inline.
     - Adicionadas referências para `style.css` e `script.js`.

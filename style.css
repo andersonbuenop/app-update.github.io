@@ -22,7 +22,7 @@ header p {
 }
 main {
   padding: 1rem;
-  max-width: 98%;
+  max-width: 90%;
   margin: 0 auto;
 }
 .controls {
@@ -199,8 +199,8 @@ a:hover {
 
 .col-obs {
   white-space: normal;
-  min-width: 200px;
-  max-width: 400px; /* Optional: limit width to prevent it from taking too much space */
+  min-width: auto;
+  max-width: none;
 }
 
 .col-actions {
