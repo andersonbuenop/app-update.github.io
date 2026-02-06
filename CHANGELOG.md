@@ -18,6 +18,10 @@ Este documento mantém o registro de todas as alterações, melhorias e correç�
 
 ### Alterado
 - **Layout Fluido**: Interface ajustada para ocupar 98% da largura da tela, removendo a barra de rolagem horizontal desnecessária.
+- **Tabela Ajustável**:
+    - Definidas classes específicas para cada coluna (`.col-app`, `.col-version`, etc.) para controle preciso de largura.
+    - Habilitada quebra de linha (wrapping) para a coluna "Aplicação" e outras colunas de texto, prevenindo estouro horizontal.
+    - Removido `white-space: nowrap` global que forçava linhas infinitas.
 - **Coluna "Observacao"**: 
     - Agora permite quebra de linha (text-wrap), evitando que textos longos forcem a rolagem horizontal da tabela.
     - Largura ajustada para ser automática (baseada no conteúdo ou título), removendo restrições de largura fixa.

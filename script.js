@@ -119,14 +119,14 @@ function renderTable() {
     }
 
     tr.innerHTML = `
-      <td class="text-center text-white">${index + 1}</td>
-      <td>${toTitleCase(row.AppName || '')}</td>
-      <td>${mergedVersion}</td>
-      <td>${row.LatestVersion || ''}</td>
-      <td>${statusButton}</td>
-      <td>${toTitleCase(row.License || '')}</td>
+      <td class="col-num text-center text-white">${index + 1}</td>
+      <td class="col-app">${toTitleCase(row.AppName || '')}</td>
+      <td class="col-version">${mergedVersion}</td>
+      <td class="col-version">${row.LatestVersion || ''}</td>
+      <td class="col-status">${statusButton}</td>
+      <td class="col-license">${toTitleCase(row.License || '')}</td>
       <td class="col-obs">${row.Observacao || ''}</td>
-      <td class="text-center">
+      <td class="col-actions text-center">
         <button onclick="openEditModal(${index})" class="btn-edit">Editar</button>
       </td>
     `;

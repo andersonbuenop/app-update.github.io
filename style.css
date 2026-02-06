@@ -67,7 +67,8 @@ th, td {
   padding: 0.5rem 0.6rem;
   border-bottom: 1px solid #c2c2c2;
   text-align: left;
-  white-space: nowrap;
+  white-space: normal;
+  vertical-align: middle;
 }
 th {
   cursor: pointer;
@@ -195,11 +196,31 @@ a:hover {
 
 .col-num {
   width: 50px;
+  text-align: center;
+}
+
+.col-app {
+  min-width: 200px;
+  word-break: break-word;
+}
+
+.col-version {
+  white-space: nowrap;
+  width: 120px;
+}
+
+.col-status {
+  width: 140px;
+  text-align: center;
+}
+
+.col-license {
+  width: 100px;
 }
 
 .col-obs {
   white-space: normal;
-  min-width: auto;
+  min-width: 150px;
   max-width: none;
 }
 
