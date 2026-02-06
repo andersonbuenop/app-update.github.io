@@ -10,6 +10,8 @@ Este documento mantém o registro de todas as alterações, melhorias e correç�
     - `style.css`: Arquivo dedicado para todos os estilos CSS, substituindo estilos inline no HTML.
     - `script.js`: Arquivo dedicado para toda a lógica JavaScript (renderização da tabela, filtros, modal), substituindo scripts inline no HTML.
     - Classes CSS "Clean" (ex: `.status-badges`, `.table-container`, `.modal-overlay`) para melhor organização visual.
+- **Backend (Python)**:
+    - `server.py`: Servidor HTTP simples em Python para servir a página e aceitar requisições POST (salvamento de dados).
 - **Persistência de Dados**:
     - Lógica no `apps_update.ps1` para ler o `apps_output.csv` existente antes de gerar um novo.
     - Preservação da coluna "Observacao" entre execuções do script (evita que anotações manuais sumam).
@@ -35,6 +37,7 @@ Este documento mantém o registro de todas as alterações, melhorias e correç�
 ## [Iteração 2] - 2026-02-05
 
 ### Adicionado
+- **Interface Web (HTML)**: Criação do `index.html` como interface principal (substituindo a visualização pura de CSV).
 - **Coluna "Observacao"**: Inserida no CSV e na interface para permitir anotações manuais sobre cada aplicação.
 - **Edição de URLs**: Adicionada funcionalidade para editar as URLs de busca (JSON/Source) diretamente pelo modal na interface web.
 
@@ -51,8 +54,8 @@ Este documento mantém o registro de todas as alterações, melhorias e correç�
 ## [Versão Inicial] - 2026-01-28
 
 ### Adicionado
-- **`server.py`**: Servidor HTTP simples em Python para servir a página e aceitar requisições POST (salvamento de dados).
-- **`apps_output.csv`**: Arquivo de dados principal, gerado pelo PowerShell e lido pelo Frontend.
+- **`apps_update.ps1`**: Script principal de automação e scraping.
+- **`apps_output.csv`**: Arquivo de dados principal, gerado pelo PowerShell.
 - **`appSources.json`**: Configuração centralizada das fontes de dados e URLs de busca.
 
 ### Alterado
