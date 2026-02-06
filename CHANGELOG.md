@@ -2,7 +2,7 @@
 
 Este documento mantém o registro de todas as alterações, melhorias e correções realizadas no projeto **App Update**.
 
-## [Não Lançado] - Trabalho em Andamento (Branch: `refactor-frontend`)
+## [Não Lançado] - 2026-02-06
 
 ### Adicionado
 - **Arquivo `CHANGELOG.md`**: Criado para documentar o histórico de mudanças do projeto.
@@ -32,7 +32,7 @@ Este documento mantém o registro de todas as alterações, melhorias e correç�
 
 ---
 
-## [Iteração 2] - Melhorias de Usabilidade e Dados
+## [Iteração 2] - 2026-02-05
 
 ### Adicionado
 - **Coluna "Observacao"**: Inserida no CSV e na interface para permitir anotações manuais sobre cada aplicação.
@@ -48,7 +48,7 @@ Este documento mantém o registro de todas as alterações, melhorias e correç�
 
 ---
 
-## [Versão Inicial] - Migração e Estrutura Base
+## [Versão Inicial] - 2026-01-28
 
 ### Adicionado
 - **`server.py`**: Servidor HTTP simples em Python para servir a página e aceitar requisições POST (salvamento de dados).
