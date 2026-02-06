@@ -54,14 +54,10 @@ table {
   border-collapse: collapse;
   background: #6d6d6d;
   border-radius: 6px;
-  overflow: hidden;
   font-size: 0.9rem;
 }
 thead {
   background: #333333;
-  position: sticky;
-  top: 0;
-  z-index: 1;
 }
 th, td {
   padding: 0.5rem 0.6rem;
@@ -78,6 +74,10 @@ th {
   text-transform: uppercase;
   letter-spacing: 0.03em;
   color: #c2c2c2;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #333333;
 }
 tr:nth-child(even) td {
   background: #6d6d6d;
