@@ -507,58 +507,17 @@ $name = $name -replace '\s*[-–—:]\s*$', ''
     # 3) trim final por garantia
     $name = $name.Trim()
 
-    # Match apps registrados no JSON
-    if ($name -match '^7[\s-]?zip') { return '7zip' }
-    if ($name -like 'notepad++*')   { return 'notepad++' }
-    if ($name -like 'google chrome*') { return 'google chrome' }
-    if ($name -like 'adobe acrobat reader*') { return 'adobe acrobat reader update' }
-    if ($name -like 'adobe acrobat xi*') { return 'adobe acrobat xi pro' }
-    if ($name -like 'apache directory*') { return 'apache directory studio' }
-    if ($name -like 'apache jmeter*') { return 'apache jmeter' }
-    if ($name -like 'apache maven*' -or $name -like 'maven apache*') { return 'apache maven' }
-    if ($name -like 'apache cxf*' -or $name -like 'apache cfx*') { return 'apache cxf' }
-    if ($name -like 'netbeans*' -or $name -like 'ide netbeans*') { return 'apache netbeans' }
-    if ($name -like 'appium*') { return 'appium inspector' }
-    if ($name -like 'python*') { return 'python' }
-    if ($name -like 'node.js*' -or $name -like 'nodejs*' -or $name -like 'node *') { return 'node.js' }
-    if ($name -like 'git*' -and -not $name.Contains('extension')) { return 'git' }
-    if ($name -like 'docker*') { return 'docker' }
-    if ($name -like '*visual*studio*' -and -not $name.Contains('code')) { return 'visual studio' }
-    if ($name -like '*vscode*' -or $name -like 'visual*studio*code*') { return 'vscode' }
-    if ($name -like 'ffmpeg*') { return 'ffmpeg' }
-    if ($name -like 'obsidian*') { return 'obsidian' }
-    if ($name -like 'keepass*') { return 'keepassxc' }
-    if ($name -like 'gimp*') { return 'gimp' }
-    if ($name -like 'vlc*') { return 'vlc' }
-    if ($name -like 'winmerge*') { return 'winmerge' }
-    if ($name -like 'freeplane*') { return 'freeplane' }
-    if ($name -like '*dotnet*' -or $name -like '.net*') { return '.net' }
-    if ($name -like 'docker*') { return 'docker' }
-    if ($name -like 'terraform*') { return 'terraform' }
-    if ($name -like 'helm*' -or $name -like '*kubernetes*helm*') { return 'helm' }
-    if ($name -like 'mongodb*' -or $name -like 'mongo*') { return 'mongodb' }
-    if ($name -like 'rstudio*') { return 'rstudio' }
-    if ($name -like 'postgresql*' -or $name -like 'postgres*' -or $name -like 'pgadmin*') { return 'postgresql' }
-    if ($name -like 'mysql*') { return 'mysql' }
-    if ($name -like 'cygwin*') { return 'cygwin' }
-    if ($name -like 'salesforce*cli*' -or $name -like 'sfdx*') { return 'salesforce cli' }
-    if ($name -like '*azure*cli*' -or $name -like 'azure cli*') { return 'azure cli' }
-    if ($name -like 'eclipse*ide*' -or $name -like '*eclipse ide*') { return 'eclipse ide' }
-    if ($name -like 'intellij*' -or $name -like '*intellij*idea*') { return 'intellij idea' }
-    if ($name -like 'pycharm*') { return 'pycharm' }
-    if ($name -like 'android*studio*') { return 'android studio' }
-    if ($name -like 'dbeaver*') { return 'dbeaver' }
-    if ($name -like '*dbvisualizer*') { return 'dbvisualizer' }
-    if ($name -like 'Sourcetree*') { return 'sourcetree' }
-    if ($name -like 'Design Review') { return 'autodesk design review' }
-    if ($name -like 'DWG True View') { return 'dwg true view' }
-    if ($name -like 'Cisco Jabber*') { return 'jabber' }
-    if ($name -like 'Webex*') { return 'webex' }
-    if ($name -like 'Vysor*') { return 'vysor' }
-    if ($name -like 'Cloudera ODBC Driver for Impala*') { return 'cloudera odbc driver for impala' }
-    if ($name -like 'Four Js Genero Desktop Client*') { return 'four js genero desktop client' }
-    if ($name -like 'Pdf24 Creator*') { return 'pdf24 creator' }
-    if ($name -like 'Gephi*') { return 'gephi' }
+    # Match apps registrados no JSON (via MatchRegex)
+    if ($AppSources) {
+        foreach ($key in $AppSources.Keys) {
+            $entry = $AppSources[$key]
+            if ($entry.MatchRegex) {
+                foreach ($pattern in $entry.MatchRegex) {
+                    if ($name -match $pattern) { return $key }
+                }
+            }
+        }
+    }
 
     return $name
 }
@@ -570,53 +529,11 @@ function Get-LicenseForApp {
 
     $norm = Get-NormalizedAppName -RawName $RawName
 
-    $freeList = @(
-        '7zip',
-        'notepad++',
-        'google chrome',
-        'adobe acrobat reader update',
-        'python',
-        'node.js',
-        'git',
-        'vscode',
-        'ffmpeg',
-        'obsidian',
-        'keepassxc',
-        'gimp',
-        'vlc',
-        'winmerge',
-        'freeplane',
-        'terraform',
-        'helm',
-        'mongodb',
-        'rstudio',
-        'postgresql',
-        'mysql',
-        'cygwin',
-        'sourcetree',
-        'android studio',
-        'pdf24 creator',
-        'gephi',
-        'eclipse ide',
-        'dbeaver'
-    )
-
-    $licensedList = @(
-        'adobe acrobat xi pro',
-        'dbvisualizer',
-        'jabber',
-        'webex',
-        'intellij idea',
-        'pycharm'
-    )
-
     if ($AppSources -and $norm -and $AppSources.ContainsKey($norm)) {
         $src = $AppSources[$norm]
+        if ($src.License) { return $src.License }
         if ($src.Type -eq 'Licenced') { return 'licensed' }
     }
-
-    if ($norm -and $freeList -contains $norm) { return 'free' }
-    if ($norm -and $licensedList -contains $norm) { return 'licensed' }
 
     return 'licensed'
 }
@@ -654,10 +571,21 @@ foreach ($row in $data) {
     }
 
     # garantir colunas
-    foreach ($col in 'LatestVersion','Website','InstalledVersion','Status','License') {
+    foreach ($col in 'LatestVersion','Website','InstalledVersion','Status','License','SourceKey','SearchUrl','Observacao') {
         if (-not ($row.PSObject.Properties.Name -contains $col)) {
             $row | Add-Member -NotePropertyName $col -NotePropertyValue $null
         }
+    }
+
+    # obter chave e url de busca do JSON
+    $normKey = Get-NormalizedAppName -RawName $row.AppName
+    $searchUrlVal = $null
+    if ($normKey -and $AppSources.ContainsKey($normKey)) {
+        $srcObj = $AppSources[$normKey]
+        # Preferência: RepoUrl (GitHub) > ScrapeUrl (Website) > ApiUrl
+        if ($srcObj.RepoUrl) { $searchUrlVal = $srcObj.RepoUrl }
+        elseif ($srcObj.ScrapeUrl) { $searchUrlVal = $srcObj.ScrapeUrl }
+        elseif ($srcObj.ApiUrl) { $searchUrlVal = $srcObj.ApiUrl }
     }
 
     # versão instalada
@@ -674,6 +602,8 @@ foreach ($row in $data) {
     $row.LatestVersion    = $normalizedLatestVersion
     $row.Website          = $info.Website
     $row.Status           = $status
+    $row.SourceKey        = $normKey
+    $row.SearchUrl        = $searchUrlVal
     $row.License          = Get-LicenseForApp -RawName $row.AppName
 
     # Adicionar à lista de dados únicos

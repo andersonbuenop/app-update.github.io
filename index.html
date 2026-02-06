@@ -223,8 +223,10 @@
           <th data-key="AppName">Aplicação</th>
           <th data-key="MergedVersion">Versão Instalada</th>
           <th data-key="LatestVersion">Última Versão Disponível</th>
-          <th data-key="License">Licença</th>
           <th data-key="Status">Status</th>
+          <th data-key="License">Licença</th>
+          <th data-key="Observacao">Observação</th>
+          <th style="width: 80px;">Ações</th>
         </tr>
       </thead>
       <tbody>
@@ -234,6 +236,62 @@
   </div>
 </main>
 
+<!-- Modal de Edição -->
+<div id="editModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:1000; justify-content:center; align-items:center;">
+  <div style="background:#444; padding:2rem; border-radius:8px; width:400px; color:#f0f0f0; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+    <h2 style="margin-top:0;">Editar Aplicação</h2>
+    <form id="editForm" style="display:flex; flex-direction:column; gap:1rem;">
+      <input type="hidden" id="editIndex">
+      
+      <label>
+        Aplicação (AppName):
+        <input type="text" id="editAppName" style="width:100%; padding:0.5rem; background:#6d6d6d; color:white; border:1px solid #c2c2c2; border-radius:4px;" readonly>
+      </label>
+      
+      <label>
+        Versão Instalada (InstalledVersion):
+        <input type="text" id="editInstalledVersion" style="width:100%; padding:0.5rem; background:#6d6d6d; color:white; border:1px solid #c2c2c2; border-radius:4px;">
+      </label>
+      
+      <label>
+        Última Versão (LatestVersion):
+        <input type="text" id="editLatestVersion" style="width:100%; padding:0.5rem; background:#6d6d6d; color:white; border:1px solid #c2c2c2; border-radius:4px;">
+      </label>
+      
+      <!-- Campos de URL do JSON -->
+      <input type="hidden" id="editSourceKey">
+      
+      <label>
+        URL de Busca (Search/Repo):
+        <input type="text" id="editSearchUrl" style="width:100%; padding:0.5rem; background:#6d6d6d; color:white; border:1px solid #c2c2c2; border-radius:4px;">
+      </label>
+
+      <label>
+        URL de Saída (Output/Website):
+        <input type="text" id="editOutputUrl" style="width:100%; padding:0.5rem; background:#6d6d6d; color:white; border:1px solid #c2c2c2; border-radius:4px;">
+      </label>
+
+      <label>
+        Licença:
+        <select id="editLicense" style="width:100%; padding:0.5rem; background:#6d6d6d; color:white; border:1px solid #c2c2c2; border-radius:4px;">
+          <option value="Free">Free</option>
+          <option value="Licensed">Licensed</option>
+        </select>
+      </label>
+
+      <label>
+        Observação:
+        <textarea id="editObservacao" rows="3" style="width:100%; padding:0.5rem; background:#6d6d6d; color:white; border:1px solid #c2c2c2; border-radius:4px; resize: vertical;"></textarea>
+      </label>
+      
+      <div style="display:flex; gap:1rem; justify-content:flex-end; margin-top:1rem;">
+        <button type="button" onclick="closeModal()" style="padding:0.5rem 1rem; background:#666; color:white; border:none; border-radius:4px; cursor:pointer;">Cancelar</button>
+        <button type="submit" style="padding:0.5rem 1rem; background:#10b981; color:white; border:none; border-radius:4px; cursor:pointer;">Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <script>
 
     function initFromText(text) {
@@ -242,6 +300,15 @@
   state.filtered = [...state.data];
   renderTable();
 }
+
+// Carrega appSources.json (configurações extras)
+fetch('appSources.json')
+  .then(r => r.ok ? r.json() : {})
+  .then(json => {
+    state.appSources = json;
+    console.log('appSources carregado', Object.keys(json).length);
+  })
+  .catch(err => console.warn('Erro ao carregar appSources.json', err));
 
 // tenta carregar apps.csv do mesmo diretório
 fetch('apps.csv')
@@ -312,6 +379,7 @@ function parseCsv(text) {
 const state = {
   data: [],
   filtered: [],
+  appSources: {},
   sort: { key: null, dir: 1 },
   statusFilter: null,
   statusDir: 1
@@ -351,10 +419,171 @@ function renderTable() {
       <td>${toTitleCase(row.AppName || '')}</td>
       <td>${mergedVersion}</td>
       <td>${row.LatestVersion || ''}</td>
-      <td>${(row.License || '').toLowerCase()}</td>
       <td>${statusButton}</td>
+      <td>${toTitleCase(row.License || '')}</td>
+      <td>${row.Observacao || ''}</td>
+      <td style="text-align: center;">
+        <button onclick="openEditModal(${index})" style="padding:0.3rem 0.6rem; background:#458bfc; color:white; border:none; border-radius:4px; cursor:pointer;">Editar</button>
+      </td>
     `;
     tableBody.appendChild(tr);
+  });
+}
+
+function openEditModal(index) {
+  // Encontra o item original nos dados filtrados
+  const item = state.filtered[index];
+  if (!item) return;
+
+  // Preenche o formulário
+  document.getElementById('editIndex').value = item._originalIndex; // Index global
+  document.getElementById('editAppName').value = item.AppName || '';
+  document.getElementById('editInstalledVersion').value = item.InstalledVersion || '';
+  document.getElementById('editLatestVersion').value = item.LatestVersion || '';
+  // Status removido da edição, calculado automaticamente ou mantido
+  let licVal = item.License || 'Free';
+  // Normaliza para Title Case para bater com o <select> (ex: "free" -> "Free")
+  if (licVal) {
+      licVal = licVal.charAt(0).toUpperCase() + licVal.slice(1).toLowerCase();
+  }
+  document.getElementById('editLicense').value = licVal;
+  
+  document.getElementById('editObservacao').value = item.Observacao || '';
+  
+  // Campos de URL
+  document.getElementById('editSourceKey').value = item.SourceKey || '';
+  document.getElementById('editSearchUrl').value = item.SearchUrl || '';
+  document.getElementById('editOutputUrl').value = item.Website || ''; // Website é o OutputUrl no CSV
+
+  // Se não tiver chave no JSON, avisa ou desabilita? Por enquanto deixa editar mas só vai salvar no CSV se não tiver key
+  const hasKey = !!item.SourceKey;
+  document.getElementById('editSearchUrl').disabled = !hasKey;
+  document.getElementById('editOutputUrl').disabled = !hasKey;
+  if (!hasKey) {
+      document.getElementById('editSearchUrl').placeholder = "Sem configuração no JSON";
+      document.getElementById('editOutputUrl').placeholder = "Sem configuração no JSON";
+  } else {
+      document.getElementById('editSearchUrl').placeholder = "URL de Busca";
+      document.getElementById('editOutputUrl').placeholder = "URL de Saída";
+  }
+  
+  // Mostra modal
+  const modal = document.getElementById('editModal');
+  modal.style.display = 'flex';
+}
+
+function closeModal() {
+  document.getElementById('editModal').style.display = 'none';
+}
+
+// Manipulador do formulário de edição
+document.getElementById('editForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const originalIndex = parseInt(document.getElementById('editIndex').value);
+  const row = state.data.find(r => r._originalIndex === originalIndex);
+  
+  if (row) {
+    //row.AppName = document.getElementById('editAppName').value; // Readonly
+    row.InstalledVersion = document.getElementById('editInstalledVersion').value;
+    row.LatestVersion = document.getElementById('editLatestVersion').value;
+    // Status não editável diretamente
+    row.License = document.getElementById('editLicense').value;
+    row.Observacao = document.getElementById('editObservacao').value;
+    
+    // Atualiza URLs no objeto row (CSV)
+    const newSearchUrl = document.getElementById('editSearchUrl').value;
+    const newOutputUrl = document.getElementById('editOutputUrl').value;
+    
+    row.SearchUrl = newSearchUrl;
+    row.Website = newOutputUrl;
+
+    // Atualiza JSON se tiver chave
+    const sourceKey = document.getElementById('editSourceKey').value;
+    if (sourceKey && state.appSources[sourceKey]) {
+        const src = state.appSources[sourceKey];
+        src.OutputUrl = newOutputUrl;
+        
+        // Atualiza ScrapeUrl ou RepoUrl dependendo do que existir ou do Type
+        if (src.RepoUrl) {
+            src.RepoUrl = newSearchUrl;
+        } else {
+            src.ScrapeUrl = newSearchUrl;
+        }
+        
+        // Atualiza Licença (sempre Title Case)
+        src.License = document.getElementById('editLicense').value;
+    }
+    
+    // Recalcula campos derivados se necessário
+    const installedVer = parseFloat((row.InstalledVersion || '0').replace(/[^0-9.]/g, '')) || 0;
+    const appVer = parseFloat((row.appversion || '0').replace(/[^0-9.]/g, '')) || 0;
+    const maxVersion = Math.max(installedVer, appVer);
+    row.MergedVersion = maxVersion > 0 ? (row.InstalledVersion || row.appversion || '') : '';
+    
+    // Atualiza tabela
+    renderTable();
+    closeModal();
+    
+    // Salva no servidor
+    saveDataToServer();
+  }
+});
+
+function saveDataToServer() {
+  // 1. Salvar CSV
+  const headers = ['AppName', 'appversion', 'LatestVersion', 'Website', 'InstalledVersion', 'Status', 'License', 'SourceKey', 'SearchUrl', 'Observacao'];
+  
+  let csvContent = headers.map(h => `"${h}"`).join(',') + '\n';
+  
+  state.data.forEach(row => {
+    const line = headers.map(h => {
+        const val = row[h] || '';
+        return `"${val.replace(/"/g, '""')}"`;
+    }).join(',');
+    csvContent += line + '\n';
+  });
+  
+  // Promise para salvar CSV
+  const saveCsv = fetch('/save', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+        filename: 'apps_output.csv',
+        content: csvContent
+    })
+  }).then(async r => {
+      const res = await r.json();
+      if (!r.ok) throw new Error(res.error || 'Erro ao salvar CSV');
+      return res;
+  });
+
+  // 2. Salvar JSON (se houver dados carregados)
+  let saveJson = Promise.resolve();
+  if (Object.keys(state.appSources).length > 0) {
+      saveJson = fetch('/save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            filename: 'appSources.json',
+            content: JSON.stringify(state.appSources, null, 2)
+        })
+      }).then(async r => {
+          const res = await r.json();
+          if (!r.ok) throw new Error(res.error || 'Erro ao salvar JSON');
+          return res;
+      });
+  }
+
+  Promise.all([saveCsv, saveJson])
+  .then(results => {
+      console.log('Salvo com sucesso:', results);
+      state.lastCsvText = csvContent;
+      alert('Alterações salvas (CSV e JSON)!');
+  })
+  .catch(err => {
+      console.error('Erro ao salvar:', err);
+      alert('Erro ao salvar alterações no servidor.');
   });
 }
 
@@ -481,6 +710,15 @@ document.querySelectorAll('#appsTable thead th').forEach(th => {
 
 // Inicializa tentando carregar apps_output.csv, com fallback para defaultCsv
 (function init() {
+  // Carrega appSources.json
+  fetch('appSources.json')
+      .then(r => r.ok ? r.json() : {})
+      .then(json => {
+          state.appSources = json;
+          console.log('appSources carregado:', Object.keys(json).length);
+      })
+      .catch(err => console.error('Erro ao carregar appSources.json:', err));
+
   const loadData = () => {
     fetch('apps_output.csv?t=' + Date.now()) // timestamp para evitar cache
       .then(r => r.ok ? r.text() : Promise.reject())
