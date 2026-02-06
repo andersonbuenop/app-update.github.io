@@ -237,7 +237,12 @@ function renderTable() {
 
     tr.innerHTML = `
       <td class="col-num text-center text-white">${index + 1}</td>
-      <td class="col-app">${toTitleCase(row.AppName || '')}</td>
+      <td class="col-app">
+        <div class="app-name-wrapper">
+          ${row.IconUrl ? `<img src="${row.IconUrl}" class="app-icon" alt="${row.AppName} icon" onerror="this.style.display='none'">` : ''}
+          ${toTitleCase(row.AppName || '')}
+        </div>
+      </td>
       <td class="col-version">${mergedVersion}</td>
       <td class="col-version">${latestVersionHtml}</td>
       <td class="col-status">${statusButton}</td>
