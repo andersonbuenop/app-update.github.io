@@ -23,6 +23,7 @@ Este documento mantém o registro de todas as alterações, melhorias e correç�
     - Habilitada quebra de linha (wrapping) para a coluna "Aplicação" e outras colunas de texto, prevenindo estouro horizontal.
     - Definida largura de 25% para a coluna "Aplicação" para evitar que ocupe espaço excessivo quando a observação está vazia.
     - Removido `white-space: nowrap` global que forçava linhas infinitas.
+    - Alterado container da tabela para `overflow: auto` para garantir que o cabeçalho fixo (`sticky`) funcione corretamente na rolagem vertical.
 - **Coluna "Observacao"**: 
     - Agora permite quebra de linha (text-wrap), evitando que textos longos forcem a rolagem horizontal da tabela.
     - Largura ajustada para ser automática (baseada no conteúdo ou título), removendo restrições de largura fixa.
