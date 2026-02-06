@@ -179,6 +179,11 @@ function Normalize-Version {
     }
 
 
+    # Tratamento para versões de 4 partes com final .00.0 ou .0.0 (ex: 25.01.00.0 -> 25.01)
+    if ($Version -match '^(?<maj>\d+)\.(?<min>\d+)\.0+\.0+$') {
+        return "$($Matches['maj']).$($Matches['min'])"
+    }
+
     # ---- Normalização específica para 7-Zip / padrões semânticos mistos ----
     # Chocolatey costuma usar "25.1.0" para o mesmo build que o site oficial "25.01"
     # (vide 7-Zip 25.01 publicado em 03/08/2025). [1](https://archive.org/download/7zip-version-archive/7-Zip%20Versions/)[2](https://www.afterdawn.com/software/version_history.cfm/7-zip)
