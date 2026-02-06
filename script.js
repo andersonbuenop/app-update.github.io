@@ -125,7 +125,7 @@ function renderTable() {
       <td>${row.LatestVersion || ''}</td>
       <td>${statusButton}</td>
       <td>${toTitleCase(row.License || '')}</td>
-      <td>${row.Observacao || ''}</td>
+      <td class="col-obs">${row.Observacao || ''}</td>
       <td class="text-center">
         <button onclick="openEditModal(${index})" class="btn-edit">Editar</button>
       </td>

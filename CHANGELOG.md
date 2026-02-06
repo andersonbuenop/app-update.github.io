@@ -17,6 +17,8 @@ Este documento mantém o registro de todas as alterações, melhorias e correç�
     - Preservação da coluna "Observacao" entre execuções do script (evita que anotações manuais sumam).
 
 ### Alterado
+- **Layout Fluido**: Interface ajustada para ocupar 98% da largura da tela, removendo a barra de rolagem horizontal desnecessária.
+- **Coluna "Observacao"**: Agora permite quebra de linha (text-wrap), evitando que textos longos forcem a rolagem horizontal da tabela.
 - **`index.html`**:
     - Removido todo CSS e JS inline.
     - Adicionadas referências para `style.css` e `script.js`.
