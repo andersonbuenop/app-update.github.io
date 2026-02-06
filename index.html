@@ -19,31 +19,31 @@
       <input type="file" id="fileInput" accept=".csv,text/csv" />
     </label>
     <input type="text" id="searchInput" placeholder="Filtrar por nome, versão ou status..." />
-    <div id="statusBadges" style="display: flex; gap: 0.5rem;">
-      <span class="badge" data-status="UpdateAvailable" style="cursor: pointer;">
+    <div id="statusBadges" class="status-badges">
+      <span class="badge" data-status="UpdateAvailable">
         <span class="dot dot-update"></span> UpdateAvailable
       </span>
-      <span class="badge" data-status="UpToDate" style="cursor: pointer;">
+      <span class="badge" data-status="UpToDate">
         <span class="dot dot-ok"></span> UpToDate
       </span>
-      <span class="badge" data-status="Unknown" style="cursor: pointer;">
+      <span class="badge" data-status="Unknown">
         <span class="dot dot-unknown"></span> Unknown
       </span>
     </div>
   </div>
 
-  <div style="overflow-x:auto; max-height: 70vh;">
+  <div class="table-container">
     <table id="appsTable">
       <thead>
         <tr>
-          <th style="width: 50px;">Nº</th>
+          <th class="col-num">Nº</th>
           <th data-key="AppName">Aplicação</th>
           <th data-key="MergedVersion">Versão Instalada</th>
           <th data-key="LatestVersion">Última Versão Disponível</th>
           <th data-key="Status">Status</th>
           <th data-key="License">Licença</th>
           <th data-key="Observacao">Observação</th>
-          <th style="width: 80px;">Ações</th>
+          <th class="col-actions">Ações</th>
         </tr>
       </thead>
       <tbody>
@@ -54,25 +54,25 @@
 </main>
 
 <!-- Modal de Edição -->
-<div id="editModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:1000; justify-content:center; align-items:center;">
-  <div style="background:#444; padding:2rem; border-radius:8px; width:400px; color:#f0f0f0; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
-    <h2 style="margin-top:0;">Editar Aplicação</h2>
-    <form id="editForm" style="display:flex; flex-direction:column; gap:1rem;">
+<div id="editModal" class="modal-overlay">
+  <div class="modal-content">
+    <h2>Editar Aplicação</h2>
+    <form id="editForm" class="modal-form">
       <input type="hidden" id="editIndex">
       
       <label>
         Aplicação (AppName):
-        <input type="text" id="editAppName" style="width:100%; padding:0.5rem; background:#6d6d6d; color:white; border:1px solid #c2c2c2; border-radius:4px;" readonly>
+        <input type="text" id="editAppName" class="form-control" readonly>
       </label>
       
       <label>
         Versão Instalada (InstalledVersion):
-        <input type="text" id="editInstalledVersion" style="width:100%; padding:0.5rem; background:#6d6d6d; color:white; border:1px solid #c2c2c2; border-radius:4px;">
+        <input type="text" id="editInstalledVersion" class="form-control">
       </label>
       
       <label>
         Última Versão (LatestVersion):
-        <input type="text" id="editLatestVersion" style="width:100%; padding:0.5rem; background:#6d6d6d; color:white; border:1px solid #c2c2c2; border-radius:4px;">
+        <input type="text" id="editLatestVersion" class="form-control">
       </label>
       
       <!-- Campos de URL do JSON -->
@@ -80,17 +80,17 @@
       
       <label>
         URL de Busca (Search/Repo):
-        <input type="text" id="editSearchUrl" style="width:100%; padding:0.5rem; background:#6d6d6d; color:white; border:1px solid #c2c2c2; border-radius:4px;">
+        <input type="text" id="editSearchUrl" class="form-control">
       </label>
 
       <label>
         URL de Saída (Output/Website):
-        <input type="text" id="editOutputUrl" style="width:100%; padding:0.5rem; background:#6d6d6d; color:white; border:1px solid #c2c2c2; border-radius:4px;">
+        <input type="text" id="editOutputUrl" class="form-control">
       </label>
 
       <label>
         Licença:
-        <select id="editLicense" style="width:100%; padding:0.5rem; background:#6d6d6d; color:white; border:1px solid #c2c2c2; border-radius:4px;">
+        <select id="editLicense" class="form-control">
           <option value="Free">Free</option>
           <option value="Licensed">Licensed</option>
         </select>
@@ -98,12 +98,12 @@
 
       <label>
         Observação:
-        <textarea id="editObservacao" rows="3" style="width:100%; padding:0.5rem; background:#6d6d6d; color:white; border:1px solid #c2c2c2; border-radius:4px; resize: vertical;"></textarea>
+        <textarea id="editObservacao" rows="3" class="form-control"></textarea>
       </label>
       
-      <div style="display:flex; gap:1rem; justify-content:flex-end; margin-top:1rem;">
-        <button type="button" onclick="closeModal()" style="padding:0.5rem 1rem; background:#666; color:white; border:none; border-radius:4px; cursor:pointer;">Cancelar</button>
-        <button type="submit" style="padding:0.5rem 1rem; background:#10b981; color:white; border:none; border-radius:4px; cursor:pointer;">Salvar</button>
+      <div class="modal-actions">
+        <button type="button" onclick="closeModal()" class="btn btn-secondary">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Salvar</button>
       </div>
     </form>
   </div>

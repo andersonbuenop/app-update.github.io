@@ -119,15 +119,15 @@ function renderTable() {
     }
 
     tr.innerHTML = `
-      <td style="text-align: center; color: #ffffff;">${index + 1}</td>
+      <td class="text-center text-white">${index + 1}</td>
       <td>${toTitleCase(row.AppName || '')}</td>
       <td>${mergedVersion}</td>
       <td>${row.LatestVersion || ''}</td>
       <td>${statusButton}</td>
       <td>${toTitleCase(row.License || '')}</td>
       <td>${row.Observacao || ''}</td>
-      <td style="text-align: center;">
-        <button onclick="openEditModal(${index})" style="padding:0.3rem 0.6rem; background:#458bfc; color:white; border:none; border-radius:4px; cursor:pointer;">Editar</button>
+      <td class="text-center">
+        <button onclick="openEditModal(${index})" class="btn-edit">Editar</button>
       </td>
     `;
     tableBody.appendChild(tr);

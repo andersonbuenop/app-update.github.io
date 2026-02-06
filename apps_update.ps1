@@ -538,6 +538,28 @@ function Get-LicenseForApp {
     return 'licensed'
 }
 
+# ---------------------- Carregar Observações Existentes ----------------------
+# Lê o arquivo de saída anterior para preservar observações manuais
+$outPath = $PSScriptRoot + "\apps_output.csv"
+$existingObs = @{}
+if (Test-Path $outPath) {
+    Write-Host "[Info] Carregando observações existentes de apps_output.csv..." -ForegroundColor Cyan
+    try {
+        $oldCsv = Import-Csv -Path $outPath
+        foreach ($item in $oldCsv) {
+            if ($item.AppName -and $item.Observacao) {
+                # Usa nome normalizado como chave para garantir match robusto
+                $normName = Get-NormalizedAppName -RawName $item.AppName
+                if ($normName) {
+                    $existingObs[$normName] = $item.Observacao
+                }
+            }
+        }
+    } catch {
+        Write-Host "[Aviso] Não foi possível ler observações antigas: $($_.Exception.Message)" -ForegroundColor Yellow
+    }
+}
+
 # 2) Processar linhas do CSV em memória
 $index = 0
 $totalApps = @($data).Count
@@ -579,6 +601,13 @@ foreach ($row in $data) {
 
     # obter chave e url de busca do JSON
     $normKey = Get-NormalizedAppName -RawName $row.AppName
+
+    # Tentar recuperar observação existente se não houver na linha atual (ou sobrescrever, dependendo da lógica desejada)
+    # Aqui, assumimos que o CSV antigo é a fonte da verdade para Observacao
+    if ($normKey -and $existingObs.ContainsKey($normKey)) {
+        $row.Observacao = $existingObs[$normKey]
+    }
+
     $searchUrlVal = $null
     if ($normKey -and $AppSources.ContainsKey($normKey)) {
         $srcObj = $AppSources[$normKey]
