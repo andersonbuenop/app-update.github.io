@@ -3,10 +3,14 @@ function initFromText(text) {
   state.data = data;
   state.filtered = [...state.data];
   renderTable();
+  updateChart(); // Atualiza gráfico ao carregar dados
 }
 
+// Inicializa gráfico logo após carregar DOM
+document.addEventListener('DOMContentLoaded', initChart);
+
 // Carrega appSources.json (configurações extras)
-fetch('appSources.json')
+fetch('data/appSources.json')
   .then(r => r.ok ? r.json() : {})
   .then(json => {
     state.appSources = json;
@@ -15,7 +19,7 @@ fetch('appSources.json')
   .catch(err => console.warn('Erro ao carregar appSources.json', err));
 
 // tenta carregar apps.csv do mesmo diretório
-fetch('apps.csv')
+fetch('data/apps.csv')
   .then(r => r.ok ? r.text() : Promise.reject())
   .then(text => initFromText(text))
   .catch(() => {
@@ -29,7 +33,7 @@ const defaultCsv = `"AppName","appversion","LatestVersion","Website","InstalledV
 "notepad++","8.9","8.9.1","https://notepad-plus-plus.org/downloads/","8.9","UpdateAvailable"
 "google chrome","138.3.3.3","144.0.7559.109","https://chromeenterprise.google/intl/pt_br/download/?modal-id=download-chrome","138.3.3.3","UpdateAvailable"
 "adobe acrobat reader update","-2345","25.1.21111","https://www.adobe.com/devnet-docs/acrobatetk/tools/ReleaseNotesDC/index.html","2345","UpdateAvailable"
-"adobe acrobat 11 pro",,,,,,"Unknown"
+"adobe acrobat 11 pro",,,,"Unknown"
 "apache directory studio",,,,"https://directory.apache.org/studio/download/",,"Unknown"
 "apache cxf",,,,"https://cxf.apache.org/download.html",,"Unknown"
 "apache jmeter",,"5.6","https://jmeter.apache.org/download_jmeter.cgi","5.6","UpToDate"
@@ -86,11 +90,118 @@ const state = {
   appSources: {},
   sort: { key: null, dir: 1 },
   statusFilter: null,
-  statusDir: 1
+  statusDir: 1,
+  chart: null // Instância do Chart.js
 };
 
 const tableBody = document.querySelector('#appsTable tbody');
 const searchInput = document.getElementById('searchInput');
+
+// Inicializa o gráfico
+function initChart() {
+  // Registra o plugin de datalabels se estiver disponível
+  if (typeof ChartDataLabels !== 'undefined') {
+    Chart.register(ChartDataLabels);
+  }
+
+  const ctx = document.getElementById('statusChart').getContext('2d');
+  state.chart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['UpdateAvailable', 'UpToDate', 'Unknown'],
+      datasets: [{
+        data: [0, 0, 0],
+        backgroundColor: [
+          '#f55353', // UpdateAvailable (Vermelho)
+          '#10b981', // UpToDate (Verde)
+          '#458bfc'  // Unknown (Azul)
+        ],
+        borderWidth: 0
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      layout: {
+        padding: {
+          top: 40
+        }
+      },
+      plugins: {
+        legend: {
+          position: 'right',
+          labels: {
+            color: '#c2c2c2',
+            font: { size: 11 },
+            boxWidth: 12,
+            padding: 15
+          }
+        },
+        title: {
+          display: false // Desativa título nativo para usar o customizado
+        },
+        datalabels: {
+          color: '#ffffff',
+          font: {
+            weight: 'bold',
+            size: 14
+          },
+          formatter: (value, ctx) => {
+            if (value === 0) return ''; // Não mostra zero
+            return value;
+          }
+        }
+      }
+    },
+    plugins: [{
+      id: 'customTitle',
+      afterDraw: (chart) => {
+        const { ctx, chartArea } = chart;
+        if (!chartArea) return;
+        
+        const { left, right } = chartArea;
+        const x = (left + right) / 2;
+        const y = 20; // Posição vertical no topo (dentro do padding)
+        
+        ctx.save();
+        ctx.fillStyle = '#f0f0f0'; // Mesma cor do título original
+        ctx.font = 'bold 14px "Segoe UI", sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('Status dos Apps', x, y);
+        ctx.restore();
+      }
+    }]
+  });
+}
+
+// Atualiza os dados do gráfico
+function updateChart() {
+  if (!state.chart) return;
+
+  const counts = {
+    UpdateAvailable: 0,
+    UpToDate: 0,
+    Unknown: 0
+  };
+
+  // Conta status dos dados FILTRADOS
+  state.filtered.forEach(row => {
+    const s = row.Status || 'Unknown';
+    if (counts[s] !== undefined) {
+      counts[s]++;
+    } else {
+      counts.Unknown++;
+    }
+  });
+
+  state.chart.data.datasets[0].data = [
+    counts.UpdateAvailable,
+    counts.UpToDate,
+    counts.Unknown
+  ];
+  state.chart.update();
+}
 
 function statusClass(status) {
   if (!status) return 'status-Unknown';
@@ -148,6 +259,7 @@ function openEditModal(index) {
   // Preenche o formulário
   document.getElementById('editIndex').value = item._originalIndex; // Index global
   document.getElementById('editAppName').value = item.AppName || '';
+  document.getElementById('editAppVersion').value = item.appversion || '';
   document.getElementById('editInstalledVersion').value = item.InstalledVersion || '';
   document.getElementById('editLatestVersion').value = item.LatestVersion || '';
   // Status removido da edição, calculado automaticamente ou mantido
@@ -165,17 +277,9 @@ function openEditModal(index) {
   document.getElementById('editSearchUrl').value = item.SearchUrl || '';
   document.getElementById('editOutputUrl').value = item.Website || ''; // Website é o OutputUrl no CSV
 
-  // Se não tiver chave no JSON, avisa ou desabilita? Por enquanto deixa editar mas só vai salvar no CSV se não tiver key
-  const hasKey = !!item.SourceKey;
-  document.getElementById('editSearchUrl').disabled = !hasKey;
-  document.getElementById('editOutputUrl').disabled = !hasKey;
-  if (!hasKey) {
-      document.getElementById('editSearchUrl').placeholder = "Sem configuração no JSON";
-      document.getElementById('editOutputUrl').placeholder = "Sem configuração no JSON";
-  } else {
-      document.getElementById('editSearchUrl').placeholder = "URL de Busca";
-      document.getElementById('editOutputUrl').placeholder = "URL de Saída";
-  }
+  // Habilita edição de URLs para todos (mesmo sem chave JSON, salva no CSV)
+  document.getElementById('editSearchUrl').placeholder = "URL de Busca";
+  document.getElementById('editOutputUrl').placeholder = "URL de Saída";
   
   // Mostra modal
   const modal = document.getElementById('editModal');
@@ -186,6 +290,30 @@ function closeModal() {
   document.getElementById('editModal').style.display = 'none';
 }
 
+function calculateStatus(installed, latest) {
+    if (!installed || !latest) return 'Unknown';
+    
+    // Remove caracteres não numéricos (mantém pontos) para comparação simples
+    const cleanInst = installed.replace(/[^0-9.]/g, '');
+    const cleanLatest = latest.replace(/[^0-9.]/g, '');
+    
+    if (!cleanInst || !cleanLatest) return 'Unknown';
+
+    // Comparação simples de versões (ex: 1.2.3 vs 1.2.4)
+    const v1Parts = cleanInst.split('.').map(Number);
+    const v2Parts = cleanLatest.split('.').map(Number);
+    
+    for (let i = 0; i < Math.max(v1Parts.length, v2Parts.length); i++) {
+        const v1 = v1Parts[i] || 0;
+        const v2 = v2Parts[i] || 0;
+        
+        if (v1 > v2) return 'UpToDate'; // Instalada maior que a última (dev/beta?)
+        if (v1 < v2) return 'UpdateAvailable';
+    }
+    
+    return 'UpToDate';
+}
+
 // Manipulador do formulário de edição
 document.getElementById('editForm').addEventListener('submit', function(e) {
   e.preventDefault();
@@ -194,7 +322,8 @@ document.getElementById('editForm').addEventListener('submit', function(e) {
   const row = state.data.find(r => r._originalIndex === originalIndex);
   
   if (row) {
-    //row.AppName = document.getElementById('editAppName').value; // Readonly
+    row.AppName = document.getElementById('editAppName').value;
+    row.appversion = document.getElementById('editAppVersion').value;
     row.InstalledVersion = document.getElementById('editInstalledVersion').value;
     row.LatestVersion = document.getElementById('editLatestVersion').value;
     // Status não editável diretamente
@@ -231,12 +360,31 @@ document.getElementById('editForm').addEventListener('submit', function(e) {
     const maxVersion = Math.max(installedVer, appVer);
     row.MergedVersion = maxVersion > 0 ? (row.InstalledVersion || row.appversion || '') : '';
     
+    // Atualiza Status dinamicamente
+    row.Status = calculateStatus(row.InstalledVersion, row.LatestVersion);
+
     // Atualiza tabela
     renderTable();
-    closeModal();
+    updateChart(); // Atualiza gráfico imediatamente
     
-    // Salva no servidor
-    saveDataToServer();
+    // Salva no servidor com feedback visual
+    const saveBtn = document.getElementById('saveEditBtn');
+    const originalText = saveBtn ? saveBtn.textContent : 'Salvar';
+    if (saveBtn) {
+        saveBtn.textContent = 'Salvando...';
+        saveBtn.disabled = true;
+    }
+
+    saveDataToServer()
+        .then(() => {
+            closeModal();
+        })
+        .finally(() => {
+            if (saveBtn) {
+                saveBtn.textContent = originalText;
+                saveBtn.disabled = false;
+            }
+        });
   }
 });
 
@@ -285,15 +433,16 @@ function saveDataToServer() {
       });
   }
 
-  Promise.all([saveCsv, saveJson])
+  return Promise.all([saveCsv, saveJson])
   .then(results => {
       console.log('Salvo com sucesso:', results);
       state.lastCsvText = csvContent;
-      alert('Alterações salvas (CSV e JSON)!');
+      return results;
   })
   .catch(err => {
       console.error('Erro ao salvar:', err);
       alert('Erro ao salvar alterações no servidor.');
+      throw err;
   });
 }
 
@@ -321,6 +470,25 @@ function applyFilters() {
   } else {
     renderTable();
   }
+  
+  // Atualiza o gráfico para refletir o filtro aplicado
+  updateChart();
+}
+
+// Evento do botão cancelar
+const cancelBtn = document.getElementById('cancelEdit');
+if (cancelBtn) {
+    cancelBtn.addEventListener('click', closeModal);
+}
+
+// Fechar modal ao clicar fora
+const modal = document.getElementById('editModal');
+if (modal) {
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
 }
 
 function sortBy(key, toggleDir = true) {
@@ -373,6 +541,10 @@ document.getElementById('fileInput').addEventListener('change', e => {
 });
 
 searchInput.addEventListener('input', applyFilters);
+
+// Botão de salvar manual (removido)
+// const saveBtn = document.getElementById('saveBtn');
+// if (saveBtn) { ... }
 
 // Badge filter events
 document.querySelectorAll('#statusBadges .badge').forEach(badge => {
@@ -430,7 +602,17 @@ document.querySelectorAll('#appsTable thead th').forEach(th => {
       .catch(err => console.error('Erro ao carregar appSources.json:', err));
 
   const loadData = () => {
-    fetch('apps_output.csv?t=' + Date.now()) // timestamp para evitar cache
+    // Carrega Metadados (Timestamp)
+    fetch('data/metadata.json?t=' + Date.now())
+        .then(r => r.ok ? r.json() : {})
+        .then(meta => {
+            if (meta.lastRun) {
+                document.getElementById('lastUpdate').textContent = 'Última Verificação: ' + meta.lastRun;
+            }
+        })
+        .catch(() => console.log('Sem metadados'));
+
+    fetch('data/apps_output.csv?t=' + Date.now()) // timestamp para evitar cache
       .then(r => r.ok ? r.text() : Promise.reject())
       .then(text => {
         // Verifica se houve mudança para evitar re-renderizar sem necessidade (opcional, mas bom para UX)

@@ -1,36 +1,94 @@
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
-  background: #333333;
+  padding: 20px;
+  background-color: #1e1e1e;
   color: #f0f0f0;
 }
-header {
-  padding: 1.5rem 1rem;
+
+/* Header Global */
+.header-global {
   text-align: center;
-  background: #f0f0f0;
-  border-bottom: 1px solid #c2c2c2;
+  padding: 1rem 0;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #333;
 }
-header h1 {
+
+h1 {
   margin: 0;
-  font-size: 1.6rem;
-  color: #ec0000;
+  font-size: 1.8rem;
 }
-header p {
-  margin: 0.3rem 0 0;
-  font-size: 0.9rem;
-  color: #333333;
-}
+
+/* Layout Principal */
 main {
   padding: 1rem;
-  max-width: 90%;
+  max-width: 95%;
   margin: 0 auto;
 }
+
+/* Barra Superior: Controls + Last Update */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end; /* Alinha na base */
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.controls-area {
+  flex: 3; /* Ocupa mais espaço */
+  min-width: 0;
+}
+
+.meta-area {
+  flex: 1;
+  text-align: right;
+  min-width: 200px;
+}
+
+.last-update {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+/* Área de Conteúdo: Tabela + Gráfico */
+.content-area {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.table-area {
+  flex: 3;
+  min-width: 0;
+}
+
+.chart-area {
+  flex: 1;
+  min-width: 250px;
+  position: sticky;
+  top: 1rem;
+}
+
+.table-container {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.chart-container {
+  background: #6d6d6d;
+  padding: 1rem;
+  border-radius: 6px;
+}
+
+/* Remove classes antigas se não usadas ou mapeia para novas se necessário */
 .controls {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  margin-bottom: 1rem;
   align-items: center;
+  margin-bottom: 0; /* Removido margin pois o top-bar gerencia */
 }
 .controls input[type="file"],
 .controls input[type="text"],
@@ -260,6 +318,15 @@ a:hover {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+.modal-form label {
+  margin-top: 0.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #c2c2c2;
+  display: block;
+  margin-bottom: 0.25rem;
 }
 
 .form-control {

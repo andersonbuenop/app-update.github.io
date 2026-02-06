@@ -2,54 +2,88 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8" />
-  <title>SCCM Team</title>
+  <title>SCCM application Status</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="style.css?v=5" />
+  <link rel="stylesheet" href="assets/css/style.css?v=9" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 </head>
 <body>
-<header>
-  <h1>SCCM App Status</h1>
-  <p>Visualização das applications disponiveis no Software Center, versões instaladas e disponíveis.</p>
-</header>
+<div class="header-global">
+  <h1>SCCM application Status</h1>
+</div>
 
 <main>
-  <div class="controls">
-    <label>
-      CSV:
-      <input type="file" id="fileInput" accept=".csv,text/csv" />
-    </label>
-    <input type="text" id="searchInput" placeholder="Filtrar por nome, versão ou status..." />
-    <div id="statusBadges" class="status-badges">
-      <span class="badge" data-status="UpdateAvailable">
-        <span class="dot dot-update"></span> UpdateAvailable
-      </span>
-      <span class="badge" data-status="UpToDate">
-        <span class="dot dot-ok"></span> UpToDate
-      </span>
-      <span class="badge" data-status="Unknown">
-        <span class="dot dot-unknown"></span> Unknown
-      </span>
+  <!-- Linha Superior: Controles e Data -->
+  <div class="top-bar">
+    <div class="controls-area">
+      <div class="controls">
+        <label>
+          CSV:
+          <input type="file" id="fileInput" accept=".csv,text/csv" />
+        </label>
+        <label>
+          Filtrar:
+          <input type="text" id="searchInput" placeholder="Nome, versão ou status..." />
+        </label>
+        <label>
+          Status:
+          <select id="statusFilter">
+            <option value="">Todos</option>
+            <option value="UpdateAvailable">UpdateAvailable</option>
+            <option value="UpToDate">UpToDate</option>
+            <option value="Unknown">Unknown</option>
+          </select>
+        </label>
+        
+        <div id="statusBadges" class="status-badges" style="display: inline-flex; margin-left: 10px; align-items: center;">
+          <span class="badge" data-status="UpdateAvailable">
+            <span class="dot dot-update"></span> UpdateAvailable
+          </span>
+          <span class="badge" data-status="UpToDate">
+            <span class="dot dot-ok"></span> UpToDate
+          </span>
+          <span class="badge" data-status="Unknown">
+            <span class="dot dot-unknown"></span> Unknown
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="meta-area">
+      <div id="lastUpdate" class="last-update">Última Verificação: --/--/---- --:--:--</div>
     </div>
   </div>
 
-  <div class="table-container">
-    <table id="appsTable">
-      <thead>
-        <tr>
-          <th class="col-num">Nº</th>
-          <th class="col-app" data-key="AppName">Aplicação</th>
-          <th class="col-version" data-key="MergedVersion">Versão Instalada</th>
-          <th class="col-version" data-key="LatestVersion">Última Versão Disponível</th>
-          <th class="col-status" data-key="Status">Status</th>
-          <th class="col-license" data-key="License">Licença</th>
-          <th class="col-obs" data-key="Observacao">Observação</th>
-          <th class="col-actions">Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Linhas geradas via JS -->
-      </tbody>
-    </table>
+  <!-- Área de Conteúdo: Tabela e Gráfico -->
+  <div class="content-area">
+    <div class="table-area">
+      <div class="table-container">
+        <table id="appsTable">
+          <thead>
+            <tr>
+              <th data-key="AppName">Aplicação</th>
+              <th data-key="appversion">Versão App</th>
+              <th data-key="LatestVersion">Última Versão</th>
+              <th>Website</th>
+              <th data-key="InstalledVersion">Instalada</th>
+              <th data-key="Status">Status</th>
+              <th data-key="Observation">Observação</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Linhas geradas via JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="chart-area">
+      <div class="chart-container">
+        <canvas id="statusChart"></canvas>
+      </div>
+    </div>
   </div>
 </main>
 
@@ -58,57 +92,52 @@
   <div class="modal-content">
     <h2>Editar Aplicação</h2>
     <form id="editForm" class="modal-form">
-      <input type="hidden" id="editIndex">
+      <input type="hidden" id="editIndex" />
       
       <label>
-        Aplicação (AppName):
-        <input type="text" id="editAppName" class="form-control" readonly>
+        Aplicação:
+        <input type="text" id="editAppName" name="AppName" class="form-control" />
       </label>
       
-      <label>
-        Versão Instalada (InstalledVersion):
-        <input type="text" id="editInstalledVersion" class="form-control">
-      </label>
+      <input type="hidden" id="editAppVersion" name="appversion" />
+      
+      <input type="hidden" id="editLatestVersion" name="LatestVersion" />
       
       <label>
-        Última Versão (LatestVersion):
-        <input type="text" id="editLatestVersion" class="form-control">
-      </label>
-      
-      <!-- Campos de URL do JSON -->
-      <input type="hidden" id="editSourceKey">
-      
-      <label>
-        URL de Busca (Search/Repo):
-        <input type="text" id="editSearchUrl" class="form-control">
-      </label>
-
-      <label>
-        URL de Saída (Output/Website):
-        <input type="text" id="editOutputUrl" class="form-control">
+        Versão Instalada:
+        <input type="text" id="editInstalledVersion" name="InstalledVersion" class="form-control" />
       </label>
 
       <label>
         Licença:
-        <select id="editLicense" class="form-control">
-          <option value="Free">Free</option>
-          <option value="Licensed">Licensed</option>
-        </select>
+        <input type="text" id="editLicense" name="License" class="form-control" />
       </label>
 
       <label>
-        Observação:
-        <textarea id="editObservacao" rows="3" class="form-control"></textarea>
+        Website (Download):
+        <input type="text" id="editOutputUrl" name="OutputUrl" class="form-control" />
+      </label>
+
+      <label>
+        URL de Busca (Repo/Scrape):
+        <input type="text" id="editSearchUrl" name="SearchUrl" class="form-control" />
       </label>
       
-      <div class="modal-actions">
-        <button type="button" onclick="closeModal()" class="btn btn-secondary">Cancelar</button>
-        <button type="submit" class="btn btn-primary">Salvar</button>
+      <input type="hidden" id="editSourceKey" name="SourceKey" />
+      
+      <label>
+        Observação:
+        <textarea id="editObservacao" name="Observacao" rows="3" class="form-control"></textarea>
+      </label>
+      
+      <div class="modal-buttons">
+        <button type="button" id="cancelEdit" class="btn btn-secondary">Cancelar</button>
+        <button type="submit" id="saveEditBtn" class="btn btn-primary">Salvar</button>
       </div>
     </form>
   </div>
 </div>
 
-<script src="script.js?v=2"></script>
+<script src="assets/js/script.js?v=9"></script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 ﻿##Start-Transcript -Path "$PSScriptRoot\app_update_debug_transcript.txt" -Force
 Write-Host "=== Início do processo (CSV + scraping com fallback Chocolatey→GitHub→Website) ===" -ForegroundColor Green
 
-$csvPath = $PSScriptRoot + '\apps.csv'
+$csvPath = $PSScriptRoot + '\data\apps.csv'
 
 if (-not (Test-Path $csvPath)) {
     Write-Host "ERRO: exporta primeiro o Excel para CSV: $csvPath" -ForegroundColor Red
@@ -32,7 +32,7 @@ $data = Import-Csv -Path $csvPath | Select-Object `
 
 
 # ---------------------- Carregar mapeamento apps do JSON ------------------------------------
-$jsonPath = $PSScriptRoot + '\appSources.json'
+$jsonPath = $PSScriptRoot + '\data\appSources.json'
 if (Test-Path $jsonPath) {
     Write-Host "[JSON] Carregando appSources.json..."
     $AppSources = Get-Content -Path $jsonPath -Raw | ConvertFrom-Json | ConvertTo-Hashtable
@@ -540,7 +540,7 @@ function Get-LicenseForApp {
 
 # ---------------------- Carregar Observações e Versões Anteriores ----------------------
 # Lê o arquivo de saída anterior para preservar observações e comparar versões
-$outPath = $PSScriptRoot + "\apps_output.csv"
+$outPath = $PSScriptRoot + "\data\apps_output.csv"
 $existingObs = @{}
 $previousVersions = @{}
 
@@ -663,9 +663,19 @@ foreach ($row in $data) {
 }
 
 # 3) Gravar CSV de saída
-$outPath =  $PSScriptRoot + "\apps_output.csv"
+$outPath =  $PSScriptRoot + "\data\apps_output.csv"
 Write-Host "A gravar CSV em: $outPath"
 $uniqueData | Export-Csv -Path $outPath -NoTypeInformation -Encoding UTF8
+
+# 4) Gravar metadados (timestamp)
+$metaPath = $PSScriptRoot + "\data\metadata.json"
+$timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+$metaContent = @{
+    lastRun = $timestamp
+} | ConvertTo-Json
+Set-Content -Path $metaPath -Value $metaContent
+Write-Host "[Metadata] Atualizado em: $timestamp"
+
 Write-Host "=== Fim. Abre $outPath no Excel. ==="
 
 #Stop-Transcript

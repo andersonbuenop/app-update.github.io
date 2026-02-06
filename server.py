@@ -4,6 +4,7 @@ import json
 import os
 
 PORT = 8000
+DATA_DIR = 'data'
 
 class CustomHandler(http.server.SimpleHTTPRequestHandler):
     def do_POST(self):
@@ -31,7 +32,12 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
                      self.send_json_error(403, "File not allowed")
                      return
 
-                with open(filename, 'w', encoding='utf-8') as f:
+                # Ensure data directory exists
+                if not os.path.exists(DATA_DIR):
+                    os.makedirs(DATA_DIR)
+
+                filepath = os.path.join(DATA_DIR, filename)
+                with open(filepath, 'w', encoding='utf-8') as f:
                     f.write(content)
                     
                 self.send_response(200)
