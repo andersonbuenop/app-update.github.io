@@ -1,7 +1,7 @@
 ﻿##Start-Transcript -Path "$PSScriptRoot\app_update_debug_transcript.txt" -Force
 Write-Host "=== Início do processo (CSV + scraping com fallback Chocolatey→GitHub→Website) ===" -ForegroundColor Green
 
-$csvPath = $PSScriptRoot + '\apps.csv'
+$csvPath = $PSScriptRoot + '\data\apps.csv'
 
 if (-not (Test-Path $csvPath)) {
     Write-Host "ERRO: exporta primeiro o Excel para CSV: $csvPath" -ForegroundColor Red
@@ -32,7 +32,7 @@ $data = Import-Csv -Path $csvPath | Select-Object `
 
 
 # ---------------------- Carregar mapeamento apps do JSON ------------------------------------
-$jsonPath = $PSScriptRoot + '\appSources.json'
+$jsonPath = $PSScriptRoot + '\data\appSources.json'
 if (Test-Path $jsonPath) {
     Write-Host "[JSON] Carregando appSources.json..."
     $AppSources = Get-Content -Path $jsonPath -Raw | ConvertFrom-Json | ConvertTo-Hashtable
@@ -62,6 +62,58 @@ if (Test-Path $jsonPath) {
         }
     }
 }
+
+# ---------------------- RuckZuck API --------------------------------------------
+$global:RuckZuckCatalog = $null
+$global:RuckZuckApiUrl = "https://ruckzuck.tools"
+
+function Initialize-RuckZuck {
+    Write-Host "[RuckZuck] Inicializando catálogo..." -ForegroundColor Cyan
+    try {
+        $apiUrl = Invoke-RestMethod -Uri "https://ruckzuck.tools/rest/v2/geturl" -ErrorAction Stop
+        $global:RuckZuckApiUrl = $apiUrl
+        $global:RuckZuckCatalog = Invoke-RestMethod -Uri "$apiUrl/rest/v2/getcatalog" -ErrorAction Stop
+        Write-Host "[RuckZuck] Catálogo carregado: $($global:RuckZuckCatalog.Count) itens." -ForegroundColor Green
+    }
+    catch {
+        Write-Warning "[RuckZuck] Falha ao carregar catálogo: $_"
+    }
+}
+
+function Get-RuckZuckInfo {
+    param([string]$RawName)
+
+    if (-not $global:RuckZuckCatalog) { return $null }
+
+    # Limpeza básica do nome local
+    $cleanName = $RawName -replace " \d+.*","" -replace " \(.*",""
+    
+    # Busca por ShortName (exato), ProductName (contains), ou ShortName (contains)
+    # Exclusão de termos muito genéricos se necessário, mas a ordenação por Downloads ajuda
+    $candidates = $global:RuckZuckCatalog | Where-Object { 
+        $_.ShortName -eq $cleanName -or 
+        $_.ProductName -like "*$cleanName*" -or
+        $cleanName -like "*$($_.ShortName)*"
+    } | Sort-Object Downloads -Descending
+
+    if ($candidates) {
+        $found = $candidates | Select-Object -First 1
+        
+        Write-Host "   [RuckZuck] ✓ Encontrado: $($found.ProductName) ($($found.ProductVersion))"
+        
+        return [PSCustomObject]@{
+            Version = $found.ProductVersion
+            Website = $found.ProductURL
+            IsDiscontinued = $false
+            SourceId = $found.ShortName
+            IconUrl = "$global:RuckZuckApiUrl/rest/v2/geticon?shortname=$($found.ShortName)"
+        }
+    }
+    return $null
+}
+
+# Inicializar RuckZuck
+Initialize-RuckZuck
 
 # ---------------------- funções --------------------------------------------
 
@@ -126,6 +178,11 @@ function Normalize-Version {
         }
     }
 
+
+    # Tratamento para versões de 4 partes com final .00.0 ou .0.0 (ex: 25.01.00.0 -> 25.01)
+    if ($Version -match '^(?<maj>\d+)\.(?<min>\d+)\.0+\.0+$') {
+        return "$($Matches['maj']).$($Matches['min'])"
+    }
 
     # ---- Normalização específica para 7-Zip / padrões semânticos mistos ----
     # Chocolatey costuma usar "25.1.0" para o mesmo build que o site oficial "25.01"
@@ -423,24 +480,45 @@ function Get-WebsiteLatestVersion {
 function Resolve-AppInfoOnline {
     param([string]$RawName)
 
+    # 0) Tentar RuckZuck (Prioridade Máxima para metadados e versão)
+    $rz = Get-RuckZuckInfo -RawName $RawName
+    if ($rz) { return $rz }
+
     $normalized = Get-NormalizedAppName -RawName $RawName
-    if (-not $normalized) { return [PSCustomObject]@{ Version=$null; Website=$null; IsDiscontinued=$false } }
+    # Retorno padrão vazio com campos novos
+    $empty = [PSCustomObject]@{ Version=$null; Website=$null; IsDiscontinued=$false; SourceId=$null; IconUrl=$null }
+
+    if (-not $normalized) { return $empty }
 
     Write-Host "  [*] A resolver app: '$RawName' (normalizado: '$normalized')"
 
     if (-not $AppSources.ContainsKey($normalized)) {
         Write-Host "    - Não há configuração para '$normalized'."
-        return [PSCustomObject]@{ Version=$null; Website=$null; IsDiscontinued=$false }
+        return $empty
     }
 
     $src = $AppSources[$normalized]
+
+    # Função local para padronizar retorno
+    function Standardize-Result($res) {
+        if ($res) {
+            if (-not $res.PSObject.Properties['SourceId']) {
+                $res | Add-Member -NotePropertyName SourceId -NotePropertyValue $null -Force
+            }
+            if (-not $res.PSObject.Properties['IconUrl']) {
+                $res | Add-Member -NotePropertyName IconUrl -NotePropertyValue $null -Force
+            }
+            return $res
+        }
+        return $null
+    }
 
     # Estratégia de fallback: Chocolatey → GitHub → Website
     # 1) Tenta Chocolatey (mais rápido e confiável)
     if ($src.ChocolateyId) {
         Write-Host "   [Fallback 1] Tentando Chocolatey..."
         $result = Get-ChocolateyLatestVersion -PackageId $src.ChocolateyId -OutputUrl $src.OutputUrl
-        if ($result.Version) { return $result }
+        if ($result.Version) { return (Standardize-Result $result) }
     }
 
     # 2) Tenta GitHub
@@ -450,43 +528,46 @@ function Resolve-AppInfoOnline {
         # 2a) tenta API (se existir)
         if ($src.ApiUrl) {
             $result = Get-GitHubLatestVersionAPI -ApiUrl $src.ApiUrl -OutputUrl $src.OutputUrl
-            if ($result.Version) { return $result }
+            if ($result.Version) { return (Standardize-Result $result) }
         }
 
         # 2b) tenta HTML
         if ($src.RepoUrl) {
             $result = Get-GitHubLatestVersionHTML -RepoUrl $src.RepoUrl -OutputUrl $src.OutputUrl
-            if ($result.Version) { return $result }
+            if ($result.Version) { return (Standardize-Result $result) }
         }
     }
 
     # 3) Tenta Website (scraping com regex)
     if ($src.Type -eq 'Website') {
         Write-Host "   [Fallback 3] Tentando Web scraping..."
-        return Get-WebsiteLatestVersion `
+        $result = Get-WebsiteLatestVersion `
             -Url $src.ScrapeUrl `
             -VersionPattern $src.VersionPattern `
             -OutputUrl $src.OutputUrl
+        return (Standardize-Result $result)
     }
 
     # 4) Type Fixed: versão descontinuada
     if ($src.Type -eq 'Fixed') {
         Write-Host " [Fixed] Versão fixa: $($src.Version)"
-        return [PSCustomObject]@{
+        $result = [PSCustomObject]@{
             Version = $src.Version
             Website = $src.OutputUrl
             IsDiscontinued = $true
         }
+        return (Standardize-Result $result)
     }elseif ($src.Type -eq 'Licenced') {
         Write-Host " [Licenced] Versão Licenciada: $($src.Version)"
-        return [PSCustomObject]@{
+        $result = [PSCustomObject]@{
             Version = $src.Version
             Website = $src.OutputUrl
             IsDiscontinued = $false
         }
+        return (Standardize-Result $result)
     }
 
-    return [PSCustomObject]@{ Version=$null; Website=$null; IsDiscontinued=$false }
+    return $empty
 }
 
 function Get-NormalizedAppName {
@@ -538,6 +619,37 @@ function Get-LicenseForApp {
     return 'licensed'
 }
 
+# ---------------------- Carregar Observações e Versões Anteriores ----------------------
+# Lê o arquivo de saída anterior para preservar observações e comparar versões
+$outPath = $PSScriptRoot + "\data\apps_output.csv"
+$existingObs = @{}
+$previousVersions = @{}
+
+if (Test-Path $outPath) {
+    Write-Host "[Info] Carregando dados existentes de apps_output.csv..." -ForegroundColor Cyan
+    try {
+        $oldCsv = Import-Csv -Path $outPath
+        foreach ($item in $oldCsv) {
+            # Usa nome normalizado como chave para garantir match robusto
+            $normName = Get-NormalizedAppName -RawName $item.AppName
+            
+            if ($normName) {
+                # Preservar Observação
+                if ($item.Observacao) {
+                    $existingObs[$normName] = $item.Observacao
+                }
+                
+                # Preservar Última Versão conhecida (para comparação de "Nova Versão")
+                if ($item.LatestVersion) {
+                    $previousVersions[$normName] = $item.LatestVersion
+                }
+            }
+        }
+    } catch {
+        Write-Host "[Aviso] Não foi possível ler dados antigos: $($_.Exception.Message)" -ForegroundColor Yellow
+    }
+}
+
 # 2) Processar linhas do CSV em memória
 $index = 0
 $totalApps = @($data).Count
@@ -567,11 +679,11 @@ foreach ($row in $data) {
     }
     catch {
         Write-Host "    ✗ ERRO CRÍTICO ao resolver '$appName': $($_.Exception.Message)" -ForegroundColor Red
-        $info = [PSCustomObject]@{ Version=$null; Website=$null; IsDiscontinued=$false }
+        $info = [PSCustomObject]@{ Version=$null; Website=$null; IsDiscontinued=$false; SourceId=$null; IconUrl=$null }
     }
 
     # garantir colunas
-    foreach ($col in 'LatestVersion','Website','InstalledVersion','Status','License','SourceKey','SearchUrl','Observacao') {
+    foreach ($col in 'LatestVersion','Website','InstalledVersion','Status','License','SourceKey','SearchUrl','Observacao','IsNewVersion','SourceId','IconUrl') {
         if (-not ($row.PSObject.Properties.Name -contains $col)) {
             $row | Add-Member -NotePropertyName $col -NotePropertyValue $null
         }
@@ -579,6 +691,26 @@ foreach ($row in $data) {
 
     # obter chave e url de busca do JSON
     $normKey = Get-NormalizedAppName -RawName $row.AppName
+
+    # Tentar recuperar observação existente se não houver na linha atual (ou sobrescrever, dependendo da lógica desejada)
+    # Aqui, assumimos que o CSV antigo é a fonte da verdade para Observacao
+    if ($normKey -and $existingObs.ContainsKey($normKey)) {
+        $row.Observacao = $existingObs[$normKey]
+    }
+    
+    # Lógica de Detecção de NOVA Versão (Comparar com execução anterior)
+    $row.IsNewVersion = $false
+    if ($normKey -and $previousVersions.ContainsKey($normKey) -and $info.Version) {
+        $prevVer = $previousVersions[$normKey]
+        $currVer = $info.Version
+        
+        # Só marcar como novo se for diferente E se não for a primeira execução (prevVer existe)
+        if ($prevVer -and $prevVer -ne $currVer) {
+            Write-Host "    ★ NOVA VERSÃO DETECTADA! (Era: $prevVer, Agora: $currVer)" -ForegroundColor Magenta
+            $row.IsNewVersion = $true
+        }
+    }
+
     $searchUrlVal = $null
     if ($normKey -and $AppSources.ContainsKey($normKey)) {
         $srcObj = $AppSources[$normKey]
@@ -605,15 +737,28 @@ foreach ($row in $data) {
     $row.SourceKey        = $normKey
     $row.SearchUrl        = $searchUrlVal
     $row.License          = Get-LicenseForApp -RawName $row.AppName
+    $row.SourceId         = $info.SourceId
+    $row.IconUrl          = $info.IconUrl
+    # IsNewVersion já foi definido acima
 
     # Adicionar à lista de dados únicos
     $uniqueData += $row
 }
 
 # 3) Gravar CSV de saída
-$outPath =  $PSScriptRoot + "\apps_output.csv"
+$outPath =  $PSScriptRoot + "\data\apps_output.csv"
 Write-Host "A gravar CSV em: $outPath"
 $uniqueData | Export-Csv -Path $outPath -NoTypeInformation -Encoding UTF8
+
+# 4) Gravar metadados (timestamp)
+$metaPath = $PSScriptRoot + "\data\metadata.json"
+$timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+$metaContent = @{
+    lastRun = $timestamp
+} | ConvertTo-Json
+Set-Content -Path $metaPath -Value $metaContent
+Write-Host "[Metadata] Atualizado em: $timestamp"
+
 Write-Host "=== Fim. Abre $outPath no Excel. ==="
 
 #Stop-Transcript

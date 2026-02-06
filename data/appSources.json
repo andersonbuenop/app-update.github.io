@@ -45,7 +45,8 @@
     "License": "Licensed",
     "MatchRegex": [
       "^adobe acrobat xi.*"
-    ]
+    ],
+    "ScrapeUrl": ""
   },
   "apache directory studio": {
     "Type": "Website",
