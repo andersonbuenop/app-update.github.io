@@ -1,0 +1,167 @@
+﻿"AppName","appversion","LatestVersion","Website","InstalledVersion","Status","License","SourceKey","SearchUrl","Observacao","IsNewVersion","SourceId","IconUrl"
+".NET 4.6.1 Developer","4.6.1","10.0.3","https://dotnet.microsoft.com/download","4.6.1","UpdateAvailable","licensed",".net","https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/releases-index.json","teste","False",,
+"7-Zip 25.01 (x64 edition)","25.01 (x64 edition)","26.00","http://www.7-zip.org/","25.01","UpdateAvailable","licensed","7-zip",,"teste","False","7-Zip","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=7-Zip"
+"Adobe Acrobat Reader - 05-2025","25.001.20467",,,"25.1.20467","Unknown","licensed","adobe acrobat reader",,"nao esta salvando status doa licença","False",,
+"Adobe Acrobat Reader Update - 25.001.21151 x32","25.001.21151","25.1.21223","https://www.adobe.com/devnet-docs/acrobatetk/tools/ReleaseNotesDC/index.html","25.1.21151","UpdateAvailable","licensed","adobe acrobat reader update",,,"True",,
+"Adobe Acrobat XI Pro","","11.0.23","https://www.adobe.com/products/acrobat/readstep.html",,"Unknown","licensed","adobe acrobat xi pro",,,"False",,
+"Aladdin by BlackRock (Prod)","",,,,"Unknown","licensed","aladdin by blackrock (prod)",,,"False",,
+"Android Studio - 2025.1.3.7","2025.1.3.7",,"https://developer.android.com/studio/install","25.1.3.7","Unknown","licensed","android studio","https://developer.android.com/studio",,"False",,
+"Apache CFX","4.1.3",,,"4.1.3","Unknown","licensed","apache cfx",,,"False",,
+"Apache Directory Studio","2.0.0","2.0.0.AM26","https://directory.apache.org/studio/download/","2.00","UpdateAvailable","licensed","apache directory studio","https://mvnrepository.com/artifact/org.apache.directory.server/apacheds-parent",,"False",,
+"Apache JMeter","5.6.3","5.6.3","https://jmeter.apache.org/download_jmeter.cgi","5.6.3","UpToDate","licensed","apache jmeter","https://jmeter.apache.org/download_jmeter.cgi",,"False",,
+"Apache Kafka","3.6.1","4.02","https://kafka.apache.org/community/downloads/","3.6.1","UpdateAvailable","licensed","apache kafka","https://kafka.apache.org/community/downloads/",,"True",,
+"Appium Inspector","2025.8.1","26.1.3","https://github.com/appium/appium-inspector","25.8.1","UpdateAvailable","licensed","appium inspector","https://github.com/appium/appium-inspector/releases/latest",,"True",,
+"Autenticação.Gov 3.13.0 (5496)","",,,"3.13","Unknown","licensed","autenticação.gov",,,"False",,
+"Automate Agent 2023 (x64)","",,,"23","Unknown","licensed","automate agent",,,"False",,
+"Azure Functions Core Tools (x64)","4.3.0","4.07","https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=windows%2Ccsharp%2Cbash#v2","4.03","UpdateAvailable","licensed","azure functions core tools (x64)",,,"True","Azure Functions Core Tools","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Azure Functions Core Tools"
+"Azure Storage Explorer 1.38.0","1.38.0","1.41","https://azure.microsoft.com/en-us/features/storage-explorer/","1.38","UpdateAvailable","licensed","azure storage explorer",,,"True","StorageExplorer","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=StorageExplorer"
+"BIOS - HP Elite X2 G4 - 01.11.00 - Unattended","01.11.00",,,"1.11","Unknown","licensed","bios - hp elite x2 g4",,,"False",,
+"Bloomberg Terminal 180.4.81","180.4.81",,,"180.4.81","Unknown","licensed","bloomberg terminal",,,"False",,
+"Blue Prism","7.2.1",,,"7.2.1","Unknown","licensed","blue prism",,,"False",,
+"Bravo for Power BI","1.0.9",,,"1.0.9","Unknown","licensed","bravo for power bi",,,"False",,
+"Bruno 3.0.2","3.0.2","3.1.2","https://www.usebruno.com/downloads","3.0.2","UpdateAvailable","licensed","bruno","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'bruno'%20and%20IsLatestVersion",,"False",,
+"Camera HP Elite X2 G4 - W11","v2",,,"2","Unknown","licensed","camera hp elite x2 g4 - w11",,,"False",,
+"Cisco Jabber 14.3.0","14.3.0","15.2.0.60459","http://www.cisco.com/","14.03","UpdateAvailable","licensed","cisco jabber",,,"False","Cisco Jabber","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Cisco Jabber"
+"Cisco Secure Client - 5.1.9.113 - Script","5.1.9.113",,,"5.1.9.113","Unknown","licensed","cisco secure client",,,"False",,
+"Citrix Workspace app 2409","","25.11.10.50","https://www.citrix.co.uk/downloads/workspace-app/windows/workspace-app-for-windows-latest.html","2409","Unknown","licensed","citrix workspace app",,,"False","Citrix Workspace","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Citrix Workspace"
+"Cloudera ODBC Driver for Impala","",,"https://www.cloudera.com/downloads/connectors/impala/odbc/2-6-4.html",,"Unknown","licensed","cloudera odbc driver for impala","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20%27cloudera-odbc-driver-for-impala%27%20and%20IsLatestVersion",,"False",,
+"ComparePlus (plugin for Notepad++) - 2.1.1","2.1.1",,,"2.1.1","Unknown","licensed","compareplus (plugin for notepad++)",,,"False",,
+"CrowdStrike 7.15.18511 - WKS e SRV PRO","",,,"7.15.18511","Unknown","licensed","crowdstrike",,,"False",,
+"Cygwin - 3.6.2","3.6.2",,"https://www.cygwin.com/","3.6.2","Unknown","licensed","cygwin","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'cygwin'%20and%20IsLatestVersion",,"False",,
+"Databrick CLI","0.260.0",,,"0.260","Unknown","licensed","databrick cli",,,"False",,
+"Dax Studio - 3.2.1","3.2.1",,,"3.2.1","Unknown","licensed","dax studio",,,"False",,
+"Dbeaver - 25.2.5","25.2.5","25.3.5","https://dbeaver.io/download/","25.2.5","UpdateAvailable","licensed","dbeaver","https://github.com/dbeaver/dbeaver/releases/latest",,"False",,
+"DBVisualizer - 24.1.1","24.1.1",,"https://www.dbvis.com/download/","24.1.1","Unknown","licensed","dbvisualizer","https://www.dbvis.com/download/",,"False",,
+"DCU","5.6.0",,,"5.06","Unknown","licensed","dcu",,,"False",,
+"Design Review - 14.0.0.177","14.0.0.177",,,"14.0.0.177","Unknown","licensed","design review",,,"False",,
+"Device Administrator","6.0.4.1106",,,"6.0.4.1106","Unknown","licensed","device administrator",,,"False",,
+"Diligent","",,,,"Unknown","licensed","diligent",,,"False",,
+"DWG True View - 31.1.122.0","31.1.122.0","2026.25.1.60","https://www.autodesk.com/products/dwg","31.1.122.0","UpdateAvailable","licensed","dwg true view","https://community.chocolatey.org/api/v2/FindPackagesById()?id=%27dwgtrueview%27&filter=IsLastVersion%20eq%20true",,"False",,
+"EasyDoc 1","1.0",,,"1.0","Unknown","licensed","easydoc",,,"False",,
+"Eclipse IDE","2025-03",,"https://www.eclipse.org/downloads/","25","Unknown","licensed","eclipse ide","https://www.eclipse.org/downloads/",,"False",,
+"Eclipse Temurin JDK with Hotspot 24.0.1+9 (x64)","24.0.1+9 (x64)","1.7.1","https://opentoonz.github.io/","24.0.1","UpToDate","licensed","eclipse temurin jdk with hotspot",,,"False","OT","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=OT"
+"EPM Automate","25.10.43",,,"25.10.43","Unknown","licensed","epm automate",,,"False",,
+"Eurofac","",,,,"Unknown","licensed","eurofac",,,"False",,
+"FFmpeg","","8.0","https://ffmpeg.org/",,"Unknown","licensed","ffmpeg","https://ffmpeg.org/download.html",,"False",,
+"Figma","125.11.6",,,"125.11.6","Unknown","licensed","figma",,,"False",,
+"Four Js Genero Desktop Client","3.10.23","6.00","https://4js.com/download/","3.10.23","UpdateAvailable","licensed","four js genero desktop client","https://4js.com/online_documentation/fjs-genero-manual-install-html/genero-install-topics/c_gdc_install.html",,"False",,
+"FreePlane","1.12.8","1.12.16","http://sourceforge.net/projects/freeplane/","1.12.8","UpdateAvailable","licensed","freeplane","https://github.com/freeplane/freeplane/releases/latest",,"False","Freeplane","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Freeplane"
+"Gephi 0.10.1","0.10.1","0.10.1","https://gephi.org/","0.10.1","UpToDate","licensed","gephi","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'gephi'%20and%20IsLatestVersion",,"False",,
+"Gestimo","",,,,"Unknown","licensed","gestimo",,,"False",,
+"GESVENGRH_CLIENT - PRO (270.2.8.0)","",,,"270.2.8.0","Unknown","licensed","gesvengrh_client - pro (270.2.8.0)",,,"False",,
+"Gimp 3.0.4","3.0.4","3.0.8.2","http://www.gimp.org/","3.0.4","UpdateAvailable","licensed","gimp","https://github.com/GNOME/gimp/releases/latest",,"False","GIMP","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=GIMP"
+"GisUP - Fundos de Pensões - Unidades de Participação","",,,,"Unknown","licensed","gisup - fundos de pensões - unidades de participação",,,"False",,
+"GIT - 2.51.1","2.51.1","2.53","https://git-scm.com/","2.51.1","UpdateAvailable","licensed","git","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'git'%20and%20IsLatestVersion",,"True",,
+"Git Extensions 5.2.1","","6.0.5.18375","https://gitextensions.github.io/","5.2.1","UpdateAvailable","licensed","git extensions",,,"False","Git Extensions","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Git Extensions"
+"GitHub Desktop 3.4.18","","3.5.4.0","https://desktop.github.com/","3.4.18","UpdateAvailable","licensed","github desktop",,,"False","GitHub Desktop","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=GitHub Desktop"
+"Gitkraken 12.2.1","12.2.1","2.53","http://msysgit.github.io","12.2.1","UpToDate","licensed","gitkraken",,,"True","Git","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Git"
+"Google Chrome 144.0.7559.60","","147.0.7697.0","https://chromeenterprise.google/intl/pt_br/download/?modal-id=download-chrome","144.0.7559.60","UpdateAvailable","licensed","google chrome","https://googlechromelabs.github.io/chrome-for-testing/",,"False",,
+"GPDocs Client","",,,,"Unknown","licensed","gpdocs client",,,"False",,
+"HAL para Cockpit 1.0.6 - Multi-Ambiente","1.0.6",,,"1.0.6","Unknown","licensed","hal para cockpit",,,"False",,
+"HEIF Image Extension","1.1.861.0",,,"1.1.861.0","Unknown","licensed","heif image extension",,,"False",,
+"Helm","4.0.2","4.01","https://helm.sh/","4.0.2","UpdateAvailable","licensed","helm","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'kubernetes-helm'%20and%20IsLatestVersion",,"True",,
+"HEVC Video Extension","2.1.1161.0",,,"2.1.1161.0","Unknown","licensed","hevc video extension",,,"False",,
+"HxD","",,,,"Unknown","licensed","hxd",,,"False",,
+"Ibm Iseries","15.0.0.498",,,"15.0.0.498","Unknown","licensed","ibm iseries",,,"False",,
+"IBM MQ Explorer 9.1.3.0","9.1.3.0",,,"9.1.3.0","Unknown","licensed","ibm mq explorer",,,"False",,
+"IDEA 12.3","","253.29346.138","https://www.jetbrains.com/idea","12.3","UpdateAvailable","licensed","idea",,,"False","IntelliJ-IDEA","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=IntelliJ-IDEA"
+"IntelliJ IDEA 2025.3.1.1","2025.3.1.1",,"https://www.jetbrains.com/idea/download/","25.3.1.1","Unknown","licensed","intellij idea","https://data.services.jetbrains.com/products/releases?code=IIU&latest=true&type=release",,"False",,
+"IntelliJ IDEA Uninstall","",,,,"Unknown","licensed","intellij idea uninstall",,,"False",,
+"Jabra Direct","6.23.16101","6.26.32801","https://www.jabra.com.de/software-and-services/jabra-direct","6.23.16101","UpdateAvailable","licensed","jabra direct",,,"False","Jabra Direct","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Jabra Direct"
+"Java SE Development Kit 8 Update 471 (64-bit)","8 Update 471 (64-bit)",,,"8","Unknown","licensed","java se development kit",,,"False",,
+"Java(TM) SE Development Kit 17.0.17 (64-bit)","17.0.17 (64-bit)",,,"17.0.17","Unknown","licensed","java(tm) se development kit",,,"False",,
+"JDAI - 52.49.0.0","52.49.0.0",,,"52.49","Unknown","licensed","jdai",,,"False",,
+"Jetbrains-toolbox","2.6.2.41321",,,"2.6.2.41321","Unknown","licensed","jetbrains-toolbox",,,"False",,
+"JPG to SVG Free","1.0.0.0",,,"1.0","Unknown","licensed","jpg to svg free",,,"False",,
+"JSON-Viewer (plugin for Notepad++)","2.0.7.0",,,"2.0.7.0","Unknown","licensed","json-viewer (plugin for notepad++)",,,"False",,
+"KeePassXC","2.7.9","2.7.11","https://keepassxc.org/","2.7.9","UpdateAvailable","licensed","keepassxc","https://github.com/keepassxreboot/keepassxc/releases/latest",,"False",,
+"Keystore Explorer","5.6.0",,,"5.06","Unknown","licensed","keystore explorer",,,"False",,
+"LDAPAdmin - 1.8.3","1.8.3",,,"1.8.3","Unknown","licensed","ldapadmin",,,"False",,
+"License Administrator","6.0.4.90",,,"6.0.4.90","Unknown","licensed","license administrator",,,"False",,
+"Login Agent - PRE","",,,,"Unknown","licensed","login agent - pre",,,"False",,
+"Login Agent - PRO","",,,,"Unknown","licensed","login agent - pro",,,"False",,
+"LOYTEC - L Studio","3.2.14",,,"3.2.14","Unknown","licensed","loytec - l studio",,,"False",,
+"LOYTEC LINX Configurator x64","",,,"64.0","Unknown","licensed","loytec linx configurator x64",,,"False",,
+"LOYTEC LVIS Configurator x64","",,,"64.0","Unknown","licensed","loytec lvis configurator x64",,,"False",,
+"Maven Apache","3.9.10",,,"3.9.10","Unknown","licensed","maven apache",,,"False",,
+"Mercury x64","",,,"64.0","Unknown","licensed","mercury x64",,,"False",,
+"Mercury x86","",,,"86.0","Unknown","licensed","mercury x86",,,"False",,
+"Microsoft Azure CLI (64-bit) - 2.81.0","2.81.0","2.83","https://learn.microsoft.com/cli/azure/overview","2.81","UpdateAvailable","licensed","microsoft azure cli (64-bit)",,,"True","Azure CLI","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Azure CLI"
+"Microsoft Azure PowerShell - April 2025","","15.3.0.40553","https://github.com/Azure/azure-powershell/releases","25","UpToDate","licensed","microsoft azure powershell - april",,,"False","Microsoft Azure PowerShell","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Microsoft Azure PowerShell"
+"Microsoft Office 365 x64 - 01-2026","","1.1.3.0","http://www.microsoft.com/en-us/download/details.aspx?id=41149","365","Unknown","licensed","microsoft office",,,"False","Microsoft Office Remote","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Microsoft Office Remote"
+"Microsoft Power BI Desktop - 01-2026","2.150.1704.0","2.150.2455.0","https://powerbi.microsoft.com/en-us/desktop","2.150.1704.0","UpdateAvailable","licensed","microsoft power bi desktop",,,"False","Microsoft Power BI Desktop","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Microsoft Power BI Desktop"
+"Microsoft Report Builder","","15.1.30001.02","https://www.microsoft.com/en-us/download/details.aspx?id=53613",,"Unknown","licensed","microsoft report builder",,,"False","Microsoft Report Builder","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Microsoft Report Builder"
+"Microsoft Teams -11-2025","25306.804.4102.7193","26005.204.4249.1621","https://adoption.microsoft.com/en-us/new-microsoft-teams/","25306.804.4102.7193","UpdateAvailable","licensed","microsoft teams",,,"False","Teams","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Teams"
+"MongoDB Command Line Database Tools","100.10.0",,,"100.10","Unknown","licensed","mongodb command line database tools",,,"False",,
+"MongoDB Compass","",,,,"Unknown","licensed","mongodb compass",,,"False",,
+"MongoDB Shell","2.3.4",,,"2.3.4","Unknown","licensed","mongodb shell",,,"False",,
+"MS - Microsoft Visual C++ 2013 Redistributable","",,,"13","Unknown","licensed","ms - microsoft visual c++",,,"False",,
+"Murex MX.3 PRE-2025","2025-PRE",,,"25","Unknown","licensed","murex mx.3 pre-2025",,,"False",,
+"Murex MX.3 PRO-2025","v62",,,"62.0","Unknown","licensed","murex mx.3 pro-2025",,,"False",,
+"Neo4j-community","2025.10.1",,,"2025.10.1","Unknown","licensed","neo4j-community",,,"False",,
+"Neo4j-Desktop","2.1.1.0",,,"2.1.1.0","Unknown","licensed","neo4j-desktop",,,"False",,
+"Netbeans IDE","26",,,"26.0","Unknown","licensed","netbeans ide",,,"False",,
+"Node.js - 25.5.0-X64","25.5.0","25.6.1","https://nodejs.org/","25.5.0","UpdateAvailable","licensed","node.js","https://github.com/nodejs/node/releases/latest",,"False",,
+"NotePad++ 8.9.1","8.9.1","8.9.2","https://notepad-plus-plus.org/downloads/","8.9.1","UpdateAvailable","licensed","notepad++","https://github.com/notepad-plus-plus/notepad-plus-plus/releases/latest",,"False",,
+"NVDA 2025.3.2","2025.3.2",,,"25.3.2","Unknown","licensed","nvda",,,"False",,
+"Obsidian","1.9.14","1.11.7","https://obsidian.md/","1.9.14","UpdateAvailable","licensed","obsidian","https://github.com/obsidianmd/obsidian-releases/releases/latest",,"False",,
+"OffSetExplorer","3.0.3.0",,,"3.0.3.0","Unknown","licensed","offsetexplorer",,,"False",,
+"Omnissa Horizon Client 8","8.16.2","8.17.0.42163","https://www.vmware.com/products/horizon.html","8.16.2","UpdateAvailable","licensed","omnissa horizon client",,,"False","Omnissa Horizon Client","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Omnissa Horizon Client"
+"OneDrive - 01-2026","25.238.1204.0001",,,"25.238.1204.0001","Unknown","licensed","onedrive",,,"False",,
+"OpenSSL 3.5.2 (64-bit)","3.5.2 (64-bit)",,,"3.5.2","Unknown","licensed","openssl",,,"False",,
+"Opentext Validation for SAP Solutions CE 21.2","",,,"21.2","Unknown","licensed","opentext validation for sap solutions ce",,,"False",,
+"OpenText Windows Validation Client for SAP Solutions CE 24.4","24.4.5.1",,,"24.4.5.1","Unknown","licensed","opentext windows validation client for sap solutions ce",,,"False",,
+"Oracle 11_x64","11_x64","7.2.6","https://www.virtualbox.org/","11.0","UpToDate","licensed","oracle",,,"False","VirtualBox","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=VirtualBox"
+"Oracle Client","11g R2",,,"11.0","Unknown","licensed","oracle client",,,"False",,
+"Oracle SQL Developer 24.3.1.347.1826","24.3.1.347.1826",,,"24.3.1.347.1826","Unknown","licensed","oracle sql developer",,,"False",,
+"OSD - IBM Personal Communications - 13.0.0","13.0.0",,,"13.00","Unknown","licensed","osd - ibm personal communications",,,"False",,
+"Outsystems Service Studio - 11.55.42.64376","11.55.42.64376",,,"11.55.42.64376","Unknown","licensed","outsystems service studio",,,"False",,
+"PAC 24.4.4.0","24.4.4.0","25.11.10.50","https://www.citrix.co.uk/downloads/workspace-app/windows/workspace-app-for-windows-latest.html","24.4.4.0","UpdateAvailable","licensed","pac",,,"False","Citrix Workspace","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Citrix Workspace"
+"PDF Arranger","",,,,"Unknown","licensed","pdf arranger",,,"False",,
+"Pdf24 Creator","11.27.0-x64","11.29","https://tools.pdf24.org/en/creator","11.27","UpdateAvailable","licensed","pdf24 creator","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'pdf24'%20and%20IsLatestVersion",,"True",,
+"PGAdmin - 4-8.9","",,,"4","Unknown","licensed","pgadmin",,,"False",,
+"Postgre ODBC","17.0.0.6",,,"17.0.0.6","Unknown","licensed","postgre odbc",,,"False",,
+"PowerShell 7","7.5.4","7.5.4.0","https://github.com/PowerShell/PowerShell/releases/latest","7.5.4","UpdateAvailable","licensed","powershell",,,"False","PowerShell7","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=PowerShell7"
+"PyCharm Community","2025.2.1.0",,,"25.2.1.0","Unknown","licensed","pycharm community",,,"False",,
+"Python - 3.14.0","3.14.0","3.14.3","https://www.python.org/downloads/","3.14","UpdateAvailable","licensed","python","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'python'%20and%20IsLatestVersion",,"False",,
+"QualysCloudAgent - 5.0.0.17","",,,"5.0.0.17","Unknown","licensed","qualyscloudagent",,,"False",,
+"R","4.5.1","12.0.40664.0","https://www.microsoft.com/en-us/download/details.aspx?id=40784","4.5.1","UpdateAvailable","licensed","r",,,"False","VCRedist2013x64","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=VCRedist2013x64"
+"RefinitivWorkspace","1.26.312",,,"1.26.312","Unknown","licensed","refinitivworkspace",,,"False",,
+"Remove Old Versions + Visual Studio Code - 1.108.1","1.108.1","1.109.4","https://code.visualstudio.com/","1.108.1","UpdateAvailable","licensed","remove old versions + visual studio code",,,"False","Code","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Code"
+"Request Builder 7.1.3","",,,"7.1.3","Unknown","licensed","request builder",,,"False",,
+"RStudio","2024.04.0-735",,"https://posit.co/download/rstudio-desktop/","24.4.0","Unknown","licensed","rstudio","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'rstudio'%20and%20IsLatestVersion",,"False",,
+"RTools v45","v45",,,"45.0","Unknown","licensed","rtools",,,"False",,
+"Salesforce CLI - 2.108.6.0","2.108.6.0","6.0.16","https://developer.salesforce.com/tools/salesforcecli","2.108.6.0","UpdateAvailable","licensed","salesforce cli","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'sfdx-cli'%20and%20IsLatestVersion",,"False",,
+"Sap Logon","",,,,"Unknown","licensed","sap logon",,,"False",,
+"SAS Add-In 7.15","7.15",,,"7.15","Unknown","licensed","sas add-in",,,"False",,
+"SAS Enterprise Guide","7.15",,,"7.15","Unknown","licensed","sas enterprise guide",,,"False",,
+"SifoxDealv3","",,,"3","Unknown","licensed","sifoxdealv3",,,"False",,
+"Simba Spark ODBC Driver","2.9","3.0.2","https://igniterealtime.org/projects/spark/index.jsp","2.9","UpdateAvailable","licensed","simba spark odbc driver",,,"False","Spark","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Spark"
+"Simba Spark ODBC Driver + Databricks","2.9","3.0.2","https://igniterealtime.org/projects/spark/index.jsp","2.9","UpdateAvailable","licensed","simba spark odbc driver + databricks",,,"False","Spark","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Spark"
+"Smartview - 11.1.2.5.710","11.1.2.5.710",,,"11.1.2.5.710","Unknown","licensed","smartview",,,"False",,
+"SoapUI - 5.5.0","5.5.0","5.9.1","http://www.soapui.org/","5.05","UpdateAvailable","licensed","soapui",,,"False","SoapUI","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=SoapUI"
+"Sourcetree Enterprise 3.4.16","",,,"3.4.16","Unknown","licensed","sourcetree enterprise",,,"False",,
+"SQL Management Studio 22","22","22.03","https://msdn.microsoft.com/en-us/library/mt238290.aspx","22.0","UpdateAvailable","licensed","sql management studio",,"teste","True","SQL Management Studio","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=SQL Management Studio"
+"SRV - Dynatrace OneAgent SaaS - 1.319.55","1.319.55",,,"1.319.55","Unknown","licensed","srv - dynatrace oneagent saas",,,"False",,
+"SRV - FlexNet Inventory Agent","",,,,"Unknown","licensed","srv - flexnet inventory agent",,,"False",,
+"SRV - IBM Spectrum Protect Client(TSM)","","1.7.1","https://opentoonz.github.io/",,"Unknown","licensed","srv - ibm spectrum protect client(tsm)",,,"False","OT","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=OT"
+"SRV - NimSoft Agent","",,,,"Unknown","licensed","srv - nimsoft agent",,,"False",,
+"SRV - Trend Micro Deep Security Agent","",,,,"Unknown","licensed","srv - trend micro deep security agent",,,"False",,
+"SVR - FlexNet Inventory Agent - 2023 R2","",,,"23","Unknown","licensed","svr - flexnet inventory agent",,,"False",,
+"Tabular Editor","2.25.0",,,"2.25","Unknown","licensed","tabular editor",,,"False",,
+"Tagetik Excel .NET Client","","4.8.3761","http://msdn.microsoft.com/en-us/library/5a4x27ek(v=vs.110).aspx",,"Unknown","licensed","tagetik excel .net client",,,"True",".NET","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=.NET"
+"TerraForm","1.3.1","1.14.5","https://www.terraform.io/downloads","1.3.1","UpdateAvailable","licensed","terraform","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'terraform'%20and%20IsLatestVersion",,"False",,
+"Tesseract OCR - 5.5.0.20241111","5.5.0.20241111",,,"5.5.0.20241111","Unknown","licensed","tesseract ocr",,,"False",,
+"TranslatorX - 15.0(3)","15.0(3)",,,"15.0","Unknown","licensed","translatorx",,,"False",,
+"Unigy(TM) Client","",,,,"Unknown","licensed","unigy(tm) client",,,"False",,
+"Visual Studio BuildTools","17.14.16",,,"17.14.16","Unknown","licensed","visual studio buildtools",,,"False",,
+"Visual VM","2.2",,,"2.2","Unknown","licensed","visual vm",,,"False",,
+"VMware-tools-13.0.5-24915695-x64","",,,"13.0.5","Unknown","licensed","vmware-tools-13.0.5-24915695-x64",,,"False",,
+"VPN Profile - MFA","",,,,"Unknown","licensed","vpn profile - mfa",,,"False",,
+"VSPlayer 7.5.3.1","7.5.3.1",,,"7.5.3.1","Unknown","licensed","vsplayer",,,"False",,
+"Vysor 5.0.7","5.0.7","5.0.17","https://www.vysor.io/#download","5.0.7","UpdateAvailable","licensed","vysor","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20%27vysor%27%20and%20IsLatestVersion",,"False",,
+"Webex","45.4.0.32158",,"https://www.webex.com/downloads/webex-app.html","45.4.0.32158","Unknown","licensed","webex","https://help.webex.com/en-us/article/mqkve8/Webex-App-%7C-Release-notes",,"False",,
+"Windows Camera Roll Viewer","2024.11020.23002.0",,,"2024.11020.23002.0","Unknown","licensed","windows camera roll viewer",,,"False",,
+"WinMerge","2.16.38","2.16.54","https://winmerge.org/","2.16.38","UpdateAvailable","licensed","winmerge","https://github.com/WinMerge/winmerge/releases/latest",,"False",,
+"WorkStation","6.0.4.10001",,,"6.0.4.10001","Unknown","licensed","workstation",,,"False",,
+"XMLTools (plugin for Notepad++)","3.1.1.13",,,"3.1.1.13","Unknown","licensed","xmltools (plugin for notepad++)",,,"False",,

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <title>SCCM Application Status</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="assets/css/style.css?v=18" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+</head>
+<body>
+<div class="sticky-header">
+  <div class="header-global">
+    <h1>SCCM Application Status</h1>
+  </div>
+
+  <div class="controls-container">
+    <div class="controls">
+      <label>
+        CSV:
+        <input type="file" id="fileInput" accept=".csv,text/csv" />
+      </label>
+      <label>
+        Filtrar:
+        <input type="text" id="searchInput" placeholder="Nome, versão ou status..." />
+      </label>
+      <label>
+        Status:
+        <select id="statusFilter">
+          <option value="">Todos</option>
+          <option value="UpdateAvailable">UpdateAvailable</option>
+          <option value="UpToDate">UpToDate</option>
+          <option value="Unknown">Unknown</option>
+        </select>
+      </label>
+      
+      <div id="statusBadges" class="status-badges" style="display: inline-flex; margin-left: 10px; align-items: center;">
+        <span class="badge" data-status="UpdateAvailable">
+          <span class="dot dot-update"></span> UpdateAvailable
+        </span>
+        <span class="badge" data-status="UpToDate">
+          <span class="dot dot-ok"></span> UpToDate
+        </span>
+        <span class="badge" data-status="Unknown">
+          <span class="dot dot-unknown"></span> Unknown
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main class="main-layout">
+  <!-- Coluna Esquerda: Tabela -->
+  <div class="left-panel">
+    <div class="table-area">
+      <div class="table-container">
+        <table id="appsTable">
+          <thead>
+            <tr>
+              <th class="col-num">#</th>
+              <th class="col-icon">Ícone</th>
+              <th data-key="AppName">Aplicações</th>
+              <th data-key="appversion">Versão App</th>
+              <th data-key="InstalledVersion">Instalada</th>
+              <th data-key="LatestVersion">Última Versão</th>
+              <th data-key="Status">Status</th>
+              <th data-key="License">Licença</th>
+              <th data-key="Observation">Observação</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Linhas geradas via JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Coluna Direita: Ações e Gráfico -->
+  <div class="right-panel">
+    <div class="meta-actions">
+      <button id="updateBtn" class="btn btn-primary">Atualizar Agora</button>
+      <div id="lastUpdate" class="last-update">Última Verificação: --/--/---- --:--:--</div>
+    </div>
+
+    <div class="chart-area">
+      <div class="chart-container">
+        <canvas id="statusChart"></canvas>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Modal de Edição -->
+<div id="editModal" class="modal-overlay">
+  <div class="modal-content">
+    <h2>Editar Aplicação</h2>
+    <form id="editForm" class="modal-form">
+      <input type="hidden" id="editIndex" />
+      
+      <label>
+        Aplicação:
+        <input type="text" id="editAppName" name="AppName" class="form-control" />
+      </label>
+      
+      <input type="hidden" id="editAppVersion" name="appversion" />
+      
+      <input type="hidden" id="editLatestVersion" name="LatestVersion" />
+      
+      <label>
+        Versão Instalada:
+        <input type="text" id="editInstalledVersion" name="InstalledVersion" class="form-control" />
+      </label>
+
+      <label>
+        Licença:
+        <input type="text" id="editLicense" name="License" class="form-control" />
+      </label>
+
+      <label>
+        Website (Download):
+        <input type="text" id="editOutputUrl" name="OutputUrl" class="form-control" />
+      </label>
+
+      <label>
+        URL de Busca (Repo/Scrape):
+        <input type="text" id="editSearchUrl" name="SearchUrl" class="form-control" />
+      </label>
+      
+      <input type="hidden" id="editSourceKey" name="SourceKey" />
+      
+      <label>
+        Observação:
+        <textarea id="editObservacao" name="Observacao" rows="3" class="form-control"></textarea>
+      </label>
+      
+      <div class="modal-buttons">
+        <button type="button" id="cancelEdit" class="btn btn-secondary">Cancelar</button>
+        <button type="submit" id="saveEditBtn" class="btn btn-primary">Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="assets/js/script.js?v=9"></script>
+</body>
+</html>
