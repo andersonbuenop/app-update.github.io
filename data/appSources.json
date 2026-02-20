@@ -27,13 +27,13 @@
   "adobe acrobat xi pro": {
     "Type": "Fixed",
     "Version": "11.0.23",
-    "OutputUrl": "https://www.adobe.com/products/acrobat/readstep.html"
+    "OutputUrl": "https://www.adobe.com/products/acrobat/readstep.html",
+    "License": "Licensed"
   },
   "apache directory studio": {
-    "Type": "Website",
-    "ScrapeUrl": "https://mvnrepository.com/artifact/org.apache.directory.server/apacheds-parent",
+    "Type": "Fixed",
+    "Version": "2.0.0",
     "OutputUrl": "https://directory.apache.org/studio/download/",
-    "VersionPattern": "(2\\.0\\.0\\.AM[0-9]+)",
     "License": "Licensed"
   },
   "apache cxf": {
@@ -115,6 +115,34 @@
     "ScrapeUrl": "https://visualstudio.microsoft.com/downloads/",
     "OutputUrl": "https://visualstudio.microsoft.com/",
     "VersionPattern": "Visual Studio\\s+([0-9]{4})"
+  },
+  "tesseract ocr": {
+    "Type": "Website",
+    "ScrapeUrl": "https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'tesseract'%20and%20IsLatestVersion",
+    "OutputUrl": "https://github.com/tesseract-ocr/tesseract/releases",
+    "VersionPattern": "<d:Version>([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)</d:Version>",
+    "License": "Licensed"
+  },
+  "translatorx": {
+    "Type": "Website",
+    "ScrapeUrl": "https://translatorx.org/downloads.html",
+    "OutputUrl": "https://translatorx.org/downloads.html",
+    "VersionPattern": "version\\s+([0-9]+\\.[0-9]+)",
+    "License": "Licensed"
+  },
+  "visual studio buildtools": {
+    "Type": "Website",
+    "ScrapeUrl": "https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'visualstudio2022buildtools'%20and%20IsLatestVersion",
+    "OutputUrl": "https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022",
+    "VersionPattern": "<d:Version>([0-9]+\\.[0-9]+\\.[0-9]+)</d:Version>",
+    "License": "Licensed"
+  },
+  "visual vm": {
+    "Type": "Website",
+    "ScrapeUrl": "https://visualvm.github.io/",
+    "OutputUrl": "https://visualvm.github.io/",
+    "VersionPattern": "VisualVM\\s*([0-9]+\\.[0-9]+\\.[0-9]+)\\s*Released",
+    "License": "Licensed"
   },
   "vscode": {
     "Type": "GitHub",

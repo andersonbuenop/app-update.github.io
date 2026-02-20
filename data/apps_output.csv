@@ -1,13 +1,12 @@
 ﻿"AppName","appversion","LatestVersion","Website","InstalledVersion","Status","License","SourceKey","SearchUrl","Observacao","IsNewVersion","SourceId","IconUrl"
 ".NET 4.6.1 Developer","4.6.1","10.0.3","https://dotnet.microsoft.com/download","4.6.1","UpdateAvailable","Licensed",".net","https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/releases-index.json","link validado","False",,
 "7-Zip 25.01 (x64 edition)","25.01 (x64 edition)","26.00","http://www.7-zip.org/","25.01","UpdateAvailable","licensed","7-zip",,"link validado","False","7-Zip","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=7-Zip"
-"Adobe Acrobat Reader - 05-2025","25.001.20467",,,"25.001.20467","Unknown","licensed","adobe acrobat reader",," ","False",,"https://www.adobe.com/favicon.ico"
 "Adobe Acrobat Reader Update - 25.001.21151 x32","25.001.21151","25.001.21223","https://www.adobe.com/devnet-docs/acrobatetk/tools/ReleaseNotesDC/index.html","25.001.21151","UpdateAvailable","Licensed","adobe acrobat reader update",,"link validado","False",,"https://www.adobe.com/favicon.ico"
-"Adobe Acrobat XI Pro","","11.0.23","https://www.adobe.com/products/acrobat/readstep.html",,"Unknown","licensed","adobe acrobat xi pro",,,"False",,
+"Adobe Acrobat XI Pro","11.0.23","11.0.23","https://www.adobe.com/products/acrobat/readstep.html","11.0.23","UpToDate","Licensed","adobe acrobat xi pro",,,"False",,
 "Aladdin by BlackRock (Prod)","",,,,"Unknown","licensed","aladdin by blackrock (prod)",,,"False",,
 "Android Studio - 2025.1.3.7","2025.1.3.7","2025.3.1","https://developer.android.com/studio/releases","2025.1.3","UpdateAvailable","Licensed","android studio","https://developer.android.com/studio/releases","link validado","False",,"https://developer.android.com/favicon.ico"
 "Apache CXF","4.1.3","4.2.0","https://cxf.apache.org/download.html","4.1.3","UpdateAvailable","Licensed","apache cxf","https://cxf.apache.org/download.html",,"False",,"https://cxf.apache.org/favicon.ico"
-"Apache Directory Studio","2.0.0",,"https://directory.apache.org/studio/download/","2.0.0","Unknown","Licensed","apache directory studio","https://mvnrepository.com/artifact/org.apache.directory.server/apacheds-parent","link validado","False",,
+"Apache Directory Studio","2.0.0","2.0.0","https://directory.apache.org/studio/download/","2.0.0","UpToDate","Licensed","apache directory studio",,"link validado","False",,
 "Apache JMeter","5.6.3","5.6.3","https://jmeter.apache.org/download_jmeter.cgi","5.6.3","UpToDate","Licensed","apache jmeter","https://jmeter.apache.org/download_jmeter.cgi","link validado","False",,
 "Apache Kafka","3.6.1","4.2.0","https://kafka.apache.org/community/downloads/","3.6.1","UpdateAvailable","Licensed","apache kafka","https://kafka.apache.org/community/downloads/","link validado","False",,
 "Appium Inspector","2025.8.1","26.1.3","https://github.com/appium/appium-inspector","25.8.1","UpdateAvailable","Licensed","appium inspector","https://github.com/appium/appium-inspector/releases/latest","link validado","True",,"https://raw.githubusercontent.com/appium/appium-inspector/main/app/common/renderer/assets/images/icon.png"
@@ -22,7 +21,7 @@
 "Bruno 3.0.2","3.0.2","3.1.2","https://www.usebruno.com/downloads","3.0.2","UpdateAvailable","licensed","bruno","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'bruno'%20and%20IsLatestVersion",,"False",,
 "Camera HP Elite X2 G4 - W11","v2",,,"2","Unknown","licensed","camera hp elite x2 g4 - w11",,"interno","False",,
 "Cisco Jabber 14.3.0","14.3.0","15.2.0.60459","http://www.cisco.com/","14.3.0","UpdateAvailable","licensed","cisco jabber",,"licenciado","False","Cisco Jabber","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Cisco Jabber"
-"Cisco Secure Client - 5.1.9.113 - Script","5.1.9.113","5.1.15.287","https://www.cisco.com/c/en/us/support/security/anyconnect-secure-mobility-client/series.html","5.1.9.113","UpdateAvailable","Licensed","cisco secure client",,,"True",,"https://www.cisco.com/favicon.ico"
+"Cisco Secure Client - 5.1.9.113 - Script","5.1.9.113","5.1.15.287","https://www.cisco.com/c/en/us/support/security/anyconnect-secure-mobility-client/series.html","5.1.9.113","UpdateAvailable","Licensed","cisco secure client",,,"False",,"https://www.cisco.com/favicon.ico"
 "Citrix Workspace app 2409","","25.11.10.50","https://www.citrix.co.uk/downloads/workspace-app/windows/workspace-app-for-windows-latest.html","2409","Unknown","licensed","citrix workspace app",,,"False","Citrix Workspace","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Citrix Workspace"
 "Cloudera ODBC Driver for Impala","",,"https://www.cloudera.com/downloads/connectors/impala/odbc/2-6-4.html",,"Unknown","licensed","cloudera odbc driver for impala","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20%27cloudera-odbc-driver-for-impala%27%20and%20IsLatestVersion",,"False",,
 "ComparePlus (plugin for Notepad++) - 2.1.1","2.1.1",,,"2.1.1","Unknown","licensed","compareplus (plugin for notepad++)",,,"False",,
@@ -151,11 +150,11 @@
 "Tabular Editor","2.25.0",,,"2.25.0","Unknown","licensed","tabular editor",,,"False",,
 "Tagetik Excel .NET Client","","4.8.03761","http://msdn.microsoft.com/en-us/library/5a4x27ek(v=vs.110).aspx",,"Unknown","licensed","tagetik excel .net client",,,"False",".NET","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=.NET"
 "TerraForm","1.3.1","1.14.5","https://www.terraform.io/downloads","1.3.1","UpdateAvailable","licensed","terraform","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'terraform'%20and%20IsLatestVersion",,"False",,"https://www.terraform.io/favicon.ico"
-"Tesseract OCR - 5.5.0.20241111","5.5.0.20241111",,,"5.5.0.20241111","Unknown","licensed","tesseract ocr",,,"False",,"https://github.com/favicon.ico"
-"TranslatorX - 15.0(3)","15.0(3)",,,"15.0","Unknown","licensed","translatorx",,,"False",,
+"Tesseract OCR - 5.5.0.20241111","5.5.0.20241111","5.5.0.20241111","https://github.com/tesseract-ocr/tesseract/releases","5.5.0.20241111","UpToDate","Licensed","tesseract ocr","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'tesseract'%20and%20IsLatestVersion",,"False",,"https://github.com/favicon.ico"
+"TranslatorX - 15.0(3)","15.0(3)","15.0","https://translatorx.org/downloads.html","15.0","UpToDate","Licensed","translatorx","https://translatorx.org/downloads.html",,"False",,
 "Unigy(TM) Client","",,,,"Unknown","licensed","unigy(tm) client",,,"False",,
-"Visual Studio BuildTools","17.14.16",,,"17.14.16","Unknown","licensed","visual studio buildtools",,,"False",,"https://visualstudio.microsoft.com/favicon.ico"
-"Visual VM","2.2",,,"2.2","Unknown","licensed","visual vm",,,"False",,"https://visualvm.github.io/favicon.ico"
+"Visual Studio BuildTools","17.14.16","117.14.27","https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022","17.14.16","UpdateAvailable","Licensed","visual studio buildtools","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'visualstudio2022buildtools'%20and%20IsLatestVersion",,"False",,"https://visualstudio.microsoft.com/favicon.ico"
+"Visual VM","2.2","2.2.1","https://visualvm.github.io/","2.2","UpdateAvailable","Licensed","visual vm","https://visualvm.github.io/",,"True",,"https://visualvm.github.io/favicon.ico"
 "VMware-tools-13.0.5-24915695-x64","",,,"13.0.5","Unknown","licensed","vmware-tools-13.0.5-24915695-x64",,,"False",,
 "VPN Profile - MFA","",,,,"Unknown","licensed","vpn profile - mfa",,,"False",,
 "VSPlayer 7.5.3.1","7.5.3.1",,,"7.5.3.1","Unknown","licensed","vsplayer",,,"False",,
