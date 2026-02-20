@@ -35,7 +35,7 @@ $data = Import-Csv -Path $csvPath | Select-Object `
 $jsonPath = $PSScriptRoot + '\data\appSources.json'
 if (Test-Path $jsonPath) {
     Write-Host "[JSON] Carregando appSources.json..."
-    $AppSources = Get-Content -Path $jsonPath -Raw | ConvertFrom-Json | ConvertTo-Hashtable
+    $AppSources = Get-Content -Path $jsonPath -Raw -Encoding UTF8 | ConvertFrom-Json | ConvertTo-Hashtable
 } else {
     # Fallback se não houver JSON
     Write-Host "[JSON] appSources.json não encontrado, usando defaults."
@@ -166,6 +166,23 @@ function Normalize-Version {
         if ($normApp -eq 'node.js') {
             return $Version
         }
+        if ($normApp -eq 'android studio') {
+            if ($Version -match '(\d{4}\.\d+\.\d+)') {
+                $base = $Matches[1]
+                if ($Version -match '(?i)patch\s*(\d+)') {
+                    return "$base.$($Matches[1])"
+                }
+                return $base
+            }
+            if ($Version -match '(\d+\.\d+\.\d+)') {
+                $base = $Matches[1]
+                if ($Version -match '(?i)patch\s*(\d+)') {
+                    return "$base.$($Matches[1])"
+                }
+                return $base
+            }
+            return $Version
+        }
     }
 
     # Caso "2025" => "25"
@@ -191,22 +208,26 @@ function Normalize-Version {
         return "$($Matches['maj']).$($Matches['min'])"
     }
 
-    # ---- Normalização específica para 7-Zip / padrões semânticos mistos ----
-    # Chocolatey costuma usar "25.1.0" para o mesmo build que o site oficial "25.01"
-    # (vide 7-Zip 25.01 publicado em 03/08/2025). [1](https://archive.org/download/7zip-version-archive/7-Zip%20Versions/)[2](https://www.afterdawn.com/software/version_history.cfm/7-zip)
-    if ($Version -match '^(?<maj>\d+)\.(?<min>\d+)\.(?<patch>\d+)$') {
-        $maj   = [int]$Matches['maj']
-        $min   = [int]$Matches['min']
-        $patch = [int]$Matches['patch']
-
-        # Se patch == 0, padronizar para "x.yy" (ex.: 25.1.0 -> 25.01)
-        if ($patch -eq 0) {
-            $minPadded = '{0:D2}' -f $min
-            return "$maj.$minPadded"
+    # Normalização específica para 7-Zip: somente para este app
+    if ($AppName) {
+        $normAppForSevenZip = Get-NormalizedAppName -RawName $AppName
+        if ($normAppForSevenZip -in @('7-zip','7zip')) {
+            if ($Version -match '^(?<maj>\d+)\.(?<min>\d+)\.(?<patch>\d+)$') {
+                $maj   = [int]$Matches['maj']
+                $min   = [int]$Matches['min']
+                $patch = [int]$Matches['patch']
+                if ($patch -eq 0) {
+                    $minPadded = '{0:D2}' -f $min
+                    return "$maj.$minPadded"
+                }
+                return "$maj.$min.$patch"
+            }
         }
+    }
 
-        # Se houver patch != 0, retornar como está; comparação deve ser semântica depois
-        return "$maj.$min.$patch"
+    # Para outras apps, se já está em x.y.z, manter como está
+    if ($Version -match '^\d+\.\d+\.\d+$') {
+        return $Version
     }
 
     # Caso "25" => "25.0" (compatibilidade)
@@ -453,7 +474,7 @@ function Get-WebsiteLatestVersion {
     $finalUrl = if ($OutputUrl) { $OutputUrl } else { $Url }
 
     try {
-        $html = Invoke-WebRequest -Uri $Url -UseBasicParsing -TimeoutSec 5 -ErrorAction Stop
+        $html = Invoke-WebRequest -Uri $Url -UseBasicParsing -TimeoutSec 5 -ErrorAction Stop -Headers @{ 'User-Agent' = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' }
         $content = $html.Content
     }
     catch {
@@ -564,6 +585,28 @@ function Resolve-AppInfoOnline {
                 -Url $src.ScrapeUrl `
                 -VersionPattern $src.VersionPattern `
                 -OutputUrl $src.OutputUrl
+            if ($result -and -not $result.Website -and $src.OutputUrl) { $result | Add-Member -NotePropertyName Website -NotePropertyValue $src.OutputUrl -Force }
+            
+            if ($result -and -not $result.Version -and $src.PSObject.Properties['AltScrapeUrl']) {
+                Write-Host "   [Fallback 3b] Tentando fonte alternativa (docs/manual)..."
+                $altPattern = $src.VersionPattern
+                if ($src.PSObject.Properties['AltVersionPattern']) { $altPattern = $src.AltVersionPattern }
+                $altOutput = $src.OutputUrl
+                if ($src.PSObject.Properties['AltOutputUrl']) { $altOutput = $src.AltOutputUrl }
+                $result2 = Get-WebsiteLatestVersion `
+                    -Url $src.AltScrapeUrl `
+                    -VersionPattern $altPattern `
+                    -OutputUrl $altOutput
+                if ($result2.Version) { return (Standardize-Result $result2) }
+                if (-not $result2.Version -and $src.PSObject.Properties['AltVersionPattern2']) {
+                    Write-Host "   [Fallback 3c] Tentando padrão alternativo de versão..."
+                    $result3 = Get-WebsiteLatestVersion `
+                        -Url $src.AltScrapeUrl `
+                        -VersionPattern $src.AltVersionPattern2 `
+                        -OutputUrl $altOutput
+                    if ($result3.Version) { return (Standardize-Result $result3) }
+                }
+            }
             return (Standardize-Result $result)
         }
 
@@ -648,6 +691,8 @@ function Get-LicenseForApp {
 $outPath = $PSScriptRoot + "\data\apps_output.csv"
 $existingObs = @{}
 $previousVersions = @{}
+$existingIcons = @{}
+$existingSourceIds = @{}
 
 if (Test-Path $outPath) {
     Write-Host "[Info] Carregando dados existentes de apps_output.csv..." -ForegroundColor Cyan
@@ -667,6 +712,13 @@ if (Test-Path $outPath) {
                 if ($item.LatestVersion) {
                     $previousVersions[$normName] = $item.LatestVersion
                 }
+                # Preservar Ícone/SourceId anteriores (para fallback robusto)
+                if ($item.IconUrl) {
+                    $existingIcons[$normName] = $item.IconUrl
+                }
+                if ($item.SourceId) {
+                    $existingSourceIds[$normName] = $item.SourceId
+                }
             }
         }
     } catch {
@@ -679,6 +731,43 @@ $index = 0
 $totalApps = @($data).Count
 $processedApps = @{} # Hashtable para rastrear apps duplicados
 $uniqueData = @()    # Lista para armazenar apenas linhas únicas
+
+# Fallbacks de favicon por marca (nomes normalizados)
+$brandFavicons = @{
+    'google chrome'                 = 'https://www.google.com/favicon.ico'
+    'android studio'                = 'https://developer.android.com/favicon.ico'
+    'autenticação.gov'              = 'https://www.autenticacao.gov.pt/favicon.ico'
+    'cisco jabber'                  = 'https://www.cisco.com/favicon.ico'
+    'cisco secure client'           = 'https://www.cisco.com/favicon.ico'
+    'citrix workspace app'          = 'https://www.citrix.com/favicon.ico'
+    'dbeaver'                       = 'https://dbeaver.io/favicon.ico'
+    'dbvisualizer'                  = 'https://www.dbvis.com/favicon.ico'
+    'ffmpeg'                        = 'https://ffmpeg.org/favicon.ico'
+    'eclipse ide'                   = 'https://www.eclipse.org/favicon.ico'
+    'freeplane'                     = 'https://www.freeplane.org/favicon.ico'
+    'gimp'                          = 'https://www.gimp.org/favicon.ico'
+    'git'                           = 'https://git-scm.com/favicon.ico'
+    'git extensions'                = 'https://gitextensions.github.io/favicon.ico'
+    'github desktop'                = 'https://github.com/favicon.ico'
+    'webex'                         = 'https://www.webex.com/favicon.ico'
+    'virtualbox'                    = 'https://www.virtualbox.org/favicon.ico'
+    'oracle sql developer'          = 'https://www.oracle.com/favicon.ico'
+    'terraform'                     = 'https://www.terraform.io/favicon.ico'
+    'helm'                          = 'https://helm.sh/favicon.ico'
+    'autodesk'                      = 'https://www.autodesk.com/favicon.ico'
+    'jetbrains'                     = 'https://www.jetbrains.com/favicon.ico'
+    'visual studio buildtools'      = 'https://visualstudio.microsoft.com/favicon.ico'
+    'vmware'                        = 'https://www.vmware.com/favicon.ico'
+    'winmerge'                      = 'https://winmerge.org/favicon.ico'
+    'vysor'                         = 'https://www.vysor.io/favicon.ico'
+    'tesseract ocr'                 = 'https://github.com/favicon.ico'
+    'visual vm'                     = 'https://visualvm.github.io/favicon.ico'
+    'appium inspector'              = 'https://raw.githubusercontent.com/appium/appium-inspector/main/app/common/renderer/assets/images/icon.png'
+    'apache cxf'                    = 'https://cxf.apache.org/favicon.ico'
+    'bloomberg terminal'            = 'https://www.bloomberg.com/favicon.ico'
+    'blue prism'                    = 'https://www.blueprism.com/favicon.ico'
+    'bravo for power bi'            = 'https://www.sqlbi.com/favicon.ico'
+}
 
 foreach ($row in $data) {
     $index++
@@ -748,7 +837,11 @@ foreach ($row in $data) {
     $installedVersion = Get-InstalledVersion -AppName $row.AppName -AppVersion $row.appversion
 
     # Normalizar versão online antes de comparar e salvar
-    $normalizedLatestVersion = Normalize-Version $info.Version $row.AppName
+    if ($normKey -eq 'blue prism') {
+        $normalizedLatestVersion = $info.Version
+    } else {
+        $normalizedLatestVersion = Normalize-Version $info.Version $row.AppName
+    }
 
     # comparar - passar o flag IsDiscontinued
     $status = Compare-AppVersion -Installed $installedVersion -Latest $normalizedLatestVersion -IsDiscontinued $info.IsDiscontinued -AppName $row.AppName
@@ -761,8 +854,34 @@ foreach ($row in $data) {
     $row.SourceKey        = $normKey
     $row.SearchUrl        = $searchUrlVal
     $row.License          = Get-LicenseForApp -RawName $row.AppName
-    $row.SourceId         = $info.SourceId
-    $row.IconUrl          = $info.IconUrl
+    $finalSourceId = $info.SourceId
+    if (-not $finalSourceId -and $normKey -and $existingSourceIds.ContainsKey($normKey)) {
+        $finalSourceId = $existingSourceIds[$normKey]
+    }
+    $finalIconUrl = $info.IconUrl
+    if (-not $finalIconUrl -and $normKey -and $existingIcons.ContainsKey($normKey)) {
+        $finalIconUrl = $existingIcons[$normKey]
+    }
+    if (-not $finalIconUrl -and $info.Website) {
+        try {
+            $host = ([uri]$info.Website).Host
+            if ($host) { $finalIconUrl = "https://www.google.com/s2/favicons?domain=$host&sz=64" }
+        } catch {}
+    }
+    if (-not $finalIconUrl -and $row.SearchUrl) {
+        try {
+            $host = ([uri]$row.SearchUrl).Host
+            if ($host) { $finalIconUrl = "https://www.google.com/s2/favicons?domain=$host&sz=64" }
+        } catch {}
+    }
+    if (-not $finalIconUrl -and $normKey -and $brandFavicons.ContainsKey($normKey)) {
+        $finalIconUrl = $brandFavicons[$normKey]
+    }
+    if (-not $finalIconUrl -and $normKey -in @('adobe acrobat reader','adobe acrobat reader update')) {
+        $finalIconUrl = 'https://www.adobe.com/favicon.ico'
+    }
+    $row.SourceId         = $finalSourceId
+    $row.IconUrl          = $finalIconUrl
     # IsNewVersion já foi definido acima
 
     # Adicionar à lista de dados únicos

@@ -20,7 +20,9 @@
   "adobe acrobat reader update": {
     "Type": "Fixed",
     "Version": "25.001.21223",
-    "OutputUrl": "https://www.adobe.com/devnet-docs/acrobatetk/tools/ReleaseNotesDC/index.html"
+    "OutputUrl": "https://www.adobe.com/devnet-docs/acrobatetk/tools/ReleaseNotesDC/index.html",
+    "ScrapeUrl": "",
+    "License": "Licensed"
   },
   "adobe acrobat xi pro": {
     "Type": "Fixed",
@@ -31,25 +33,33 @@
     "Type": "Website",
     "ScrapeUrl": "https://mvnrepository.com/artifact/org.apache.directory.server/apacheds-parent",
     "OutputUrl": "https://directory.apache.org/studio/download/",
-    "VersionPattern": "(2\\.0\\.0\\.AM[0-9]+)"
+    "VersionPattern": "(2\\.0\\.0\\.AM[0-9]+)",
+    "License": "Licensed"
   },
   "apache cxf": {
     "Type": "Website",
     "ScrapeUrl": "https://cxf.apache.org/download.html",
     "OutputUrl": "https://cxf.apache.org/download.html",
-    "VersionPattern": "\\bCXF\\b.*?([0-9]+\\.[0-9]+\\.[0-9]+)"
+    "VersionPattern": "apache-cxf-([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "MatchRegex": [
+      "apache cfx",
+      "apache cxf"
+    ],
+    "License": "Licensed"
   },
   "apache jmeter": {
     "Type": "Website",
     "ScrapeUrl": "https://jmeter.apache.org/download_jmeter.cgi",
     "OutputUrl": "https://jmeter.apache.org/download_jmeter.cgi",
-    "VersionPattern": "apache-jmeter-([0-9]+\\.[0-9]+\\.[0-9])"
+    "VersionPattern": "apache-jmeter-([0-9]+\\.[0-9]+\\.[0-9])",
+    "License": "Licensed"
   },
   "apache kafka": {
     "Type": "Website",
     "ScrapeUrl": "https://kafka.apache.org/community/downloads/",
     "OutputUrl": "https://kafka.apache.org/community/downloads/",
-    "VersionPattern": "Kafka ([0-9]+\\.[0-9]+\\.[0-9]+)"
+    "VersionPattern": "Kafka ([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "License": "Licensed"
   },
   "apache maven": {
     "Type": "Website",
@@ -67,7 +77,8 @@
     "Type": "GitHub",
     "RepoUrl": "https://github.com/appium/appium-inspector/releases/latest",
     "OutputUrl": "https://github.com/appium/appium-inspector",
-    "VersionPattern": "Appium Inspector\\s*([0-9]+\\.[0-9]+\\.[0-9]+)"
+    "VersionPattern": "Appium Inspector\\s*([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "License": "Licensed"
   },
   "python": {
     "Type": "Website",
@@ -96,7 +107,8 @@
     "Type": "Website",
     "ScrapeUrl": "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/releases-index.json",
     "OutputUrl": "https://dotnet.microsoft.com/download",
-    "VersionPattern": "\"latest-release\":\\s*\"([0-9]+\\.[0-9]+\\.[0-9]+)\""
+    "VersionPattern": "\"latest-release\":\\s*\"([0-9]+\\.[0-9]+\\.[0-9]+)\"",
+    "License": "Licensed"
   },
   "visual studio": {
     "Type": "Website",
@@ -220,9 +232,10 @@
   },
   "android studio": {
     "Type": "Website",
-    "ScrapeUrl": "https://developer.android.com/studio",
-    "OutputUrl": "https://developer.android.com/studio/install",
-    "VersionPattern": "Android Studio ([0-9]+\\.[0-9]+\\.[0-9]+)|version.*?([0-9]+\\.[0-9]+\\.[0-9]+)"
+    "ScrapeUrl": "https://developer.android.com/studio/releases",
+    "OutputUrl": "https://developer.android.com/studio/releases",
+    "VersionPattern": "Android Studio[^|]*\\|\\s*([0-9]{4}\\.[0-9]+\\.[0-9]+(?:\\s*Patch\\s*\\d+)?)",
+    "License": "Licensed"
   },
   "dbeaver": {
     "Type": "GitHub",
@@ -247,16 +260,46 @@
     "OutputUrl": "https://www.autodesk.com/products/design-review",
     "VersionPattern": "<d:Version>([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)</d:Version>"
   },
+  "autenticação.gov": {
+    "Type": "Website",
+    "ScrapeUrl": "https://www.autenticacao.gov.pt/cc-aplicacao",
+    "OutputUrl": "https://www.autenticacao.gov.pt/cc-aplicacao",
+    "VersionPattern": "(?:\\(\\s*)?v\\s*([0-9]+(?:\\.[0-9]+){1,2})(?:\\s*\\))?",
+    "AltScrapeUrl": "https://amagovpt.github.io/docs.autenticacao.gov/user_manual.html",
+    "AltOutputUrl": "https://amagovpt.github.io/docs.autenticacao.gov/user_manual.html",
+    "AltVersionPattern": "v\\s*([0-9]+(?:\\.[0-9]+){1,2})",
+    "AltVersionPattern2": "(?i)vers[aã]o\\s*([0-9]+(?:\\.[0-9]+){1,2})",
+    "License": "Licensed"
+  },
   "dwg true view": {
     "Type": "Website",
     "ScrapeUrl": "https://community.chocolatey.org/api/v2/FindPackagesById()?id=%27dwgtrueview%27&filter=IsLastVersion%20eq%20true",
     "OutputUrl": "https://www.autodesk.com/products/dwg",
     "VersionPattern": "<d:Version>([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)</d:Version>"
   },
-  "Bloomberg Terminal": {
-    "Type": "Licenced",
-    "Version": "180.4.81",
-    "OutputUrl": "https://www.bloomberg.com/professional/solution/bloomberg-terminal/"
+  "bloomberg terminal": {
+    "Type": "Fixed",
+    "Version": "189.3.81",
+    "OutputUrl": "https://www.bloomberg.com/professional/support/documentation/release-notes/",
+    "License": "Licensed"
+  },
+  "blue prism": {
+    "Type": "Fixed",
+    "Version": "7.4.0",
+    "OutputUrl": "https://documentation.blueprism.com/bp-7-4/en-us/release-notes/rn-home.htm",
+    "License": "Licensed"
+  },
+  "bravo for power bi": {
+    "Type": "GitHub",
+    "RepoUrl": "https://github.com/sql-bi/Bravo/releases/latest",
+    "OutputUrl": "https://www.sqlbi.com/tools/bravo-for-power-bi/",
+    "License": "Licensed"
+  },
+  "cisco secure client": {
+    "Type": "Fixed",
+    "Version": "5.1.15.287",
+    "OutputUrl": "https://www.cisco.com/c/en/us/support/security/anyconnect-secure-mobility-client/series.html",
+    "License": "Licensed"
   },
   "Bruno": {
     "Type": "Website",

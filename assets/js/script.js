@@ -272,10 +272,18 @@ function renderTable() {
         latestVersionHtml += ' <span class="badge-new">NEW</span>';
     }
 
+    let iconUrl = row.IconUrl || '';
+    if (!iconUrl) {
+      const urlCandidate = row.Website || row.SearchUrl || '';
+      try {
+        const u = new URL(urlCandidate);
+        iconUrl = `https://www.google.com/s2/favicons?domain=${u.hostname}&sz=64`;
+      } catch (e) {}
+    }
     tr.innerHTML = `
       <td class="col-num text-center text-white">${index + 1}</td>
       <td class="col-icon text-center">
-        <img src="${row.IconUrl || 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNjMmMyYzIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHJ4PSI1IiByeT0iNSIvPjxwYXRoIGQ9Ik0xNiAxMS4zN0ExLjQgMS40IDAgMTE1IDEzYTEuNCAxLjQgMCAwMSAxLTEuNjN6bTAtMy43N2ExLjQgMS40IDAgMTEuMzMgMS4zM0ExLjQgMS40IDAgMDExNiA3LjZ6TTcuNDEgMTAuODhBMS41IDEuNSAwIDExNiAxMi41YTEuNSAxLjUgMCAwMSAxLjQxLTEuNjJ6bS0uMjUgMy43NkExLjUgMS41IDAgMTE1Ljg0IDE2YTEuNSAxLjUgMCAwMSAxLjMzLTEuMzZ6IiBmaWxsPSJjdXJyZW50Q29sb3IiIG9wYWNpdHk9IjAuNSIvPjwvc3ZnPg=='}" 
+        <img src="${iconUrl || 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNjMmMyYzIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHJ4PSI1IiByeT0iNSIvPjxwYXRoIGQ9Ik0xNiAxMS4zN0ExLjQgMS40IDAgMTE1IDEzYTEuNCAxLjQgMCAwMSAxLTEuNjN6bTAtMy43N2ExLjQgMS40IDAgMTEuMzMgMS4zM0ExLjQgMS40IDAgMDExNiA3LjZ6TTcuNDEgMTAuODhBMS41IDEuNSAwIDExNiAxMi41YTEuNSAxLjUgMCAwMSAxLjQxLTEuNjJ6bS0uMjUgMy43NkExLjUgMS41IDAgMTE1Ljg0IDE2YTEuNSAxLjUgMCAwMSAxLjMzLTEuMzZ6IiBmaWxsPSJjdXJyZW50Q29sb3IiIG9wYWNpdHk9IjAuNSIvPjwvc3ZnPg=='}" 
              class="app-icon" 
              alt="icon" 
              onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNjMmMyYzIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHJ4PSI1IiByeT0iNSIvPjxwYXRoIGQ9Ik0xMiA4djhNMCAxMmgyNCIgc3Ryb2tlPSIjZmZmIiBvcGFjaXR5PSIwLjIiLz48L3N2Zz4='">
