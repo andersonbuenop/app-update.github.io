@@ -2,6 +2,34 @@
 
 Este documento mantém o registro de todas as alterações, melhorias e correções realizadas no projeto **App Update**.
 
+## [Exclusão Lógica, Restauração e Limpeza da Tabela] - 2026-02-21
+
+### Adicionado
+- **Exclusão Lógica (`IsDeleted`) com Aba de Excluídos**:
+    - Itens marcados como excluídos deixam a lista principal e aparecem em uma aba dedicada de "Excluídos".
+    - Todos os dados (histórico, observações, URLs, tipo, licença) são preservados no CSV.
+- **Aba de Aplicativos Excluídos na Interface Web**:
+    - Nova aba no topo permite alternar entre lista principal e itens excluídos.
+    - Mesma estrutura de colunas da lista principal, com ação de restauração.
+- **Regra para Internos na Lista de Excluídos**:
+    - Apps com `TipoApp = app interno` são sempre tratados como excluídos (IsDeleted = True) pelo backend.
+    - Evita que internos reapareçam na lista principal por engano.
+- **Comportamento Inteligente de Restauração**:
+    - Ao tentar restaurar um app interno, é exibido um aviso informando que ele precisa ser alterado para `app comercial` antes da restauração.
+    - Se o usuário mudar o dropdown para `app comercial` e clicar em restaurar, o tipo é salvo e o app é restaurado em uma única ação.
+
+### Alterado
+- **Tabela Principal Mais Enxuta**:
+    - Colunas "Instalada" e "Tipo" foram removidas da visualização da tabela principal.
+    - Os campos continuam existindo no CSV e podem ser editados via modal.
+- **Fluxo de Edição e Salvamento**:
+    - O botão de exclusão/restauração no modal passa a respeitar diretamente o valor atual dos campos editados (como `TipoApp`), evitando obrigar o usuário a clicar em "Salvar" antes.
+
+### Corrigido
+- **Coerência entre Tipo Interno e Scraping**:
+    - Garantido que apps internos não façam scraping externo e permaneçam sempre fora da lista principal.
+    - Evita estados inconsistentes entre o que o usuário vê na aba principal e na aba de excluídos.
+
 ## [Regras de Versão, TipoApp e Licença] - 2026-02-21
 
 ### Adicionado

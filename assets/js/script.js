@@ -1,9 +1,7 @@
 function initFromText(text) {
   const { data } = parseCsv(text);
   state.data = data;
-  state.filtered = [...state.data];
-  renderTable();
-  updateChart(); // Atualiza gráfico ao carregar dados
+  applyFilters();
 }
 
 // Inicializa gráfico logo após carregar DOM
@@ -92,11 +90,63 @@ const state = {
   statusFilter: null,
   statusDir: 1,
   licenseFilter: null,
-  chart: null // Instância do Chart.js
+  chart: null,
+  view: 'main'
 };
 
 const tableBody = document.querySelector('#appsTable tbody');
 const searchInput = document.getElementById('searchInput');
+const tabMain = document.getElementById('tabMain');
+const tabDeleted = document.getElementById('tabDeleted');
+const exportBtn = document.getElementById('exportBtn');
+const statusSelect = document.getElementById('statusFilter');
+
+function isRowDeleted(row) {
+  const flag = (row.IsDeleted || '').toString().toLowerCase();
+  return flag === 'true' || flag === '1' || flag === 'sim';
+}
+
+if (tabMain && tabDeleted) {
+  tabMain.addEventListener('click', () => {
+    state.view = 'main';
+    tabMain.classList.add('active');
+    tabDeleted.classList.remove('active');
+    applyFilters();
+  });
+  tabDeleted.addEventListener('click', () => {
+    state.view = 'deleted';
+    tabDeleted.classList.add('active');
+    tabMain.classList.remove('active');
+    applyFilters();
+  });
+}
+
+function exportCurrentViewToXlsx() {
+  if (typeof XLSX === 'undefined') {
+    alert('Biblioteca de exportação não carregada.');
+    return;
+  }
+
+  const headers = ['AppName','appversion','LatestVersion','Website','InstalledVersion','Status','License','TipoApp','Observacao','SourceKey','SearchUrl','IsNewVersion','SourceId','IconUrl','IsDeleted'];
+  const rows = (state.filtered || []).map(row => {
+    const obj = {};
+    headers.forEach(h => {
+      obj[h] = row[h] || '';
+    });
+    return obj;
+  });
+
+  const ws = XLSX.utils.json_to_sheet(rows);
+  const wb = XLSX.utils.book_new();
+  const sheetName = state.view === 'deleted' ? 'Excluidos' : 'Principal';
+  XLSX.utils.book_append_sheet(wb, ws, sheetName);
+  const filename = state.view === 'deleted' ? 'apps_excluidos.xlsx' : 'apps_principal.xlsx';
+  XLSX.writeFile(wb, filename);
+}
+
+if (exportBtn) {
+  exportBtn.addEventListener('click', exportCurrentViewToXlsx);
+}
 
 // Botão de Atualizar Agora
 document.getElementById('updateBtn').addEventListener('click', () => {
@@ -291,11 +341,9 @@ function renderTable() {
       </td>
       <td class="col-app">${toTitleCase(row.AppName || '')}</td>
       <td class="col-version">${row.appversion || ''}</td>
-      <td class="col-version">${row.InstalledVersion || ''}</td>
       <td class="col-version">${latestVersionHtml}</td>
       <td class="col-status">${statusButton}</td>
       <td class="col-license">${toTitleCase(row.License || '')}</td>
-      <td class="col-type">${row.TipoApp || 'app comercial'}</td>
       <td class="col-obs">${row.Observacao || ''}</td>
       <td class="col-actions">
         <button onclick="openEditModal(${index})" class="btn btn-primary btn-sm">Editar</button>
@@ -338,6 +386,16 @@ function openEditModal(index) {
   // Habilita edição de URLs para todos (mesmo sem chave JSON, salva no CSV)
   document.getElementById('editSearchUrl').placeholder = "URL de Busca";
   document.getElementById('editOutputUrl').placeholder = "URL de Saída";
+  const deleteBtn = document.getElementById('deleteAppBtn');
+  if (deleteBtn) {
+    if (isRowDeleted(item)) {
+      deleteBtn.textContent = 'Restaurar';
+      deleteBtn.dataset.mode = 'restore';
+    } else {
+      deleteBtn.textContent = 'Excluir da lista';
+      deleteBtn.dataset.mode = 'delete';
+    }
+  }
   
   // Mostra modal
   const modal = document.getElementById('editModal');
@@ -448,7 +506,7 @@ document.getElementById('editForm').addEventListener('submit', function(e) {
 });
 
 function saveDataToServer() {
-  const headers = ['AppName', 'appversion', 'LatestVersion', 'Website', 'InstalledVersion', 'Status', 'License', 'SourceKey', 'SearchUrl', 'Observacao', 'IsNewVersion', 'SourceId', 'IconUrl', 'TipoApp'];
+  const headers = ['AppName', 'appversion', 'LatestVersion', 'Website', 'InstalledVersion', 'Status', 'License', 'SourceKey', 'SearchUrl', 'Observacao', 'IsNewVersion', 'SourceId', 'IconUrl', 'TipoApp', 'IsDeleted'];
   
   let csvContent = headers.map(h => `"${h}"`).join(',') + '\n';
   
@@ -510,6 +568,9 @@ function applyFilters() {
   const license = state.licenseFilter;
 
   state.filtered = state.data.filter(row => {
+    const deleted = isRowDeleted(row);
+    if (state.view === 'main' && deleted) return false;
+    if (state.view === 'deleted' && !deleted) return false;
     const matchesStatus = !status || (row.Status || '') === status;
     const matchesLicense = !license || ((row.License || '').toLowerCase() === license.toLowerCase());
     const text = (
@@ -540,6 +601,37 @@ function applyFilters() {
 const cancelBtn = document.getElementById('cancelEdit');
 if (cancelBtn) {
     cancelBtn.addEventListener('click', closeModal);
+}
+
+const deleteBtn = document.getElementById('deleteAppBtn');
+if (deleteBtn) {
+  deleteBtn.addEventListener('click', () => {
+    const originalIndex = parseInt(document.getElementById('editIndex').value);
+    const row = state.data.find(r => r._originalIndex === originalIndex);
+    if (!row) return;
+    const mode = deleteBtn.dataset.mode || 'delete';
+    const tipoSelect = document.getElementById('editTipoApp');
+    if (tipoSelect) {
+      row.TipoApp = tipoSelect.value || row.TipoApp || 'app comercial';
+    }
+    if (mode === 'restore' && (row.TipoApp || '').toLowerCase() === 'app interno') {
+      alert("Para restaurar este aplicativo, altere o Tipo para 'app comercial' antes.");
+      return;
+    }
+    row.IsDeleted = mode === 'delete' ? 'True' : '';
+    applyFilters();
+    const originalText = deleteBtn.textContent;
+    deleteBtn.disabled = true;
+    deleteBtn.textContent = mode === 'delete' ? 'Excluindo...' : 'Restaurando...';
+    saveDataToServer()
+      .then(() => {
+        closeModal();
+      })
+      .finally(() => {
+        deleteBtn.disabled = false;
+        deleteBtn.textContent = originalText;
+      });
+  });
 }
 
 // Fechar modal ao clicar fora
@@ -603,6 +695,15 @@ document.getElementById('fileInput').addEventListener('change', e => {
 });
 
 searchInput.addEventListener('input', applyFilters);
+
+if (statusSelect) {
+  statusSelect.addEventListener('change', () => {
+    state.statusFilter = statusSelect.value || null;
+    state.statusDir = 1;
+    updateBadgeStyles();
+    applyFilters();
+  });
+}
 
 const licenseSelect = document.getElementById('licenseFilter');
 if (licenseSelect) {

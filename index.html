@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="assets/css/style.css?v=18" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 </head>
 <body>
 <div class="sticky-header">
@@ -41,6 +42,11 @@
           <option value="Free">Free</option>
         </select>
       </label>
+      <div class="tab-switch">
+        <button type="button" id="tabMain" class="btn btn-tab active">Lista Principal</button>
+        <button type="button" id="tabDeleted" class="btn btn-tab">Excluídos</button>
+        <button type="button" id="exportBtn" class="btn btn-tab">Exportar</button>
+      </div>
       
       <div id="statusBadges" class="status-badges" style="display: inline-flex; margin-left: 10px; align-items: center;">
         <span class="badge" data-status="UpdateAvailable">
@@ -69,11 +75,9 @@
               <th class="col-icon">Ícone</th>
               <th data-key="AppName">Aplicações</th>
               <th data-key="appversion">Versão App</th>
-              <th data-key="InstalledVersion">Instalada</th>
               <th data-key="LatestVersion">Última Versão</th>
               <th data-key="Status">Status</th>
               <th data-key="License">Licença</th>
-              <th data-key="TipoApp">Tipo</th>
               <th data-key="Observation">Observação</th>
               <th>Ações</th>
             </tr>
@@ -157,6 +161,7 @@
       
       <div class="modal-buttons">
         <button type="button" id="cancelEdit" class="btn btn-secondary">Cancelar</button>
+        <button type="button" id="deleteAppBtn" class="btn btn-secondary">Excluir da lista</button>
         <button type="submit" id="saveEditBtn" class="btn btn-primary">Salvar</button>
       </div>
     </form>

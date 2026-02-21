@@ -703,6 +703,7 @@ $existingIcons = @{}
 $existingSourceIds = @{}
 $existingTipoApp = @{}
 $existingLicenses = @{}
+$existingDeleted = @{}
 
 if (Test-Path $outPath) {
     Write-Host "[Info] Carregando dados existentes de apps_output.csv..." -ForegroundColor Cyan
@@ -734,6 +735,9 @@ if (Test-Path $outPath) {
                 }
                 if ($item.License) {
                     $existingLicenses[$normName] = $item.License
+                }
+                if ($item.IsDeleted) {
+                    $existingDeleted[$normName] = $item.IsDeleted
                 }
             }
         }
@@ -803,10 +807,16 @@ foreach ($row in $data) {
 
     $normKey = $normalizedCheck
 
-    # Tipo de app: default "app comercial", pode ser sobrescrito a partir do CSV anterior
     $tipoApp = 'app comercial'
     if ($normKey -and $existingTipoApp.ContainsKey($normKey)) {
         $tipoApp = $existingTipoApp[$normKey]
+    }
+    $isDeleted = $false
+    if ($normKey -and $existingDeleted.ContainsKey($normKey)) {
+        $isDeleted = $existingDeleted[$normKey]
+    }
+    if ($tipoApp -eq 'app interno') {
+        $isDeleted = $true
     }
 
     Write-Host "[$index/$totalApps] AppName: '$appName' (Tipo: $tipoApp)" -ForegroundColor Cyan
@@ -825,8 +835,7 @@ foreach ($row in $data) {
         }
     }
 
-    # garantir colunas
-    foreach ($col in 'LatestVersion','Website','InstalledVersion','Status','License','SourceKey','SearchUrl','Observacao','IsNewVersion','SourceId','IconUrl','TipoApp') {
+    foreach ($col in 'LatestVersion','Website','InstalledVersion','Status','License','SourceKey','SearchUrl','Observacao','IsNewVersion','SourceId','IconUrl','TipoApp','IsDeleted') {
         if (-not ($row.PSObject.Properties.Name -contains $col)) {
             $row | Add-Member -NotePropertyName $col -NotePropertyValue $null
         }
@@ -912,6 +921,7 @@ foreach ($row in $data) {
     $row.SourceId         = $finalSourceId
     $row.IconUrl          = $finalIconUrl
     $row.TipoApp          = $tipoApp
+    $row.IsDeleted        = $isDeleted
     # IsNewVersion já foi definido acima
 
     # Adicionar à lista de dados únicos
