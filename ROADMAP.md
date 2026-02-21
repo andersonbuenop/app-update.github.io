@@ -63,3 +63,4 @@ Reduzir chamadas desnecessárias a sites externos e tornar as execuções mais p
   - Cache de resultados de scraping por execução (evitar chamadas repetidas para duplicados).
   - Métricas simples (tempo total, quantidade de apps por fonte, quantidade de timeouts).
   - Estratégias automáticas de backoff quando uma fonte estiver instável.
+  - Priorização de fontes oficiais para apps críticos (ex: NVDA, Oracle SQL Developer) sempre que possível, evitando discrepâncias entre repositórios terceiros (Chocolatey, etc.) e o que o fornecedor publica no site.

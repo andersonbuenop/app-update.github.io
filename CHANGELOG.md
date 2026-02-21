@@ -51,6 +51,16 @@ Este documento mantém o registro de todas as alterações, melhorias e correç�
 - **Persistência de `TipoApp` e Licença**:
     - O script `apps_update.ps1` agora lê e preserva as colunas `TipoApp` e `License` existentes.
     - Atualizações sucessivas não sobrescrevem mais escolhas manuais feitas na planilha ou na web.
+- **Exceções de Normalização de Versão para Apps Específicos**:
+    - Node.js, Neo4j, PyCharm (incluindo Community), IntelliJ IDEA, Appium Inspector e NVDA passam a manter exatamente o formato de versão exibido pelos sites oficiais (sem encurtar o ano ou ajustar segmentos).
+    - A lista de exceções foi centralizada em uma função auxiliar no `apps_update.ps1` para facilitar manutenção futura.
+
+### Adicionado
+- **Fontes Oficiais para NVDA e Oracle SQL Developer**:
+    - NVDA passa a usar exclusivamente a página oficial de download como fonte de versão, com detecção direta do texto "NVDA version AAAA.X.Y".
+    - Oracle SQL Developer passa a ter a versão extraída dos links oficiais de download no site da Oracle, alinhando o status com a versão efetivamente distribuída.
+- **Tratativa Documentada para OpenSSL**:
+    - Registrado no CSV que o critério de comparação de versão do OpenSSL será definido posteriormente (por exemplo, última 3.5.x LTS oficial ou build específico do fornecedor), mantendo o status como `Unknown` até essa decisão.
 
 ### Corrigido
 - **Reflexo de `TipoApp` na Interface Web**:

@@ -139,6 +139,10 @@ Este lote foca em otimizações funcionais ligadas a regras de negócio, reduzin
 - **Reuso de Metadados Existentes**:
     - Dicionários em memória preservam `TipoApp` e `License` de execuções anteriores.
     - Evita recalcular ou sobrescrever decisões manuais a cada rodada do script.
+- **Uso de Fontes Oficiais em Apps Críticos**:
+    - NVDA passou a usar diretamente a página oficial como fonte de versão, eliminando divergências entre Chocolatey e o site do fornecedor.
+    - Oracle SQL Developer teve a versão amarrada aos links oficiais de download da Oracle, reduzindo o risco de desencontro entre o instalador utilizado pelo time e o que o site anuncia.
+    - Para OpenSSL, o status permanece `Unknown` com anotação explícita no CSV, adiando o critério de comparação (última 3.5.x LTS vs build específico) para decisão futura consciente.
 
 ### Impacto de Performance
 - Menos chamadas de scraping em massa para apps internos.

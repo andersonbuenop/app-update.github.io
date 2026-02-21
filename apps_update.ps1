@@ -152,6 +152,27 @@ function Get-InstalledVersion {
     return $null
 }
 
+function Is-NonNormalizedVersionApp {
+    param([string]$AppName)
+
+    if (-not $AppName) { return $false }
+
+    $normApp = Get-NormalizedAppName -RawName $AppName
+    if (-not $normApp) { return $false }
+
+    $apps = @(
+        'node.js',
+        'neo4j-community',
+        'pycharm',
+        'pycharm community',
+        'intellij idea',
+        'appium inspector',
+        'nvda'
+    )
+
+    return $apps -contains $normApp
+}
+
 function Normalize-Version {
     param(
         [string]$Version,
@@ -160,12 +181,12 @@ function Normalize-Version {
 
     if (-not $Version) { return $null }
 
-    # Tratamento específico para Node.js: manter versão original (ex: 25.6.0)
+    if ($AppName -and (Is-NonNormalizedVersionApp -AppName $AppName)) {
+        return $Version
+    }
+
     if ($AppName) {
         $normApp = Get-NormalizedAppName -RawName $AppName
-        if ($normApp -eq 'node.js') {
-            return $Version
-        }
         if ($normApp -eq 'android studio') {
             if ($Version -match '(\d{4}\.\d+\.\d+)') {
                 $base = $Matches[1]
@@ -843,8 +864,6 @@ foreach ($row in $data) {
 
     # obter chave e url de busca do JSON
 
-    # Tentar recuperar observação existente se não houver na linha atual (ou sobrescrever, dependendo da lógica desejada)
-    # Aqui, assumimos que o CSV antigo é a fonte da verdade para Observacao
     if ($normKey -and $existingObs.ContainsKey($normKey)) {
         $row.Observacao = $existingObs[$normKey]
     }
