@@ -91,6 +91,7 @@ const state = {
   sort: { key: null, dir: 1 },
   statusFilter: null,
   statusDir: 1,
+  licenseFilter: null,
   chart: null // Instância do Chart.js
 };
 
@@ -294,6 +295,7 @@ function renderTable() {
       <td class="col-version">${latestVersionHtml}</td>
       <td class="col-status">${statusButton}</td>
       <td class="col-license">${toTitleCase(row.License || '')}</td>
+      <td class="col-type">${row.TipoApp || 'app comercial'}</td>
       <td class="col-obs">${row.Observacao || ''}</td>
       <td class="col-actions">
         <button onclick="openEditModal(${index})" class="btn btn-primary btn-sm">Editar</button>
@@ -321,6 +323,10 @@ function openEditModal(index) {
       licVal = licVal.charAt(0).toUpperCase() + licVal.slice(1).toLowerCase();
   }
   document.getElementById('editLicense').value = licVal;
+  const tipoEl = document.getElementById('editTipoApp');
+  if (tipoEl) {
+    tipoEl.value = item.TipoApp || 'app comercial';
+  }
   
   document.getElementById('editObservacao').value = item.Observacao || '';
   
@@ -381,6 +387,7 @@ document.getElementById('editForm').addEventListener('submit', function(e) {
     // Status não editável diretamente
     row.License = document.getElementById('editLicense').value;
     row.Observacao = document.getElementById('editObservacao').value;
+    row.TipoApp = document.getElementById('editTipoApp').value || 'app comercial';
     
     // Atualiza URLs no objeto row (CSV)
     const newSearchUrl = document.getElementById('editSearchUrl').value;
@@ -441,8 +448,7 @@ document.getElementById('editForm').addEventListener('submit', function(e) {
 });
 
 function saveDataToServer() {
-  // 1. Salvar CSV
-  const headers = ['AppName', 'appversion', 'LatestVersion', 'Website', 'InstalledVersion', 'Status', 'License', 'SourceKey', 'SearchUrl', 'Observacao', 'IsNewVersion', 'SourceId', 'IconUrl'];
+  const headers = ['AppName', 'appversion', 'LatestVersion', 'Website', 'InstalledVersion', 'Status', 'License', 'SourceKey', 'SearchUrl', 'Observacao', 'IsNewVersion', 'SourceId', 'IconUrl', 'TipoApp'];
   
   let csvContent = headers.map(h => `"${h}"`).join(',') + '\n';
   
@@ -501,9 +507,11 @@ function saveDataToServer() {
 function applyFilters() {
   const term = searchInput.value.trim().toLowerCase();
   const status = state.statusFilter;
+  const license = state.licenseFilter;
 
   state.filtered = state.data.filter(row => {
     const matchesStatus = !status || (row.Status || '') === status;
+    const matchesLicense = !license || ((row.License || '').toLowerCase() === license.toLowerCase());
     const text = (
       (row.AppName || '') + ' ' +
       (row.appversion || '') + ' ' +
@@ -511,10 +519,11 @@ function applyFilters() {
       (row.Website || '') + ' ' +
       (row.InstalledVersion || '') + ' ' +
       (row.Status || '') + ' ' +
-      (row.License || '')
+      (row.License || '') + ' ' +
+      (row.TipoApp || '')
     ).toLowerCase();
     const matchesTerm = !term || text.includes(term);
-    return matchesStatus && matchesTerm;
+    return matchesStatus && matchesLicense && matchesTerm;
   });
 
   if (state.sort.key) {
@@ -586,6 +595,7 @@ document.getElementById('fileInput').addEventListener('change', e => {
     state.sort = { key: null, dir: 1 };
     state.statusFilter = null;
     state.statusDir = 1;
+    state.licenseFilter = null;
     updateBadgeStyles();
     renderTable();
   };
@@ -593,6 +603,14 @@ document.getElementById('fileInput').addEventListener('change', e => {
 });
 
 searchInput.addEventListener('input', applyFilters);
+
+const licenseSelect = document.getElementById('licenseFilter');
+if (licenseSelect) {
+  licenseSelect.addEventListener('change', () => {
+    state.licenseFilter = licenseSelect.value || null;
+    applyFilters();
+  });
+}
 
 // Botão de salvar manual (removido)
 // const saveBtn = document.getElementById('saveBtn');

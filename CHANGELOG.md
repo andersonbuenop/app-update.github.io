@@ -2,6 +2,36 @@
 
 Este documento mantém o registro de todas as alterações, melhorias e correções realizadas no projeto **App Update**.
 
+## [Regras de Versão, TipoApp e Licença] - 2026-02-21
+
+### Adicionado
+- **Coluna `TipoApp` no CSV e na Web**:
+    - Novos valores suportados: `app comercial` (padrão) e `app interno`.
+    - Campo visível na tabela e no modal de edição da interface web.
+- **Regra para Aplicações Internas**:
+    - Apps marcados como `app interno` não realizam scraping externo.
+    - Mantêm as colunas de versão preenchidas apenas com dados internos (quando houver).
+- **Gestão Manual de Licenças**:
+    - Campo de licença agora totalmente manual (`Free` / `Licensed`).
+    - Interface web com combo para selecionar o tipo de licença por aplicação.
+
+### Alterado
+- **Cálculo de Status para Apps sem Versão Instalada**:
+    - Quando não há `InstalledVersion`, o backend usa `0.0.0` apenas internamente para comparação.
+    - O `Status` passa a ser sempre `UpdateAvailable` nesses casos, usando a última versão do site.
+    - O valor `0.0.0` nunca é gravado no CSV (colunas de versão continuam vazias).
+- **Persistência de `TipoApp` e Licença**:
+    - O script `apps_update.ps1` agora lê e preserva as colunas `TipoApp` e `License` existentes.
+    - Atualizações sucessivas não sobrescrevem mais escolhas manuais feitas na planilha ou na web.
+
+### Corrigido
+- **Reflexo de `TipoApp` na Interface Web**:
+    - A coluna `TipoApp` agora aparece corretamente na tabela e no modal.
+    - Salvando pelo frontend, os valores são mantidos em `apps_output.csv`.
+- **Normalização de Licença**:
+    - Removida inferência automática agressiva de licença.
+    - As licenças passam a respeitar exclusivamente o valor configurado pelo usuário.
+
 ## [Melhorias de Layout e Funcionalidade] - 2026-02-06
 
 ### Adicionado

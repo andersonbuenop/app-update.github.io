@@ -1,166 +1,166 @@
-﻿"AppName","appversion","LatestVersion","Website","InstalledVersion","Status","License","SourceKey","SearchUrl","Observacao","IsNewVersion","SourceId","IconUrl"
-".NET 4.6.1 Developer","4.6.1","10.0.3","https://dotnet.microsoft.com/download","4.6.1","UpdateAvailable","Licensed",".net","https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/releases-index.json","link validado","False",,
-"7-Zip 25.01 (x64 edition)","25.01 (x64 edition)","26.00","http://www.7-zip.org/","25.01","UpdateAvailable","licensed","7-zip",,"link validado","False","7-Zip","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=7-Zip"
-"Adobe Acrobat Reader Update - 25.001.21151 x32","25.001.21151","25.001.21223","https://www.adobe.com/devnet-docs/acrobatetk/tools/ReleaseNotesDC/index.html","25.001.21151","UpdateAvailable","Licensed","adobe acrobat reader update",,"link validado","False",,"https://www.adobe.com/favicon.ico"
-"Adobe Acrobat XI Pro","11.0.23","11.0.23","https://www.adobe.com/products/acrobat/readstep.html","11.0.23","UpToDate","Licensed","adobe acrobat xi pro",,,"False",,
-"Aladdin by BlackRock (Prod)","",,,,"Unknown","licensed","aladdin by blackrock (prod)",,,"False",,
-"Android Studio - 2025.1.3.7","2025.1.3.7","2025.3.1","https://developer.android.com/studio/releases","2025.1.3","UpdateAvailable","Licensed","android studio","https://developer.android.com/studio/releases","link validado","False",,"https://developer.android.com/favicon.ico"
-"Apache CXF","4.1.3","4.2.0","https://cxf.apache.org/download.html","4.1.3","UpdateAvailable","Licensed","apache cxf","https://cxf.apache.org/download.html",,"False",,"https://cxf.apache.org/favicon.ico"
-"Apache Directory Studio","2.0.0","2.0.0","https://directory.apache.org/studio/download/","2.0.0","UpToDate","Licensed","apache directory studio",,"link validado","False",,
-"Apache JMeter","5.6.3","5.6.3","https://jmeter.apache.org/download_jmeter.cgi","5.6.3","UpToDate","Licensed","apache jmeter","https://jmeter.apache.org/download_jmeter.cgi","link validado","False",,
-"Apache Kafka","3.6.1","4.2.0","https://kafka.apache.org/community/downloads/","3.6.1","UpdateAvailable","Licensed","apache kafka","https://kafka.apache.org/community/downloads/","link validado","False",,
-"Appium Inspector","2025.8.1","26.1.3","https://github.com/appium/appium-inspector","25.8.1","UpdateAvailable","Licensed","appium inspector","https://github.com/appium/appium-inspector/releases/latest","link validado","True",,"https://raw.githubusercontent.com/appium/appium-inspector/main/app/common/renderer/assets/images/icon.png"
-"Autenticação.Gov 3.13.0 (5496)","","3.14","https://www.autenticacao.gov.pt/cc-aplicacao","3.13.0","UpdateAvailable","Licensed","autenticação.gov","https://www.autenticacao.gov.pt/cc-aplicacao","link validado","False",,"https://www.autenticacao.gov.pt/favicon.ico"
-"Automate Agent 2023 (x64)","",,,"23","Unknown","licensed","automate agent",,"interno","False",,
-"Azure Functions Core Tools (x64)","4.3.0","4.7.0","https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=windows%2Ccsharp%2Cbash#v2","4.3.0","UpdateAvailable","licensed","azure functions core tools (x64)",,"link validado","False","Azure Functions Core Tools","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Azure Functions Core Tools"
-"Azure Storage Explorer 1.38.0","1.38.0","1.41.1","https://azure.microsoft.com/en-us/features/storage-explorer/","1.38.0","UpdateAvailable","licensed","azure storage explorer",,"link validado","False","StorageExplorer","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=StorageExplorer"
-"BIOS - HP Elite X2 G4 - 01.11.00 - Unattended","01.11.00",,,"01.11.00","Unknown","licensed","bios - hp elite x2 g4",,"interno","False",,
-"Bloomberg Terminal 180.4.81","180.4.81","189.3.81","https://www.bloomberg.com/professional/support/documentation/release-notes/","180.4.81","UpdateAvailable","Licensed","bloomberg terminal",,"licenciado","False",,"https://www.bloomberg.com/favicon.ico"
-"Blue Prism","7.2.1","7.4.0","https://documentation.blueprism.com/bp-7-4/en-us/release-notes/rn-home.htm","7.2.1","UpdateAvailable","Licensed","blue prism",,"licenciado","False",,"https://www.blueprism.com/favicon.ico"
-"Bravo for Power BI","1.0.9","1.0.13","https://www.sqlbi.com/tools/bravo-for-power-bi/","1.0.9","UpdateAvailable","Licensed","bravo for power bi","https://github.com/sql-bi/Bravo/releases/latest",,"False",,"https://www.sqlbi.com/favicon.ico"
-"Bruno 3.0.2","3.0.2","3.1.2","https://www.usebruno.com/downloads","3.0.2","UpdateAvailable","licensed","bruno","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'bruno'%20and%20IsLatestVersion",,"False",,
-"Camera HP Elite X2 G4 - W11","v2",,,"2","Unknown","licensed","camera hp elite x2 g4 - w11",,"interno","False",,
-"Cisco Jabber 14.3.0","14.3.0","15.2.0.60459","http://www.cisco.com/","14.3.0","UpdateAvailable","licensed","cisco jabber",,"licenciado","False","Cisco Jabber","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Cisco Jabber"
-"Cisco Secure Client - 5.1.9.113 - Script","5.1.9.113","5.1.15.287","https://www.cisco.com/c/en/us/support/security/anyconnect-secure-mobility-client/series.html","5.1.9.113","UpdateAvailable","Licensed","cisco secure client",,,"False",,"https://www.cisco.com/favicon.ico"
-"Citrix Workspace app 2409","","25.11.10.50","https://www.citrix.co.uk/downloads/workspace-app/windows/workspace-app-for-windows-latest.html","2409","Unknown","licensed","citrix workspace app",,,"False","Citrix Workspace","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Citrix Workspace"
-"Cloudera ODBC Driver for Impala","",,"https://www.cloudera.com/downloads/connectors/impala/odbc/2-6-4.html",,"Unknown","licensed","cloudera odbc driver for impala","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20%27cloudera-odbc-driver-for-impala%27%20and%20IsLatestVersion",,"False",,
-"ComparePlus (plugin for Notepad++) - 2.1.1","2.1.1",,,"2.1.1","Unknown","licensed","compareplus (plugin for notepad++)",,,"False",,
-"CrowdStrike 7.15.18511 - WKS e SRV PRO","",,,"7.15.18511","Unknown","licensed","crowdstrike",,,"False",,
-"Cygwin - 3.6.2","3.6.2",,"https://www.cygwin.com/","3.6.2","Unknown","licensed","cygwin","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'cygwin'%20and%20IsLatestVersion",,"False",,
-"Databrick CLI","0.260.0",,,"0.260.0","Unknown","licensed","databrick cli",,,"False",,
-"Dax Studio - 3.2.1","3.2.1",,,"3.2.1","Unknown","licensed","dax studio",,,"False",,
-"Dbeaver - 25.2.5","25.2.5","25.3.5","https://dbeaver.io/download/","25.2.5","UpdateAvailable","licensed","dbeaver","https://github.com/dbeaver/dbeaver/releases/latest",,"False",,"https://dbeaver.io/favicon.ico"
-"DBVisualizer - 24.1.1","24.1.1",,"https://www.dbvis.com/download/","24.1.1","Unknown","licensed","dbvisualizer","https://www.dbvis.com/download/",,"False",,"https://www.dbvis.com/favicon.ico"
-"DCU","5.6.0",,,"5.6.0","Unknown","licensed","dcu",,,"False",,
-"Design Review - 14.0.0.177","14.0.0.177",,,"14.0.0.177","Unknown","licensed","design review",,,"False",,
-"Device Administrator","6.0.4.1106",,,"6.0.4.1106","Unknown","licensed","device administrator",,,"False",,
-"Diligent","",,,,"Unknown","licensed","diligent",,,"False",,
-"DWG True View - 31.1.122.0","31.1.122.0","2026.25.1.60","https://www.autodesk.com/products/dwg","31.1.122.0","UpdateAvailable","licensed","dwg true view","https://community.chocolatey.org/api/v2/FindPackagesById()?id=%27dwgtrueview%27&filter=IsLastVersion%20eq%20true",,"False",,
-"EasyDoc 1","1.0",,,"1.0","Unknown","licensed","easydoc",,,"False",,
-"Eclipse IDE","2025-03",,"https://www.eclipse.org/downloads/","25","Unknown","licensed","eclipse ide","https://www.eclipse.org/downloads/",,"False",,"https://www.eclipse.org/favicon.ico"
-"Eclipse Temurin JDK with Hotspot 24.0.1+9 (x64)","24.0.1+9 (x64)","1.7.1","https://opentoonz.github.io/","24.0.1","UpToDate","licensed","eclipse temurin jdk with hotspot",,,"False","OT","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=OT"
-"EPM Automate","25.10.43",,,"25.10.43","Unknown","licensed","epm automate",,,"False",,
-"Eurofac","",,,,"Unknown","licensed","eurofac",,,"False",,
-"FFmpeg","","8.0","https://ffmpeg.org/",,"Unknown","licensed","ffmpeg","https://ffmpeg.org/download.html",,"False",,"https://ffmpeg.org/favicon.ico"
-"Figma","125.11.6",,,"125.11.6","Unknown","licensed","figma",,,"False",,
-"Four Js Genero Desktop Client","3.10.23","6.00","https://4js.com/download/","3.10.23","UpdateAvailable","licensed","four js genero desktop client","https://4js.com/online_documentation/fjs-genero-manual-install-html/genero-install-topics/c_gdc_install.html",,"False",,
-"FreePlane","1.12.8","1.12.16","http://sourceforge.net/projects/freeplane/","1.12.8","UpdateAvailable","licensed","freeplane","https://github.com/freeplane/freeplane/releases/latest",,"False","Freeplane","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Freeplane"
-"Gephi 0.10.1","0.10.1","0.10.1","https://gephi.org/","0.10.1","UpToDate","licensed","gephi","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'gephi'%20and%20IsLatestVersion",,"False",,
-"Gestimo","",,,,"Unknown","licensed","gestimo",,,"False",,
-"GESVENGRH_CLIENT - PRO (270.2.8.0)","",,,"270.2.8.0","Unknown","licensed","gesvengrh_client - pro (270.2.8.0)",,,"False",,
-"Gimp 3.0.4","3.0.4","3.0.8.2","http://www.gimp.org/","3.0.4","UpdateAvailable","licensed","gimp","https://github.com/GNOME/gimp/releases/latest",,"False","GIMP","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=GIMP"
-"GisUP - Fundos de Pensões - Unidades de Participação","",,,,"Unknown","licensed","gisup - fundos de pensões - unidades de participação",,,"False",,
-"GIT - 2.51.1","2.51.1","2.53.0","https://git-scm.com/","2.51.1","UpdateAvailable","licensed","git","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'git'%20and%20IsLatestVersion",,"False",,"https://git-scm.com/favicon.ico"
-"Git Extensions 5.2.1","","6.0.5.18375","https://gitextensions.github.io/","5.2.1","UpdateAvailable","licensed","git extensions",,,"False","Git Extensions","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Git Extensions"
-"GitHub Desktop 3.4.18","","3.5.4.0","https://desktop.github.com/","3.4.18","UpdateAvailable","licensed","github desktop",,,"False","GitHub Desktop","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=GitHub Desktop"
-"Gitkraken 12.2.1","12.2.1","2.53.0","http://msysgit.github.io","12.2.1","UpToDate","licensed","gitkraken",,,"False","Git","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Git"
-"Google Chrome 144.0.7559.60","","147.0.7698.0","https://chromeenterprise.google/intl/pt_br/download/?modal-id=download-chrome","144.0.7559.60","UpdateAvailable","licensed","google chrome","https://googlechromelabs.github.io/chrome-for-testing/",,"False",,"https://www.google.com/favicon.ico"
-"GPDocs Client","",,,,"Unknown","licensed","gpdocs client",,,"False",,
-"HAL para Cockpit 1.0.6 - Multi-Ambiente","1.0.6",,,"1.0.6","Unknown","licensed","hal para cockpit",,,"False",,
-"HEIF Image Extension","1.1.861.0",,,"1.1.861.0","Unknown","licensed","heif image extension",,,"False",,
-"Helm","4.0.2","4.1.0","https://helm.sh/","4.0.2","UpdateAvailable","licensed","helm","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'kubernetes-helm'%20and%20IsLatestVersion",,"False",,"https://helm.sh/favicon.ico"
-"HEVC Video Extension","2.1.1161.0",,,"2.1.1161.0","Unknown","licensed","hevc video extension",,,"False",,
-"HxD","",,,,"Unknown","licensed","hxd",,,"False",,
-"Ibm Iseries","15.0.0.498",,,"15.0.0.498","Unknown","licensed","ibm iseries",,,"False",,
-"IBM MQ Explorer 9.1.3.0","9.1.3.0",,,"9.1.3.0","Unknown","licensed","ibm mq explorer",,,"False",,
-"IDEA 12.3","","253.29346.138","https://www.jetbrains.com/idea","12.3","UpdateAvailable","licensed","idea",,,"False","IntelliJ-IDEA","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=IntelliJ-IDEA"
-"IntelliJ IDEA 2025.3.1.1","2025.3.1.1","25.3.3","https://www.jetbrains.com/idea/download/","25.3.1.1","UpdateAvailable","licensed","intellij idea","https://data.services.jetbrains.com/products/releases?code=IIU&latest=true&type=release",,"True",,
-"IntelliJ IDEA Uninstall","",,,,"Unknown","licensed","intellij idea uninstall",,,"False",,
-"Jabra Direct","6.23.16101","6.26.32801","https://www.jabra.com.de/software-and-services/jabra-direct","6.23.16101","UpdateAvailable","licensed","jabra direct",,,"False","Jabra Direct","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Jabra Direct"
-"Java SE Development Kit 8 Update 471 (64-bit)","8 Update 471 (64-bit)",,,"8","Unknown","licensed","java se development kit",,,"False",,
-"Java(TM) SE Development Kit 17.0.17 (64-bit)","17.0.17 (64-bit)",,,"17.0.17","Unknown","licensed","java(tm) se development kit",,,"False",,
-"JDAI - 52.49.0.0","52.49.0.0",,,"52.49","Unknown","licensed","jdai",,,"False",,
-"Jetbrains-toolbox","2.6.2.41321",,,"2.6.2.41321","Unknown","licensed","jetbrains-toolbox",,,"False",,
-"JPG to SVG Free","1.0.0.0",,,"1.0","Unknown","licensed","jpg to svg free",,,"False",,
-"JSON-Viewer (plugin for Notepad++)","2.0.7.0",,,"2.0.7.0","Unknown","licensed","json-viewer (plugin for notepad++)",,,"False",,
-"KeePassXC","2.7.9","2.7.11","https://keepassxc.org/","2.7.9","UpdateAvailable","licensed","keepassxc","https://github.com/keepassxreboot/keepassxc/releases/latest",,"False",,
-"Keystore Explorer","5.6.0",,,"5.6.0","Unknown","licensed","keystore explorer",,,"False",,
-"LDAPAdmin - 1.8.3","1.8.3",,,"1.8.3","Unknown","licensed","ldapadmin",,,"False",,
-"License Administrator","6.0.4.90",,,"6.0.4.90","Unknown","licensed","license administrator",,,"False",,
-"Login Agent - PRE","",,,,"Unknown","licensed","login agent - pre",,,"False",,
-"Login Agent - PRO","",,,,"Unknown","licensed","login agent - pro",,,"False",,
-"LOYTEC - L Studio","3.2.14",,,"3.2.14","Unknown","licensed","loytec - l studio",,,"False",,
-"LOYTEC LINX Configurator x64","",,,"64.0","Unknown","licensed","loytec linx configurator x64",,,"False",,
-"LOYTEC LVIS Configurator x64","",,,"64.0","Unknown","licensed","loytec lvis configurator x64",,,"False",,
-"Maven Apache","3.9.10",,,"3.9.10","Unknown","licensed","maven apache",,,"False",,
-"Mercury x64","",,,"64.0","Unknown","licensed","mercury x64",,,"False",,
-"Mercury x86","",,,"86.0","Unknown","licensed","mercury x86",,,"False",,
-"Microsoft Azure CLI (64-bit) - 2.81.0","2.81.0","2.83.0","https://learn.microsoft.com/cli/azure/overview","2.81.0","UpdateAvailable","licensed","microsoft azure cli (64-bit)",,,"False","Azure CLI","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Azure CLI"
-"Microsoft Azure PowerShell - April 2025","","15.3.0.40553","https://github.com/Azure/azure-powershell/releases","25","UpToDate","licensed","microsoft azure powershell - april",,,"False","Microsoft Azure PowerShell","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Microsoft Azure PowerShell"
-"Microsoft Office 365 x64 - 01-2026","","1.1.3.0","http://www.microsoft.com/en-us/download/details.aspx?id=41149","365","Unknown","licensed","microsoft office",,,"False","Microsoft Office Remote","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Microsoft Office Remote"
-"Microsoft Power BI Desktop - 01-2026","2.150.1704.0","2.150.2455.0","https://powerbi.microsoft.com/en-us/desktop","2.150.1704.0","UpdateAvailable","licensed","microsoft power bi desktop",,,"False","Microsoft Power BI Desktop","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Microsoft Power BI Desktop"
-"Microsoft Report Builder","","15.1.30001.02","https://www.microsoft.com/en-us/download/details.aspx?id=53613",,"Unknown","licensed","microsoft report builder",,,"False","Microsoft Report Builder","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Microsoft Report Builder"
-"Microsoft Teams -11-2025","25306.804.4102.7193","26005.204.4249.1621","https://adoption.microsoft.com/en-us/new-microsoft-teams/","25306.804.4102.7193","UpdateAvailable","licensed","microsoft teams",,,"False","Teams","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Teams"
-"MongoDB Command Line Database Tools","100.10.0",,,"100.10.0","Unknown","licensed","mongodb command line database tools",,,"False",,
-"MongoDB Compass","",,,,"Unknown","licensed","mongodb compass",,,"False",,
-"MongoDB Shell","2.3.4",,,"2.3.4","Unknown","licensed","mongodb shell",,,"False",,
-"MS - Microsoft Visual C++ 2013 Redistributable","",,,"13","Unknown","licensed","ms - microsoft visual c++",,,"False",,
-"Murex MX.3 PRE-2025","2025-PRE",,,"25","Unknown","licensed","murex mx.3 pre-2025",,,"False",,
-"Murex MX.3 PRO-2025","v62",,,"62.0","Unknown","licensed","murex mx.3 pro-2025",,,"False",,
-"Neo4j-community","2025.10.1",,,"2025.10.1","Unknown","licensed","neo4j-community",,,"False",,
-"Neo4j-Desktop","2.1.1.0",,,"2.1.1.0","Unknown","licensed","neo4j-desktop",,,"False",,
-"Netbeans IDE","26",,,"26.0","Unknown","licensed","netbeans ide",,,"False",,
-"Node.js - 25.5.0-X64","25.5.0","25.6.1","https://nodejs.org/","25.5.0","UpdateAvailable","licensed","node.js","https://github.com/nodejs/node/releases/latest",,"False",,
-"NotePad++ 8.9.1","8.9.1","8.9.2","https://notepad-plus-plus.org/downloads/","8.9.1","UpdateAvailable","licensed","notepad++","https://github.com/notepad-plus-plus/notepad-plus-plus/releases/latest",,"False",,
-"NVDA 2025.3.2","2025.3.2",,,"25.3.2","Unknown","licensed","nvda",,,"False",,
-"Obsidian","1.9.14","1.11.7","https://obsidian.md/","1.9.14","UpdateAvailable","licensed","obsidian","https://github.com/obsidianmd/obsidian-releases/releases/latest",,"False",,
-"OffSetExplorer","3.0.3.0",,,"3.0.3.0","Unknown","licensed","offsetexplorer",,,"False",,
-"Omnissa Horizon Client 8","8.16.2","8.17.0.42163","https://www.vmware.com/products/horizon.html","8.16.2","UpdateAvailable","licensed","omnissa horizon client",,,"False","Omnissa Horizon Client","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Omnissa Horizon Client"
-"OneDrive - 01-2026","25.238.1204.0001",,,"25.238.1204.0001","Unknown","licensed","onedrive",,,"False",,
-"OpenSSL 3.5.2 (64-bit)","3.5.2 (64-bit)",,,"3.5.2","Unknown","licensed","openssl",,,"False",,
-"Opentext Validation for SAP Solutions CE 21.2","",,,"21.2","Unknown","licensed","opentext validation for sap solutions ce",,,"False",,
-"OpenText Windows Validation Client for SAP Solutions CE 24.4","24.4.5.1",,,"24.4.5.1","Unknown","licensed","opentext windows validation client for sap solutions ce",,,"False",,
-"Oracle 11_x64","11_x64","7.2.6","https://www.virtualbox.org/","11.0","UpToDate","licensed","oracle",,,"False","VirtualBox","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=VirtualBox"
-"Oracle Client","11g R2",,,"11.0","Unknown","licensed","oracle client",,,"False",,
-"Oracle SQL Developer 24.3.1.347.1826","24.3.1.347.1826",,,"24.3.1.347.1826","Unknown","licensed","oracle sql developer",,,"False",,"https://www.oracle.com/favicon.ico"
-"OSD - IBM Personal Communications - 13.0.0","13.0.0",,,"13.0.0","Unknown","licensed","osd - ibm personal communications",,,"False",,
-"Outsystems Service Studio - 11.55.42.64376","11.55.42.64376",,,"11.55.42.64376","Unknown","licensed","outsystems service studio",,,"False",,
-"PAC 24.4.4.0","24.4.4.0","25.11.10.50","https://www.citrix.co.uk/downloads/workspace-app/windows/workspace-app-for-windows-latest.html","24.4.4.0","UpdateAvailable","licensed","pac",,,"False","Citrix Workspace","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Citrix Workspace"
-"PDF Arranger","",,,,"Unknown","licensed","pdf arranger",,,"False",,
-"Pdf24 Creator","11.27.0-x64","11.29.0","https://tools.pdf24.org/en/creator","11.27.0","UpdateAvailable","licensed","pdf24 creator","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'pdf24'%20and%20IsLatestVersion",,"False",,
-"PGAdmin - 4-8.9","",,,"4","Unknown","licensed","pgadmin",,,"False",,
-"Postgre ODBC","17.0.0.6",,,"17.0.0.6","Unknown","licensed","postgre odbc",,,"False",,
-"PowerShell 7","7.5.4","7.5.4.0","https://github.com/PowerShell/PowerShell/releases/latest","7.5.4","UpdateAvailable","licensed","powershell",,,"False","PowerShell7","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=PowerShell7"
-"PyCharm Community","2025.2.1.0",,,"25.2.1.0","Unknown","licensed","pycharm community",,,"False",,
-"Python - 3.14.0","3.14.0","3.14.3","https://www.python.org/downloads/","3.14.0","UpdateAvailable","licensed","python","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'python'%20and%20IsLatestVersion",,"False",,
-"QualysCloudAgent - 5.0.0.17","",,,"5.0.0.17","Unknown","licensed","qualyscloudagent",,,"False",,
-"R","4.5.1","12.0.40664.0","https://www.microsoft.com/en-us/download/details.aspx?id=40784","4.5.1","UpdateAvailable","licensed","r",,,"False","VCRedist2013x64","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=VCRedist2013x64"
-"RefinitivWorkspace","1.26.312",,,"1.26.312","Unknown","licensed","refinitivworkspace",,,"False",,
-"Remove Old Versions + Visual Studio Code - 1.108.1","1.108.1","1.109.5","https://code.visualstudio.com/","1.108.1","UpdateAvailable","licensed","remove old versions + visual studio code",,,"False","Code","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Code"
-"Request Builder 7.1.3","",,,"7.1.3","Unknown","licensed","request builder",,,"False",,
-"RStudio","2024.04.0-735",,"https://posit.co/download/rstudio-desktop/","24.4.0","Unknown","licensed","rstudio","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'rstudio'%20and%20IsLatestVersion",,"False",,
-"RTools v45","v45",,,"45.0","Unknown","licensed","rtools",,,"False",,
-"Salesforce CLI - 2.108.6.0","2.108.6.0","6.0.16","https://developer.salesforce.com/tools/salesforcecli","2.108.6.0","UpdateAvailable","licensed","salesforce cli","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'sfdx-cli'%20and%20IsLatestVersion",,"False",,
-"Sap Logon","",,,,"Unknown","licensed","sap logon",,,"False",,
-"SAS Add-In 7.15","7.15",,,"7.15","Unknown","licensed","sas add-in",,,"False",,
-"SAS Enterprise Guide","7.15",,,"7.15","Unknown","licensed","sas enterprise guide",,,"False",,
-"SifoxDealv3","",,,"3","Unknown","licensed","sifoxdealv3",,,"False",,
-"Simba Spark ODBC Driver","2.9","3.0.2","https://igniterealtime.org/projects/spark/index.jsp","2.9","UpdateAvailable","licensed","simba spark odbc driver",,,"False","Spark","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Spark"
-"Simba Spark ODBC Driver + Databricks","2.9","3.0.2","https://igniterealtime.org/projects/spark/index.jsp","2.9","UpdateAvailable","licensed","simba spark odbc driver + databricks",,,"False","Spark","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Spark"
-"Smartview - 11.1.2.5.710","11.1.2.5.710",,,"11.1.2.5.710","Unknown","licensed","smartview",,,"False",,
-"SoapUI - 5.5.0","5.5.0","5.9.1","http://www.soapui.org/","5.5.0","UpdateAvailable","licensed","soapui",,,"False","SoapUI","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=SoapUI"
-"Sourcetree Enterprise 3.4.16","",,,"3.4.16","Unknown","licensed","sourcetree enterprise",,,"False",,
-"SQL Management Studio 22","22","22.3.0","https://msdn.microsoft.com/en-us/library/mt238290.aspx","22.0","UpdateAvailable","licensed","sql management studio",,"teste","False","SQL Management Studio","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=SQL Management Studio"
-"SRV - Dynatrace OneAgent SaaS - 1.319.55","1.319.55",,,"1.319.55","Unknown","licensed","srv - dynatrace oneagent saas",,,"False",,
-"SRV - FlexNet Inventory Agent","",,,,"Unknown","licensed","srv - flexnet inventory agent",,,"False",,
-"SRV - IBM Spectrum Protect Client(TSM)","","1.7.1","https://opentoonz.github.io/",,"Unknown","licensed","srv - ibm spectrum protect client(tsm)",,,"False","OT","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=OT"
-"SRV - NimSoft Agent","",,,,"Unknown","licensed","srv - nimsoft agent",,,"False",,
-"SRV - Trend Micro Deep Security Agent","",,,,"Unknown","licensed","srv - trend micro deep security agent",,,"False",,
-"SVR - FlexNet Inventory Agent - 2023 R2","",,,"23","Unknown","licensed","svr - flexnet inventory agent",,,"False",,
-"Tabular Editor","2.25.0",,,"2.25.0","Unknown","licensed","tabular editor",,,"False",,
-"Tagetik Excel .NET Client","","4.8.03761","http://msdn.microsoft.com/en-us/library/5a4x27ek(v=vs.110).aspx",,"Unknown","licensed","tagetik excel .net client",,,"False",".NET","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=.NET"
-"TerraForm","1.3.1","1.14.5","https://www.terraform.io/downloads","1.3.1","UpdateAvailable","licensed","terraform","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'terraform'%20and%20IsLatestVersion",,"False",,"https://www.terraform.io/favicon.ico"
-"Tesseract OCR - 5.5.0.20241111","5.5.0.20241111","5.5.0.20241111","https://github.com/tesseract-ocr/tesseract/releases","5.5.0.20241111","UpToDate","Licensed","tesseract ocr","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'tesseract'%20and%20IsLatestVersion",,"False",,"https://github.com/favicon.ico"
-"TranslatorX - 15.0(3)","15.0(3)","15.0","https://translatorx.org/downloads.html","15.0","UpToDate","Licensed","translatorx","https://translatorx.org/downloads.html",,"False",,
-"Unigy(TM) Client","",,,,"Unknown","licensed","unigy(tm) client",,,"False",,
-"Visual Studio BuildTools","17.14.16","117.14.27","https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022","17.14.16","UpdateAvailable","Licensed","visual studio buildtools","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'visualstudio2022buildtools'%20and%20IsLatestVersion",,"False",,"https://visualstudio.microsoft.com/favicon.ico"
-"Visual VM","2.2","2.2.1","https://visualvm.github.io/","2.2","UpdateAvailable","Licensed","visual vm","https://visualvm.github.io/",,"True",,"https://visualvm.github.io/favicon.ico"
-"VMware-tools-13.0.5-24915695-x64","",,,"13.0.5","Unknown","licensed","vmware-tools-13.0.5-24915695-x64",,,"False",,
-"VPN Profile - MFA","",,,,"Unknown","licensed","vpn profile - mfa",,,"False",,
-"VSPlayer 7.5.3.1","7.5.3.1",,,"7.5.3.1","Unknown","licensed","vsplayer",,,"False",,
-"Vysor 5.0.7","5.0.7","5.0.17","https://www.vysor.io/#download","5.0.7","UpdateAvailable","licensed","vysor","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20%27vysor%27%20and%20IsLatestVersion",,"False",,"https://www.vysor.io/favicon.ico"
-"Webex","45.4.0.32158","46.2.1.34187","https://www.webex.com/downloads/webex-app.html","45.4.0.32158","UpdateAvailable","licensed","webex","https://help.webex.com/en-us/article/mqkve8/Webex-App-%7C-Release-notes",,"False",,"https://www.webex.com/favicon.ico"
-"Windows Camera Roll Viewer","2024.11020.23002.0",,,"2024.11020.23002.0","Unknown","licensed","windows camera roll viewer",,,"False",,
-"WinMerge","2.16.38","2.16.54","https://winmerge.org/","2.16.38","UpdateAvailable","licensed","winmerge","https://github.com/WinMerge/winmerge/releases/latest",,"False",,"https://winmerge.org/favicon.ico"
-"WorkStation","6.0.4.10001",,,"6.0.4.10001","Unknown","licensed","workstation",,,"False",,
-"XMLTools (plugin for Notepad++)","3.1.1.13",,,"3.1.1.13","Unknown","licensed","xmltools (plugin for notepad++)",,,"False",,
+"AppName","appversion","LatestVersion","Website","InstalledVersion","Status","License","SourceKey","SearchUrl","Observacao","IsNewVersion","SourceId","IconUrl","TipoApp"
+".NET 4.6.1 Developer","4.6.1","10.0.3","https://dotnet.microsoft.com/download","4.6.1","UpdateAvailable","Free",".net","https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/releases-index.json","link validado","False","","","app comercial"
+"7-Zip 25.01 (x64 edition)","25.01 (x64 edition)","26.00","http://www.7-zip.org/","25.01","UpdateAvailable","Free","7-zip","","link validado","False","7-Zip","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=7-Zip","app comercial"
+"Adobe Acrobat Reader Update - 25.001.21151 x32","25.001.21151","25.001.21223","https://www.adobe.com/devnet-docs/acrobatetk/tools/ReleaseNotesDC/index.html","25.001.21151","UpdateAvailable","Free","adobe acrobat reader update","","link validado","False","","https://www.adobe.com/favicon.ico","app comercial"
+"Adobe Acrobat XI Pro","11.0.23","11.0.23","https://www.adobe.com/products/acrobat/readstep.html","11.0.23","UpToDate","Licensed","adobe acrobat xi pro","","","False","","","app comercial"
+"Aladdin by BlackRock (Prod)","","","","","Unknown","Licensed","aladdin by blackrock (prod)","","","False","","","app comercial"
+"Android Studio - 2025.1.3.7","2025.1.3.7","2025.3.1","https://developer.android.com/studio/releases","2025.1.3","UpdateAvailable","Free","android studio","https://developer.android.com/studio/releases","link validado","False","","https://developer.android.com/favicon.ico","app comercial"
+"Apache CXF","4.1.3","4.2.0","https://cxf.apache.org/download.html","4.1.3","UpdateAvailable","Free","apache cxf","https://cxf.apache.org/download.html","","False","","https://cxf.apache.org/favicon.ico","app comercial"
+"Apache Directory Studio","2.0.0","2.0.0","https://directory.apache.org/studio/download/","2.0.0","UpToDate","Free","apache directory studio","","link validado","False","","","app comercial"
+"Apache JMeter","5.6.3","5.6.3","https://jmeter.apache.org/download_jmeter.cgi","5.6.3","UpToDate","Free","apache jmeter","https://jmeter.apache.org/download_jmeter.cgi","link validado","False","","","app comercial"
+"Apache Kafka","3.6.1","4.2.0","https://kafka.apache.org/community/downloads/","3.6.1","UpdateAvailable","Free","apache kafka","https://kafka.apache.org/community/downloads/","link validado","False","","","app comercial"
+"Appium Inspector","2025.8.1","26.1.3","https://github.com/appium/appium-inspector","25.8.1","UpdateAvailable","Free","appium inspector","https://github.com/appium/appium-inspector/releases/latest","link validado","True","","https://raw.githubusercontent.com/appium/appium-inspector/main/app/common/renderer/assets/images/icon.png","app comercial"
+"Autenticação.Gov 3.13.0 (5496)","","3.14","https://www.autenticacao.gov.pt/cc-aplicacao","3.13.0","UpdateAvailable","Free","autenticação.gov","https://www.autenticacao.gov.pt/cc-aplicacao","link validado","False","","https://www.autenticacao.gov.pt/favicon.ico","app comercial"
+"Automate Agent 2023 (x64)","","","","23","Unknown","Free","automate agent","","interno","False","","","app interno"
+"Azure Functions Core Tools (x64)","4.3.0","4.7.0","https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=windows%2Ccsharp%2Cbash#v2","4.3.0","UpdateAvailable","Free","azure functions core tools (x64)","","link validado","False","Azure Functions Core Tools","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Azure Functions Core Tools","app comercial"
+"Azure Storage Explorer 1.38.0","1.38.0","1.41.1","https://azure.microsoft.com/en-us/features/storage-explorer/","1.38.0","UpdateAvailable","Free","azure storage explorer","","link validado","False","StorageExplorer","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=StorageExplorer","app comercial"
+"Citrix Workspace app 2409","25.11.10.50","25.11.10.50","https://www.citrix.co.uk/downloads/workspace-app/windows/workspace-app-for-windows-latest.html","25.11.10.50","UpToDate","Free","citrix workspace app","","","False","Citrix Workspace","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Citrix Workspace","app comercial"
+"BIOS - HP Elite X2 G4 - 01.11.00 - Unattended","01.11.00","","","01.11.00","Unknown","Free","bios - hp elite x2 g4","","interno","False","","","app comercial"
+"Bloomberg Terminal 180.4.81","180.4.81","189.3.81","https://www.bloomberg.com/professional/support/documentation/release-notes/","180.4.81","UpdateAvailable","Free","bloomberg terminal","","licenciado","False","","https://www.bloomberg.com/favicon.ico","app comercial"
+"Blue Prism","7.2.1","7.4.2","https://documentation.blueprism.com/bp-7-4/en-us/release-notes/rn-home.htm","7.2.1","UpdateAvailable","Free","blue prism","https://documentation.blueprism.com/bp-7-4/en-us/release-notes/rn-home.htm","licenciado","False","","https://www.blueprism.com/favicon.ico","app comercial"
+"Bravo for Power BI","1.0.9","1.0.13","https://www.sqlbi.com/tools/bravo-for-power-bi/","1.0.9","UpdateAvailable","Free","bravo for power bi","https://github.com/sql-bi/Bravo/releases/latest","","False","","https://www.sqlbi.com/favicon.ico","app comercial"
+"Bruno 3.0.2","3.0.2","3.1.2","https://www.usebruno.com/downloads","3.0.2","UpdateAvailable","Free","bruno","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'bruno'%20and%20IsLatestVersion","","False","","","app comercial"
+"Camera HP Elite X2 G4 - W11","v2","","","2","Unknown","Free","camera hp elite x2 g4 - w11","","interno","False","","","app comercial"
+"Cisco Jabber 14.3.0","14.3.0","15.2.0.60459","http://www.cisco.com/","14.3.0","UpdateAvailable","Free","cisco jabber","","licenciado","False","Cisco Jabber","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Cisco Jabber","app comercial"
+"Cisco Secure Client - 5.1.9.113 - Script","5.1.9.113","5.1.15.287","https://www.cisco.com/c/en/us/support/security/anyconnect-secure-mobility-client/series.html","5.1.9.113","UpdateAvailable","Free","cisco secure client","","","False","","https://www.cisco.com/favicon.ico","app comercial"
+"Cloudera ODBC Driver for Impala","","2.9.0","https://www.cloudera.com/downloads/connectors/impala/odbc.html","","UpdateAvailable","Free","cloudera odbc driver for impala","https://www.cloudera.com/downloads/connectors/impala/odbc.html","","False","","","app comercial"
+"ComparePlus (plugin for Notepad++) - 2.1.1","2.1.1","2.2.0","https://github.com/pnedev/comparePlus","2.1.1","UpdateAvailable","Free","compareplus (plugin for notepad++)","https://github.com/pnedev/comparePlus/releases/latest","","False","","","app comercial"
+"CrowdStrike 7.15.18511 - WKS e SRV PRO","","7.15.18511","https://www.crowdstrike.com/en-us/products/faq/","7.15.18511","UpToDate","Free","crowdstrike","","","False","","","app comercial"
+"Cygwin - 3.6.2","3.6.2","3.6.6","https://www.cygwin.com/","3.6.2","UpdateAvailable","Free","cygwin","https://community.chocolatey.org/packages/cygwin","","False","","","app comercial"
+"Databrick CLI","0.260.0","0.283.0","https://anaconda.org/conda-forge/databricks-cli","0.260.0","UpdateAvailable","Free","databrick cli","https://anaconda.org/conda-forge/databricks-cli/files","","False","","","app comercial"
+"Dax Studio - 3.2.1","3.2.1","3.4.0","https://daxstudio.org/downloads/","3.2.1","UpdateAvailable","Free","dax studio","https://github.com/DaxStudio/DaxStudio/releases/latest","","False","","","app comercial"
+"Dbeaver - 25.2.5","25.2.5","25.3.5","https://dbeaver.io/download/","25.2.5","UpdateAvailable","Free","dbeaver","https://github.com/dbeaver/dbeaver/releases/latest","","False","","https://dbeaver.io/favicon.ico","app comercial"
+"DBVisualizer - 24.1.1","24.1.1","25.3.2","https://www.dbvis.com/download/","24.1.1","UpdateAvailable","Free","dbvisualizer","https://www.dbvis.com/download/","","False","","https://www.dbvis.com/favicon.ico","app comercial"
+"DCU","5.6.0","5.6.0","https://www.dell.com/support/home/en-us/drivers/driversdetails?driverid=2wt0j","5.6.0","UpToDate","Free","dcu","https://community.chocolatey.org/packages/dellcommandupdate","","False","","","app comercial"
+"Design Review - 14.0.0.177","14.0.0.177","15.0.2.10","https://www.autodesk.com/products/design-review/download","14.0.0.177","UpdateAvailable","Free","design review","https://community.chocolatey.org/api/v2/FindPackagesById()?id=%27designreview%27&filter=IsLastVersion%20eq%20true","","False","","","app comercial"
+"Device Administrator","6.0.4.1106","","","6.0.4.1106","Unknown","Free","device administrator","","interno","False","","","app comercial"
+"Diligent","","","","","Unknown","Free","diligent","","","False","","","app comercial"
+"DWG True View - 31.1.122.0","31.1.122.0","2026.25.1.60","https://www.autodesk.com/products/dwg","31.1.122.0","UpdateAvailable","Free","dwg true view","https://community.chocolatey.org/api/v2/FindPackagesById()?id=%27dwgtrueview%27&filter=IsLastVersion%20eq%20true","","False","","","app comercial"
+"EasyDoc 1","1.0","","","1.0","Unknown","Free","easydoc","","","False","","","app comercial"
+"Eclipse IDE","2025-03","","https://www.eclipse.org/downloads/","25","Unknown","Free","eclipse ide","https://www.eclipse.org/downloads/","","False","","https://www.eclipse.org/favicon.ico","app comercial"
+"Eclipse Temurin JDK with Hotspot 24.0.1+9 (x64)","24.0.1+9 (x64)","1.7.1","https://opentoonz.github.io/","24.0.1","UpToDate","Free","eclipse temurin jdk with hotspot","","","False","OT","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=OT","app comercial"
+"EPM Automate","25.10.43","","","25.10.43","Unknown","Free","epm automate","","","False","","","app comercial"
+"Eurofac","","","","","Unknown","Free","eurofac","","","False","","","app comercial"
+"FFmpeg","","8.0","https://ffmpeg.org/","","UpdateAvailable","Free","ffmpeg","https://ffmpeg.org/download.html","","False","","https://ffmpeg.org/favicon.ico","app comercial"
+"Figma","125.11.6","","","125.11.6","Unknown","Free","figma","","","False","","","app comercial"
+"Four Js Genero Desktop Client","3.10.23","6.00","https://4js.com/download/","3.10.23","UpdateAvailable","Free","four js genero desktop client","https://4js.com/online_documentation/fjs-genero-manual-install-html/genero-install-topics/c_gdc_install.html","","False","","","app comercial"
+"FreePlane","1.12.8","1.12.16","http://sourceforge.net/projects/freeplane/","1.12.8","UpdateAvailable","Free","freeplane","https://github.com/freeplane/freeplane/releases/latest","","False","Freeplane","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Freeplane","app comercial"
+"Gephi 0.10.1","0.10.1","0.10.1","https://gephi.org/","0.10.1","UpToDate","Free","gephi","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'gephi'%20and%20IsLatestVersion","","False","","","app comercial"
+"Gestimo","","","","","Unknown","Free","gestimo","","","False","","","app comercial"
+"GESVENGRH_CLIENT - PRO (270.2.8.0)","","","","270.2.8.0","Unknown","Free","gesvengrh_client - pro (270.2.8.0)","","interno","False","","","app comercial"
+"Gimp 3.0.4","3.0.4","3.0.8.2","http://www.gimp.org/","3.0.4","UpdateAvailable","Free","gimp","https://github.com/GNOME/gimp/releases/latest","","False","GIMP","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=GIMP","app comercial"
+"GisUP - Fundos de Pensões - Unidades de Participação","","","","","Unknown","Free","gisup - fundos de pensões - unidades de participação","","","False","","","app comercial"
+"GIT - 2.51.1","2.51.1","2.53.0","https://git-scm.com/","2.51.1","UpdateAvailable","Free","git","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'git'%20and%20IsLatestVersion","","False","","https://git-scm.com/favicon.ico","app comercial"
+"Git Extensions 5.2.1","","6.0.5.18375","https://gitextensions.github.io/","5.2.1","UpdateAvailable","Free","git extensions","","","False","Git Extensions","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Git Extensions","app comercial"
+"GitHub Desktop 3.4.18","","3.5.4.0","https://desktop.github.com/","3.4.18","UpdateAvailable","Free","github desktop","","","False","GitHub Desktop","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=GitHub Desktop","app comercial"
+"Gitkraken 12.2.1","12.2.1","2.53.0","http://msysgit.github.io","12.2.1","UpToDate","Free","gitkraken","","","False","Git","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Git","app comercial"
+"Google Chrome 144.0.7559.60","","147.0.7698.0","https://chromeenterprise.google/intl/pt_br/download/?modal-id=download-chrome","144.0.7559.60","UpdateAvailable","Free","google chrome","https://googlechromelabs.github.io/chrome-for-testing/","","False","","https://www.google.com/favicon.ico","app comercial"
+"GPDocs Client","","","","","Unknown","Free","gpdocs client","","","False","","","app comercial"
+"HAL para Cockpit 1.0.6 - Multi-Ambiente","1.0.6","","","1.0.6","Unknown","Free","hal para cockpit","","interno","False","","","app comercial"
+"HEIF Image Extension","1.1.861.0","","","1.1.861.0","Unknown","Free","heif image extension","","","False","","","app comercial"
+"Helm","4.0.2","4.1.0","https://helm.sh/","4.0.2","UpdateAvailable","Free","helm","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'kubernetes-helm'%20and%20IsLatestVersion","","False","","https://helm.sh/favicon.ico","app comercial"
+"HEVC Video Extension","2.1.1161.0","","","2.1.1161.0","Unknown","Free","hevc video extension","","","False","","","app comercial"
+"HxD","","2.5","https://mh-nexus.de/en/hxd/","","UpdateAvailable","Free","hxd","https://mh-nexus.de/en/hxd/","","True","","","app comercial"
+"Ibm Iseries","15.0.0.498","","","15.0.0.498","Unknown","Free","ibm iseries","","","False","","","app comercial"
+"IBM MQ Explorer 9.1.3.0","9.1.3.0","","","9.1.3.0","Unknown","Free","ibm mq explorer","","","False","","","app comercial"
+"IDEA 12.3","","253.29346.138","https://www.jetbrains.com/idea","12.3","UpdateAvailable","Free","idea","","","False","IntelliJ-IDEA","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=IntelliJ-IDEA","app comercial"
+"IntelliJ IDEA 2025.3.1.1","2025.3.1.1","25.3.3","https://www.jetbrains.com/idea/download/","25.3.1.1","UpdateAvailable","Free","intellij idea","https://data.services.jetbrains.com/products/releases?code=IIU&latest=true&type=release","","True","","","app comercial"
+"IntelliJ IDEA Uninstall","","","","","Unknown","Free","intellij idea uninstall","","interno","False","","","app comercial"
+"Jabra Direct","6.23.16101","6.26.32801","https://www.jabra.com.de/software-and-services/jabra-direct","6.23.16101","UpdateAvailable","Free","jabra direct","","","False","Jabra Direct","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Jabra Direct","app comercial"
+"Java SE Development Kit 8 Update 471 (64-bit)","8 Update 471 (64-bit)","","","8","Unknown","Free","java se development kit","","","False","","","app comercial"
+"Java(TM) SE Development Kit 17.0.17 (64-bit)","17.0.17 (64-bit)","","","17.0.17","Unknown","Free","java(tm) se development kit","","","False","","","app comercial"
+"JDAI - 52.49.0.0","52.49.0.0","","","52.49","Unknown","Free","jdai","","interno","False","","","app comercial"
+"Jetbrains-toolbox","2.6.2.41321","","","2.6.2.41321","Unknown","Free","jetbrains-toolbox","","","False","","","app comercial"
+"JPG to SVG Free","1.0.0.0","","","1.0","Unknown","Free","jpg to svg free","","","False","","","app comercial"
+"JSON-Viewer (plugin for Notepad++)","2.0.7.0","","","2.0.7.0","Unknown","Free","json-viewer (plugin for notepad++)","","","False","","","app comercial"
+"KeePassXC","2.7.9","2.7.11","https://keepassxc.org/","2.7.9","UpdateAvailable","Free","keepassxc","https://github.com/keepassxreboot/keepassxc/releases/latest","","False","","","app comercial"
+"Keystore Explorer","5.6.0","5.6.1","https://keystore-explorer.org/downloads.html","5.6.0","UpdateAvailable","Free","keystore explorer","https://keystore-explorer.org/downloads.html","","False","","","app comercial"
+"LDAPAdmin - 1.8.3","1.8.3","1.8.3","http://www.ldapadmin.org/","1.8.3","UpToDate","Free","ldapadmin","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'ldapadmin'%20and%20IsLatestVersion","","False","","","app comercial"
+"License Administrator","6.0.4.90","","","6.0.4.90","Unknown","Free","license administrator","","licenciado","False","","","app comercial"
+"Login Agent - PRE","","","","","Unknown","Free","login agent - pre","","","False","","","app comercial"
+"Login Agent - PRO","","","","","Unknown","Free","login agent - pro","","","False","","","app comercial"
+"LOYTEC - L Studio","3.2.14","","","3.2.14","Unknown","Free","loytec - l studio","","","False","","","app comercial"
+"LOYTEC LINX Configurator x64","","","","64.0","Unknown","Free","loytec linx configurator x64","","","False","","","app comercial"
+"LOYTEC LVIS Configurator x64","","","","64.0","Unknown","Free","loytec lvis configurator x64","","","False","","","app comercial"
+"Maven Apache","3.9.10","3.9.12","https://maven.apache.org/download.cgi","3.9.10","UpdateAvailable","Free","maven apache","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'maven'%20and%20IsLatestVersion","","False","","","app comercial"
+"Mercury x64","","","","64.0","Unknown","Free","mercury x64","","","False","","","app comercial"
+"Mercury x86","","","","86.0","Unknown","Free","mercury x86","","","False","","","app comercial"
+"Microsoft Azure CLI (64-bit) - 2.81.0","2.81.0","2.83.0","https://learn.microsoft.com/cli/azure/overview","2.81.0","UpdateAvailable","Free","microsoft azure cli (64-bit)","","","False","Azure CLI","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Azure CLI","app comercial"
+"Microsoft Azure PowerShell - April 2025","","15.3.0.40553","https://github.com/Azure/azure-powershell/releases","25","UpToDate","Free","microsoft azure powershell - april","","","False","Microsoft Azure PowerShell","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Microsoft Azure PowerShell","app comercial"
+"Microsoft Office 365 x64 - 01-2026","","1.1.3.0","http://www.microsoft.com/en-us/download/details.aspx?id=41149","365","UpToDate","Free","microsoft office","","","False","Microsoft Office Remote","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Microsoft Office Remote","app comercial"
+"Microsoft Power BI Desktop - 01-2026","2.150.1704.0","2.150.2455.0","https://powerbi.microsoft.com/en-us/desktop","2.150.1704.0","UpdateAvailable","Free","microsoft power bi desktop","","","False","Microsoft Power BI Desktop","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Microsoft Power BI Desktop","app comercial"
+"Microsoft Report Builder","","15.1.30001.02","https://www.microsoft.com/en-us/download/details.aspx?id=53613","","UpdateAvailable","Free","microsoft report builder","","","False","Microsoft Report Builder","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Microsoft Report Builder","app comercial"
+"Microsoft Teams -11-2025","25306.804.4102.7193","26005.204.4249.1621","https://adoption.microsoft.com/en-us/new-microsoft-teams/","25306.804.4102.7193","UpdateAvailable","Free","microsoft teams","","","False","Teams","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Teams","app comercial"
+"MongoDB Command Line Database Tools","100.10.0","100.14.1","https://www.mongodb.com/try/download/database-tools","100.10.0","UpdateAvailable","Free","mongodb command line database tools","https://www.mongodb.com/try/download/database-tools","","False","","","app comercial"
+"MongoDB Compass","","","","","Unknown","Free","mongodb compass","","","False","","","app comercial"
+"MongoDB Shell","2.3.4","","","2.3.4","Unknown","Free","mongodb shell","","","False","","","app comercial"
+"MS - Microsoft Visual C++ 2013 Redistributable","","","","13","Unknown","Free","ms - microsoft visual c++","","","False","","","app comercial"
+"Murex MX.3 PRE-2025","2025-PRE","","","25","Unknown","Free","murex mx.3 pre-2025","","","False","","","app comercial"
+"Murex MX.3 PRO-2025","v62","","","62.0","Unknown","Free","murex mx.3 pro-2025","","","False","","","app comercial"
+"Neo4j-community","2025.10.1","","","2025.10.1","Unknown","Free","neo4j-community","","","False","","","app comercial"
+"Neo4j-Desktop","2.1.1.0","","","2.1.1.0","Unknown","Free","neo4j-desktop","","","False","","","app comercial"
+"Netbeans IDE","26","","","26.0","Unknown","Free","netbeans ide","","","False","","","app comercial"
+"Node.js - 25.5.0-X64","25.5.0","25.6.1","https://nodejs.org/","25.5.0","UpdateAvailable","Free","node.js","https://github.com/nodejs/node/releases/latest","","False","","","app comercial"
+"NotePad++ 8.9.1","8.9.1","8.9.2","https://notepad-plus-plus.org/downloads/","8.9.1","UpdateAvailable","Free","notepad++","https://github.com/notepad-plus-plus/notepad-plus-plus/releases/latest","","False","","","app comercial"
+"NVDA 2025.3.2","2025.3.2","","","25.3.2","Unknown","Free","nvda","","","False","","","app comercial"
+"Obsidian","1.9.14","1.11.7","https://obsidian.md/","1.9.14","UpdateAvailable","Free","obsidian","https://github.com/obsidianmd/obsidian-releases/releases/latest","","False","","","app comercial"
+"OffSetExplorer","3.0.3.0","","","3.0.3.0","Unknown","Free","offsetexplorer","","","False","","","app comercial"
+"Omnissa Horizon Client 8","8.16.2","8.17.0.42163","https://www.vmware.com/products/horizon.html","8.16.2","UpdateAvailable","Free","omnissa horizon client","","","False","Omnissa Horizon Client","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Omnissa Horizon Client","app comercial"
+"OneDrive - 01-2026","25.238.1204.0001","","","25.238.1204.0001","Unknown","Free","onedrive","","","False","","","app comercial"
+"OpenSSL 3.5.2 (64-bit)","3.5.2 (64-bit)","","","3.5.2","Unknown","Free","openssl","","","False","","","app comercial"
+"Opentext Validation for SAP Solutions CE 21.2","","","","21.2","Unknown","Free","opentext validation for sap solutions ce","","","False","","","app comercial"
+"OpenText Windows Validation Client for SAP Solutions CE 24.4","24.4.5.1","","","24.4.5.1","Unknown","Free","opentext windows validation client for sap solutions ce","","","False","","","app comercial"
+"Oracle 11_x64","11_x64","7.2.6","https://www.virtualbox.org/","11.0","UpToDate","Free","oracle","","","False","VirtualBox","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=VirtualBox","app comercial"
+"Oracle Client","11g R2","","","11.0","Unknown","Free","oracle client","","","False","","","app comercial"
+"Oracle SQL Developer 24.3.1.347.1826","24.3.1.347.1826","","","24.3.1.347.1826","Unknown","Free","oracle sql developer","","","False","","https://www.oracle.com/favicon.ico","app comercial"
+"OSD - IBM Personal Communications - 13.0.0","13.0.0","","","13.0.0","Unknown","Free","osd - ibm personal communications","","","False","","","app comercial"
+"Outsystems Service Studio - 11.55.42.64376","11.55.42.64376","","","11.55.42.64376","Unknown","Free","outsystems service studio","","","False","","","app comercial"
+"PAC 24.4.4.0","24.4.4.0","25.11.10.50","https://www.citrix.co.uk/downloads/workspace-app/windows/workspace-app-for-windows-latest.html","24.4.4.0","UpdateAvailable","Free","pac","","","False","Citrix Workspace","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Citrix Workspace","app comercial"
+"PDF Arranger","","","","","Unknown","Free","pdf arranger","","","False","","","app comercial"
+"Pdf24 Creator","11.27.0-x64","11.29.0","https://tools.pdf24.org/en/creator","11.27.0","UpdateAvailable","Free","pdf24 creator","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'pdf24'%20and%20IsLatestVersion","","False","","","app comercial"
+"PGAdmin - 4-8.9","","","","4","Unknown","Free","pgadmin","","","False","","","app comercial"
+"Postgre ODBC","17.0.0.6","","","17.0.0.6","Unknown","Free","postgre odbc","","","False","","","app comercial"
+"PowerShell 7","7.5.4","7.5.4.0","https://github.com/PowerShell/PowerShell/releases/latest","7.5.4","UpdateAvailable","Free","powershell","","","False","PowerShell7","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=PowerShell7","app comercial"
+"PyCharm Community","2025.2.1.0","","","25.2.1.0","Unknown","Free","pycharm community","","","False","","","app comercial"
+"Python - 3.14.0","3.14.0","3.14.3","https://www.python.org/downloads/","3.14.0","UpdateAvailable","Free","python","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'python'%20and%20IsLatestVersion","","False","","","app comercial"
+"QualysCloudAgent - 5.0.0.17","","","","5.0.0.17","Unknown","Free","qualyscloudagent","","","False","","","app comercial"
+"R","4.5.1","12.0.40664.0","https://www.microsoft.com/en-us/download/details.aspx?id=40784","4.5.1","UpdateAvailable","Free","r","","","False","VCRedist2013x64","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=VCRedist2013x64","app comercial"
+"RefinitivWorkspace","1.26.312","","","1.26.312","Unknown","Free","refinitivworkspace","","","False","","","app comercial"
+"Remove Old Versions + Visual Studio Code - 1.108.1","1.108.1","1.109.5","https://code.visualstudio.com/","1.108.1","UpdateAvailable","Free","remove old versions + visual studio code","","","False","Code","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Code","app comercial"
+"Request Builder 7.1.3","","","","7.1.3","Unknown","Free","request builder","","","False","","","app comercial"
+"RStudio","2024.04.0-735","","https://posit.co/download/rstudio-desktop/","24.4.0","Unknown","Free","rstudio","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'rstudio'%20and%20IsLatestVersion","","False","","","app comercial"
+"RTools v45","v45","","","45.0","Unknown","Free","rtools","","","False","","","app comercial"
+"Salesforce CLI - 2.108.6.0","2.108.6.0","6.0.16","https://developer.salesforce.com/tools/salesforcecli","2.108.6.0","UpdateAvailable","Free","salesforce cli","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'sfdx-cli'%20and%20IsLatestVersion","","False","","","app comercial"
+"Sap Logon","","","","","Unknown","Free","sap logon","","","False","","","app comercial"
+"SAS Add-In 7.15","7.15","","","7.15","Unknown","Free","sas add-in","","","False","","","app comercial"
+"SAS Enterprise Guide","7.15","","","7.15","Unknown","Free","sas enterprise guide","","","False","","","app comercial"
+"SifoxDealv3","","","","3","Unknown","Free","sifoxdealv3","","","False","","","app comercial"
+"Simba Spark ODBC Driver","2.9","3.0.2","https://igniterealtime.org/projects/spark/index.jsp","2.9","UpdateAvailable","Free","simba spark odbc driver","","","False","Spark","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Spark","app comercial"
+"Simba Spark ODBC Driver + Databricks","2.9","3.0.2","https://igniterealtime.org/projects/spark/index.jsp","2.9","UpdateAvailable","Free","simba spark odbc driver + databricks","","","False","Spark","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=Spark","app comercial"
+"Smartview - 11.1.2.5.710","11.1.2.5.710","","","11.1.2.5.710","Unknown","Free","smartview","","","False","","","app comercial"
+"SoapUI - 5.5.0","5.5.0","5.9.1","http://www.soapui.org/","5.5.0","UpdateAvailable","Free","soapui","","","False","SoapUI","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=SoapUI","app comercial"
+"Sourcetree Enterprise 3.4.16","","","","3.4.16","Unknown","Free","sourcetree enterprise","","","False","","","app comercial"
+"SQL Management Studio 22","22","22.3.0","https://msdn.microsoft.com/en-us/library/mt238290.aspx","22.0","UpdateAvailable","Free","sql management studio","","teste","False","SQL Management Studio","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=SQL Management Studio","app comercial"
+"SRV - Dynatrace OneAgent SaaS - 1.319.55","1.319.55","","","1.319.55","Unknown","Free","srv - dynatrace oneagent saas","","","False","","","app comercial"
+"SRV - FlexNet Inventory Agent","","","","","Unknown","Free","srv - flexnet inventory agent","","","False","","","app comercial"
+"SRV - IBM Spectrum Protect Client(TSM)","","1.7.1","https://opentoonz.github.io/","","UpdateAvailable","Free","srv - ibm spectrum protect client(tsm)","","","False","OT","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=OT","app comercial"
+"SRV - NimSoft Agent","","","","","Unknown","Free","srv - nimsoft agent","","","False","","","app comercial"
+"SRV - Trend Micro Deep Security Agent","","","","","Unknown","Free","srv - trend micro deep security agent","","","False","","","app comercial"
+"SVR - FlexNet Inventory Agent - 2023 R2","","","","23","Unknown","Free","svr - flexnet inventory agent","","","False","","","app comercial"
+"Tabular Editor","2.25.0","","","2.25.0","Unknown","Free","tabular editor","","","False","","","app comercial"
+"Tagetik Excel .NET Client","","4.8.03761","http://msdn.microsoft.com/en-us/library/5a4x27ek(v=vs.110).aspx","","UpdateAvailable","Free","tagetik excel .net client","","","False",".NET","https://cdn.ruckzuck.tools/rest/v2/geticon?shortname=.NET","app comercial"
+"TerraForm","1.3.1","1.14.5","https://www.terraform.io/downloads","1.3.1","UpdateAvailable","Free","terraform","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'terraform'%20and%20IsLatestVersion","","False","","https://www.terraform.io/favicon.ico","app comercial"
+"Tesseract OCR - 5.5.0.20241111","5.5.0.20241111","5.5.0.20241111","https://github.com/tesseract-ocr/tesseract/releases","5.5.0.20241111","UpToDate","Free","tesseract ocr","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'tesseract'%20and%20IsLatestVersion","","False","","https://github.com/favicon.ico","app comercial"
+"TranslatorX - 15.0(3)","15.0(3)","15.0","https://translatorx.org/downloads.html","15.0","UpToDate","Free","translatorx","https://translatorx.org/downloads.html","","False","","","app comercial"
+"Unigy(TM) Client","","","","","Unknown","Free","unigy(tm) client","","","False","","","app comercial"
+"Visual Studio BuildTools","17.14.16","117.14.27","https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022","17.14.16","UpdateAvailable","Free","visual studio buildtools","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'visualstudio2022buildtools'%20and%20IsLatestVersion","","False","","https://visualstudio.microsoft.com/favicon.ico","app comercial"
+"Visual VM","2.2","2.2.1","https://visualvm.github.io/","2.2","UpdateAvailable","Free","visual vm","https://visualvm.github.io/","","False","","https://visualvm.github.io/favicon.ico","app comercial"
+"VMware-tools-13.0.5-24915695-x64","","","","13.0.5","Unknown","Free","vmware-tools-13.0.5-24915695-x64","","","False","","","app comercial"
+"VPN Profile - MFA","","","","","Unknown","Free","vpn profile - mfa","","","False","","","app comercial"
+"VSPlayer 7.5.3.1","7.5.3.1","","","7.5.3.1","Unknown","Free","vsplayer","","","False","","","app comercial"
+"Vysor 5.0.7","5.0.7","5.0.17","https://www.vysor.io/#download","5.0.7","UpdateAvailable","Free","vysor","https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20%27vysor%27%20and%20IsLatestVersion","","False","","https://www.vysor.io/favicon.ico","app comercial"
+"Webex","45.4.0.32158","46.2.1.34187","https://www.webex.com/downloads/webex-app.html","45.4.0.32158","UpdateAvailable","Free","webex","https://help.webex.com/en-us/article/mqkve8/Webex-App-%7C-Release-notes","","False","","https://www.webex.com/favicon.ico","app comercial"
+"Windows Camera Roll Viewer","2024.11020.23002.0","","","2024.11020.23002.0","Unknown","Free","windows camera roll viewer","","","False","","","app comercial"
+"WinMerge","2.16.38","2.16.54","https://winmerge.org/","2.16.38","UpdateAvailable","Free","winmerge","https://github.com/WinMerge/winmerge/releases/latest","","False","","https://winmerge.org/favicon.ico","app comercial"
+"WorkStation","6.0.4.10001","","","6.0.4.10001","Unknown","Free","workstation","","","False","","","app comercial"
+"XMLTools (plugin for Notepad++)","3.1.1.13","","","3.1.1.13","Unknown","Free","xmltools (plugin for notepad++)","","","False","","","app comercial"

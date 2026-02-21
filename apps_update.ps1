@@ -304,7 +304,10 @@ function Compare-AppVersion {
         return 'Discontinued'
     }
 
-    if (-not $Installed -or -not $Latest) { return 'Unknown' }
+    if (-not $Latest) { return 'Unknown' }
+    if (-not $Installed) {
+        $Installed = '0.0.0'
+    }
 
     # Normalizar ambas as versões
     $Installed = Normalize-Version $Installed $AppName
@@ -335,7 +338,14 @@ function Compare-AppVersion {
         }
     }
     catch {
-        return 'Unknown'
+        try {
+            $cmp = Compare-Version -A $Installed -B $Latest
+            if ($cmp -lt 0) { return 'UpdateAvailable' }
+            return 'UpToDate'
+        }
+        catch {
+            return 'Unknown'
+        }
     }
 
     if ($vInstalled -lt $vLatest) { return 'UpdateAvailable' }
@@ -673,17 +683,15 @@ function Get-NormalizedAppName {
 function Get-LicenseForApp {
     param([string]$RawName)
 
-    if ([string]::IsNullOrWhiteSpace($RawName)) { return 'licensed' }
+    if ([string]::IsNullOrWhiteSpace($RawName)) { return 'Free' }
 
     $norm = Get-NormalizedAppName -RawName $RawName
 
-    if ($AppSources -and $norm -and $AppSources.ContainsKey($norm)) {
-        $src = $AppSources[$norm]
-        if ($src.License) { return $src.License }
-        if ($src.Type -eq 'Licenced') { return 'licensed' }
+    if ($existingLicenses -and $norm -and $existingLicenses.ContainsKey($norm)) {
+        return $existingLicenses[$norm]
     }
 
-    return 'licensed'
+    return 'Free'
 }
 
 # ---------------------- Carregar Observações e Versões Anteriores ----------------------
@@ -693,6 +701,8 @@ $existingObs = @{}
 $previousVersions = @{}
 $existingIcons = @{}
 $existingSourceIds = @{}
+$existingTipoApp = @{}
+$existingLicenses = @{}
 
 if (Test-Path $outPath) {
     Write-Host "[Info] Carregando dados existentes de apps_output.csv..." -ForegroundColor Cyan
@@ -718,6 +728,12 @@ if (Test-Path $outPath) {
                 }
                 if ($item.SourceId) {
                     $existingSourceIds[$normName] = $item.SourceId
+                }
+                if ($item.TipoApp) {
+                    $existingTipoApp[$normName] = $item.TipoApp
+                }
+                if ($item.License) {
+                    $existingLicenses[$normName] = $item.License
                 }
             }
         }
@@ -785,25 +801,38 @@ foreach ($row in $data) {
         $processedApps[$normalizedCheck] = $true
     }
 
-    Write-Host "[$index/$totalApps] AppName: '$appName'" -ForegroundColor Cyan
+    $normKey = $normalizedCheck
 
-    try {
-        $info = Resolve-AppInfoOnline -RawName $appName
+    # Tipo de app: default "app comercial", pode ser sobrescrito a partir do CSV anterior
+    $tipoApp = 'app comercial'
+    if ($normKey -and $existingTipoApp.ContainsKey($normKey)) {
+        $tipoApp = $existingTipoApp[$normKey]
     }
-    catch {
-        Write-Host "    ✗ ERRO CRÍTICO ao resolver '$appName': $($_.Exception.Message)" -ForegroundColor Red
+
+    Write-Host "[$index/$totalApps] AppName: '$appName' (Tipo: $tipoApp)" -ForegroundColor Cyan
+
+    if ($tipoApp -eq 'app interno') {
+        Write-Host "    [Info] App marcado como interno – pulando scraping online." -ForegroundColor Yellow
         $info = [PSCustomObject]@{ Version=$null; Website=$null; IsDiscontinued=$false; SourceId=$null; IconUrl=$null }
+    }
+    else {
+        try {
+            $info = Resolve-AppInfoOnline -RawName $appName
+        }
+        catch {
+            Write-Host "    ✗ ERRO CRÍTICO ao resolver '$appName': $($_.Exception.Message)" -ForegroundColor Red
+            $info = [PSCustomObject]@{ Version=$null; Website=$null; IsDiscontinued=$false; SourceId=$null; IconUrl=$null }
+        }
     }
 
     # garantir colunas
-    foreach ($col in 'LatestVersion','Website','InstalledVersion','Status','License','SourceKey','SearchUrl','Observacao','IsNewVersion','SourceId','IconUrl') {
+    foreach ($col in 'LatestVersion','Website','InstalledVersion','Status','License','SourceKey','SearchUrl','Observacao','IsNewVersion','SourceId','IconUrl','TipoApp') {
         if (-not ($row.PSObject.Properties.Name -contains $col)) {
             $row | Add-Member -NotePropertyName $col -NotePropertyValue $null
         }
     }
 
     # obter chave e url de busca do JSON
-    $normKey = Get-NormalizedAppName -RawName $row.AppName
 
     # Tentar recuperar observação existente se não houver na linha atual (ou sobrescrever, dependendo da lógica desejada)
     # Aqui, assumimos que o CSV antigo é a fonte da verdade para Observacao
@@ -882,6 +911,7 @@ foreach ($row in $data) {
     }
     $row.SourceId         = $finalSourceId
     $row.IconUrl          = $finalIconUrl
+    $row.TipoApp          = $tipoApp
     # IsNewVersion já foi definido acima
 
     # Adicionar à lista de dados únicos

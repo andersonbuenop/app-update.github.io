@@ -41,3 +41,25 @@ Permitir execução do script `apps_update.ps1` diretamente pelo navegador.
 - **Backend:** Evoluir `server.py` para interceptar uma rota de API (ex: `/api/update`).
 - **Segurança:** O backend executa apenas o comando pré-definido via `subprocess`.
 - **Feedback:** O frontend exibe um spinner/loading enquanto o script roda e recarrega a tabela ao finalizar.
+
+## 6. Classificação de Aplicações (Comercial vs Interno)
+Aproveitar a nova coluna `TipoApp` (`app comercial` / `app interno`) para evoluir o comportamento do sistema.
+- **Visão:** Tratar aplicações internas como primeiro‑classe no fluxo (sem scraping externo).
+- **Melhorias futuras:**
+  - Filtros dedicados na interface web para TipoApp.
+  - Relatórios separados para apps internos, com foco em conformidade e governança.
+  - Possibilidade de importar/exportar listas de apps internos por área/equipe.
+
+## 7. Gestão de Licenças (Free vs Licensed)
+Aproveitar o campo de licença totalmente manual (`Free` / `Licensed`) para próximos passos.
+- **Ideias:**
+  - Painel de resumo mostrando % de apps licenciados vs free.
+  - Exportação de CSV filtrando apenas apps `Licensed` para análise financeira.
+  - Regras opcionais de alerta quando um app licenciado está `UpdateAvailable`.
+
+## 8. Otimização de Scraping e Performance
+Reduzir chamadas desnecessárias a sites externos e tornar as execuções mais previsíveis.
+- **Direções futuras:**
+  - Cache de resultados de scraping por execução (evitar chamadas repetidas para duplicados).
+  - Métricas simples (tempo total, quantidade de apps por fonte, quantidade de timeouts).
+  - Estratégias automáticas de backoff quando uma fonte estiver instável.

@@ -1,14 +1,16 @@
-# App Update Optimizations - January 28, 2026
+# App Update Optimizations
 
-## Problem Statement
+## Lote 1 - 2026-01-28
+
+### Problem Statement
 O script anterior estava crashando o VS Code durante a execução, causado por:
 1. **Sem timeouts**: requisições web podem travar indefinidamente
 2. **Sem prioridade Chocolatey**: pulava a fonte mais rápida/confiável
 3. **Sem tratamento robusto de erro**: falha em um app podia derrubar todo o processamento
 
-## Solutions Implemented
+### Solutions Implemented
 
-### 1. Timeout Protection (5 segundos)
+#### 1. Timeout Protection (5 segundos)
 ```powershell
 Invoke-WebRequest -Uri $url -TimeoutSec 5 -ErrorAction Stop
 ```
@@ -20,7 +22,7 @@ Invoke-WebRequest -Uri $url -TimeoutSec 5 -ErrorAction Stop
 
 **Impacto:** Requisições que demoravam > 5s agora retornam gracefully com `Version = $null`
 
-### 2. New Chocolatey-First Fallback Strategy
+#### 2. New Chocolatey-First Fallback Strategy
 **Ordem de tentativa:**
 1. **Chocolatey API** (~500ms, mais confiável)
    - Busca em `community.chocolatey.org`
@@ -37,7 +39,7 @@ if ($src.Type -eq 'GitHub') { Try-GitHub }
 if ($src.Type -eq 'Website') { Try-WebScraping }
 ```
 
-### 3. Robust Error Handling
+#### 3. Robust Error Handling
 ✅ **Main loop agora protegido:**
 ```powershell
 try {
@@ -55,32 +57,32 @@ catch {
 - 🟢 `Timeout/Erro`: `Gray` (não-crítico)
 - 🔴 `Red`: Falhas críticas apenas
 
-### 4. Progress Visibility
+#### 4. Progress Visibility
 ```powershell
-Write-Host "[$index/$totalApps] AppName: '$appName'" -ForegroundColor Cyan
+Write-Host "[$index/$total] AppName: '$appName'" -ForegroundColor Cyan
 ```
 - Exibe contador de progresso
 - Mostra qual app está sendo processado
 - Evita sensação de "travamento"
 
-## Functions Added/Modified
+### Functions Added/Modified
 
-### New: `Get-ChocolateyLatestVersion`
+#### New: `Get-ChocolateyLatestVersion`
 - Busca versão via Chocolatey API
 - Pattern: `<d:Version>X.Y.Z</d:Version>`
 - Returns: PSCustomObject com `Version`, `Website`, `IsDiscontinued`
 
-### Modified: `Resolve-AppInfoOnline`
+#### Modified: `Resolve-AppInfoOnline`
 - Implementa fallback automático
 - Tenta Chocolatey primeiro (se `ChocolateyId` existir)
 - Logging progressivo dos fallbacks
 
-### Modified: Main Loop (Processamento)
+#### Modified: Main Loop (Processamento)
 - Envolvido em try-catch
 - Contador de progresso `[index/total]`
 - Melhor feedback do usuário
 
-## Performance Improvements
+### Performance Improvements
 
 | Source | Antes | Depois | Melhoria |
 |--------|-------|--------|----------|
@@ -89,16 +91,16 @@ Write-Host "[$index/$totalApps] AppName: '$appName'" -ForegroundColor Cyan
 | Error handling | Cascade fail | Graceful degrade | 100% completion |
 | User feedback | Nenhum | [n/total] | UX |
 
-## Files Modified
+### Files Modified
 - ✅ `app_update.ps1` - Core script com otimizações
 - ✅ `.github/copilot-instructions.md` - Documentação atualizada
 
-## Configuration Changes (Optional)
+### Configuration Changes (Optional)
 Para aproveitar Chocolatey, adicione a appSources.json:
 ```json
 "app_key": {
   "Type": "GitHub|Website|Fixed",
-  "ChocolateyId": "package-id",  // ← Novo campo (opcional)
+  "ChocolateyId": "package-id",
   "RepoUrl": "https://...",
   "ScrapeUrl": "https://...",
   "OutputUrl": "https://...",
@@ -106,15 +108,39 @@ Para aproveitar Chocolatey, adicione a appSources.json:
 }
 ```
 
-## Testing
+### Testing
 ✅ Script testado com sucesso:
 - Processa 121 apps sem crash
 - Trata timeouts gracefully
 - Mostra progresso em tempo real
 - Completa mesmo com falhas individuais
 
-## Next Steps (Sugestões)
+### Next Steps (Sugestões)
 1. Adicionar `ChocolateyId` aos entries no appSources.json
 2. Corrigir regex patterns para apps com falhas (ex: `cygwin`)
 3. Considerar cache em memória para apps duplicados
 4. Implementar retry logic para falhas transientes
+
+---
+
+## Lote 2 - 2026-02-21
+
+### Contexto
+Este lote foca em otimizações funcionais ligadas a regras de negócio, reduzindo chamadas externas e aumentando a previsibilidade do status.
+
+### Otimizações Implementadas
+- **Skip de Scraping para `app interno`**:
+    - Apps marcados como `app interno` não disparam mais chamadas HTTP para fontes externas.
+    - Redução direta do volume de requisições em ambientes com muitos pacotes internos.
+- **Regra de Status para Apps sem Versão Instalada**:
+    - Quando `InstalledVersion` está vazia, o backend usa `0.0.0` apenas internamente para comparação.
+    - O `Status` passa a ser sempre `UpdateAvailable`, usando a última versão encontrada na web.
+    - Evita erros de comparação e mantém o CSV limpo (sem gravar `0.0.0`).
+- **Reuso de Metadados Existentes**:
+    - Dicionários em memória preservam `TipoApp` e `License` de execuções anteriores.
+    - Evita recalcular ou sobrescrever decisões manuais a cada rodada do script.
+
+### Impacto de Performance
+- Menos chamadas de scraping em massa para apps internos.
+- Menos lógica de decisão por app (reuso de metadados já resolvidos).
+- Execuções mais estáveis e previsíveis, especialmente em ambientes com muitos pacotes corporativos.

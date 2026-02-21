@@ -33,6 +33,14 @@
           <option value="Unknown">Unknown</option>
         </select>
       </label>
+      <label>
+        Licença:
+        <select id="licenseFilter">
+          <option value="">Todas</option>
+          <option value="Licensed">Licensed</option>
+          <option value="Free">Free</option>
+        </select>
+      </label>
       
       <div id="statusBadges" class="status-badges" style="display: inline-flex; margin-left: 10px; align-items: center;">
         <span class="badge" data-status="UpdateAvailable">
@@ -65,6 +73,7 @@
               <th data-key="LatestVersion">Última Versão</th>
               <th data-key="Status">Status</th>
               <th data-key="License">Licença</th>
+              <th data-key="TipoApp">Tipo</th>
               <th data-key="Observation">Observação</th>
               <th>Ações</th>
             </tr>
@@ -115,7 +124,18 @@
 
       <label>
         Licença:
-        <input type="text" id="editLicense" name="License" class="form-control" />
+        <select id="editLicense" name="License" class="form-control">
+          <option value="Licensed">Licensed</option>
+          <option value="Free">Free</option>
+        </select>
+      </label>
+
+      <label>
+        Tipo:
+        <select id="editTipoApp" name="TipoApp" class="form-control">
+          <option value="app comercial">app comercial</option>
+          <option value="app interno">app interno</option>
+        </select>
       </label>
 
       <label>

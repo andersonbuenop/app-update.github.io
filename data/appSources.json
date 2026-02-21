@@ -67,6 +67,20 @@
     "OutputUrl": "https://maven.apache.org/download.cgi",
     "VersionPattern": "apache maven ([0-9]+\\.[0-9]+\\.[0-9]+)"
   },
+  "dax studio": {
+    "Type": "GitHub",
+    "RepoUrl": "https://github.com/DaxStudio/DaxStudio/releases/latest",
+    "OutputUrl": "https://daxstudio.org/downloads/",
+    "VersionPattern": "DAX Studio v([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "License": "Licensed"
+  },
+  "compareplus (plugin for notepad++)": {
+    "Type": "Website",
+    "ScrapeUrl": "https://github.com/pnedev/comparePlus/releases/latest",
+    "OutputUrl": "https://github.com/pnedev/comparePlus",
+    "VersionPattern": "ComparePlus v([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "License": "Licensed"
+  },
   "apache netbeans": {
     "Type": "Website",
     "ScrapeUrl": "https://netbeans.apache.org/download/index.html",
@@ -85,6 +99,13 @@
     "ScrapeUrl": "https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'python'%20and%20IsLatestVersion",
     "OutputUrl": "https://www.python.org/downloads/",
     "VersionPattern": "<d:Version>([0-9]+\\.[0-9]+\\.[0-9]+)</d:Version>"
+  },
+  "databrick cli": {
+    "Type": "Website",
+    "ScrapeUrl": "https://anaconda.org/conda-forge/databricks-cli/files",
+    "OutputUrl": "https://anaconda.org/conda-forge/databricks-cli",
+    "VersionPattern": "databricks-cli-([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "License": "Licensed"
   },
   "node.js": {
     "Type": "GitHub",
@@ -224,9 +245,9 @@
   },
   "cygwin": {
     "Type": "Website",
-    "ScrapeUrl": "https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'cygwin'%20and%20IsLatestVersion",
+    "ScrapeUrl": "https://community.chocolatey.org/packages/cygwin",
     "OutputUrl": "https://www.cygwin.com/",
-    "VersionPattern": "<d:Version>([0-9]+\\.[0-9]+\\.[0-9]+[0-9]*)</d:Version>"
+    "VersionPattern": "Cygwin ([0-9]+\\.[0-9]+\\.[0-9]+)"
   },
   "salesforce cli": {
     "Type": "Website",
@@ -274,7 +295,7 @@
     "Type": "Website",
     "ScrapeUrl": "https://www.dbvis.com/download/",
     "OutputUrl": "https://www.dbvis.com/download/",
-    "VersionPattern": "DBVisualizer ([0-9]+\\.[0-9]+\\.[0-9]+)"
+    "VersionPattern": "(?i)Latest version\\s*([0-9]+\\.[0-9]+\\.[0-9]+)|DBVisualizer\\s*([0-9]+\\.[0-9]+\\.[0-9]+)"
   },
   "sourcetree": {
     "Type": "Website",
@@ -282,11 +303,54 @@
     "OutputUrl": "https://www.sourcetreeapp.com/download-archives",
     "VersionPattern": "<d:Version>([0-9]+\\.[0-9]+\\.[0-9]+)</d:Version>"
   },
-  "autodesk design review": {
+  "design review": {
     "Type": "Website",
     "ScrapeUrl": "https://community.chocolatey.org/api/v2/FindPackagesById()?id=%27designreview%27&filter=IsLastVersion%20eq%20true",
-    "OutputUrl": "https://www.autodesk.com/products/design-review",
-    "VersionPattern": "<d:Version>([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)</d:Version>"
+    "OutputUrl": "https://www.autodesk.com/products/design-review/download",
+    "VersionPattern": "(?:<|&lt;)d:Version(?:>|&gt;)\\s*([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)\\s*(?:</|&lt;/)d:Version(?:>|&gt;)",
+    "License": "Licensed"
+  },
+  "dcu": {
+    "Type": "Website",
+    "ScrapeUrl": "https://community.chocolatey.org/packages/dellcommandupdate",
+    "OutputUrl": "https://www.dell.com/support/home/en-us/drivers/driversdetails?driverid=2wt0j",
+    "VersionPattern": "Dell Command \\| Update ([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "License": "Licensed"
+  },
+  "hxd": {
+    "Type": "Website",
+    "ScrapeUrl": "https://mh-nexus.de/en/hxd/",
+    "OutputUrl": "https://mh-nexus.de/en/hxd/",
+    "VersionPattern": "([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)",
+    "License": "Licensed"
+  },
+  "keystore explorer": {
+    "Type": "Website",
+    "ScrapeUrl": "https://keystore-explorer.org/downloads.html",
+    "OutputUrl": "https://keystore-explorer.org/downloads.html",
+    "VersionPattern": "kse[-_]([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "License": "Licensed"
+  },
+  "ldapadmin": {
+    "Type": "Website",
+    "ScrapeUrl": "https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'ldapadmin'%20and%20IsLatestVersion",
+    "OutputUrl": "http://www.ldapadmin.org/",
+    "VersionPattern": "<d:Version>([0-9]+\\.[0-9]+\\.[0-9]+)</d:Version>",
+    "License": "Licensed"
+  },
+  "maven apache": {
+    "Type": "Website",
+    "ScrapeUrl": "https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'maven'%20and%20IsLatestVersion",
+    "OutputUrl": "https://maven.apache.org/download.cgi",
+    "VersionPattern": "<d:Version>([0-9]+\\.[0-9]+\\.[0-9]+)</d:Version>",
+    "License": "Licensed"
+  },
+  "mongodb command line database tools": {
+    "Type": "Website",
+    "ScrapeUrl": "https://www.mongodb.com/try/download/database-tools",
+    "OutputUrl": "https://www.mongodb.com/try/download/database-tools",
+    "VersionPattern": "MongoDB Database Tools[\\s\\S]*?([0-9]{3}\\.[0-9]+\\.[0-9]+)",
+    "License": "Licensed"
   },
   "autenticação.gov": {
     "Type": "Website",
@@ -312,9 +376,10 @@
     "License": "Licensed"
   },
   "blue prism": {
-    "Type": "Fixed",
-    "Version": "7.4.0",
+    "Type": "Website",
+    "ScrapeUrl": "https://documentation.blueprism.com/bp-7-4/en-us/release-notes/rn-home.htm",
     "OutputUrl": "https://documentation.blueprism.com/bp-7-4/en-us/release-notes/rn-home.htm",
+    "VersionPattern": "([0-9]+\\.[0-9]+\\.[0-9]+)",
     "License": "Licensed"
   },
   "bravo for power bi": {
@@ -327,6 +392,12 @@
     "Type": "Fixed",
     "Version": "5.1.15.287",
     "OutputUrl": "https://www.cisco.com/c/en/us/support/security/anyconnect-secure-mobility-client/series.html",
+    "License": "Licensed"
+  },
+  "crowdstrike": {
+    "Type": "Fixed",
+    "Version": "7.15.18511",
+    "OutputUrl": "https://www.crowdstrike.com/en-us/products/faq/",
     "License": "Licensed"
   },
   "Bruno": {
@@ -354,9 +425,10 @@
   },
   "cloudera odbc driver for impala": {
     "Type": "Website",
-    "ScrapeUrl": "https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20%27cloudera-odbc-driver-for-impala%27%20and%20IsLatestVersion",
-    "OutputUrl": "https://www.cloudera.com/downloads/connectors/impala/odbc/2-6-4.html",
-    "VersionPattern": "<d:Version>([0-9]+\\.[0-9]+\\.[0-9]+)</d:Version>"
+    "ScrapeUrl": "https://www.cloudera.com/downloads/connectors/impala/odbc.html",
+    "OutputUrl": "https://www.cloudera.com/downloads/connectors/impala/odbc.html",
+    "VersionPattern": "Impala ODBC Connector\\s*([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "License": "Licensed"
   },
   "four js genero desktop client": {
     "Type": "Website",
