@@ -2,6 +2,36 @@
 
 Este documento mantém o registro de todas as alterações, melhorias e correções realizadas no projeto **App Update**.
 
+## [Fontes Oficiais para Java, JetBrains e Tratativa de Unknown] - 2026-02-22
+
+### Adicionado
+- **Fontes oficiais para JDK 8 e JDK 17 (Oracle)**:
+    - Entradas `Java SE Development Kit 8 Update 471 (64-bit)` e `Java(TM) SE Development Kit 17.0.17 (64-bit)` passam a usar diretamente as páginas de release notes da Oracle (`8u-relnotes` e `17u-relnotes`) como referência de versão.
+    - As colunas `LatestVersion`, `Website` e `SearchUrl` foram atualizadas para refletir a versão GA mais recente (ex.: `8u481` e `17.0.18`) e apontar explicitamente para essas páginas.
+    - As observações no CSV documentam que a referência é sempre a última versão GA publicada pela Oracle.
+- **Fonte oficial para JetBrains Toolbox**:
+    - Criada entrada dedicada no `appSources.json` usando a API oficial da JetBrains (`data.services.jetbrains.com`, código `TBA`) para obter a versão mais recente do Toolbox App.
+    - A linha `Jetbrains-toolbox` no CSV passa a ter `LatestVersion` e `Status` calculados com base nessa API, mantendo em observação que o aplicativo continua com auto‑update, mas agora com checagem automatizada para inventário.
+
+### Alterado
+- **Configuração de scraping (appSources.json)**:
+    - Adicionadas/ajustadas chaves para:
+        - `java se development kit` e `java(tm) se development kit`, com `ScrapeUrl` apontando para as páginas de release notes da Oracle e regex para capturar a versão GA.
+        - `jetbrains-toolbox`, com `ScrapeUrl` para a API da JetBrains (`code=TBA`) e padrão de versão compatível com o JSON retornado.
+- **Justificativas para Status `Unknown`**:
+    - Várias entradas com `Status = Unknown` que ainda estavam sem observação receberam textos padronizados explicando o motivo:
+        - Aplicações legadas ou específicas de fornecedor (ex.: Mercury x64/x86, SifoxDealv3).
+        - Componentes OpenText integrados ao SAP, distribuídos via portal autenticado.
+        - Agentes de infraestrutura (Dynatrace OneAgent, FlexNet Inventory Agent, NimSoft Agent, Trend Micro Deep Security Agent) geridos por plataformas centrais, sem fonte pública simples por host.
+    - Com isso, o CSV passa a distinguir claramente Unknown por decisão de negócio (sem fonte automatizável) de Unknown por falta de análise.
+
+### Corrigido
+- **Coerência de fontes para Java e JetBrains**:
+    - Removida dependência da API do Adoptium como referência principal para os JDKs 8 e 17, alinhando o status com o que a Oracle publica oficialmente.
+    - JetBrains Toolbox deixa de aparecer como `Unknown` sem fonte, passando a ter fonte oficial e justificativa clara.
+
+---
+
 ## [Exclusão Lógica, Restauração e Limpeza da Tabela] - 2026-02-21
 
 ### Adicionado

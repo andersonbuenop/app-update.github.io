@@ -148,3 +148,29 @@ Este lote foca em otimizações funcionais ligadas a regras de negócio, reduzin
 - Menos chamadas de scraping em massa para apps internos.
 - Menos lógica de decisão por app (reuso de metadados já resolvidos).
 - Execuções mais estáveis e previsíveis, especialmente em ambientes com muitos pacotes corporativos.
+
+---
+
+## Lote 3 - 2026-02-22
+
+### Contexto
+Este lote concentra ajustes finos de fontes de versão para Java e ecossistema JetBrains, além de reforçar a documentação explícita dos casos em que o status `Unknown` é uma decisão consciente (sem fonte automatizável).
+
+### Otimizações Implementadas
+- **JDK 8 e JDK 17 via release notes da Oracle**:
+    - `java se development kit` e `java(tm) se development kit` passam a usar as páginas oficiais de release notes (`8u-relnotes` e `17u-relnotes`) como fonte principal.
+    - Regex de extração foi ajustada para capturar a última versão GA destacada no texto (ex.: `8u481` e `17.0.18`), reduzindo divergências entre inventário e o que a Oracle publica.
+- **JetBrains Toolbox via API oficial**:
+    - Adicionada entrada `jetbrains-toolbox` em `appSources.json` apontando para `data.services.jetbrains.com` com `code=TBA`.
+    - A versão exibida para o Toolbox App passa a vir diretamente do JSON oficial (ex.: `version = 3.2`, `build = 3.2.0.65851`), mantendo o app com auto‑update mas com checagem confiável para inventário.
+- **Outras fontes oficiais reforçadas**:
+    - Neo4j Community configurado para usar a página de release notes oficial (`neo4j.com/release-notes`) em vez de fontes indiretas.
+    - Eclipse Temurin JDK com Hotspot utilizando a página de releases do Adoptium como referência de LTS para Windows x64.
+- **Documentação de Unknowns estruturais**:
+    - Casos em que não há fonte pública estável (agentes de inventário/monitorização, componentes OpenText, apps legados específicos de fornecedor, pequenos utilitários de loja) tiveram observações padronizadas adicionadas ao CSV.
+    - Isso evita reanálises futuras e deixa claro que não se trata de “falha de scraping”, e sim de limitação de negócio/técnica.
+
+### Impacto
+- Redução de divergências entre o que o inventário aponta como “última versão” e as páginas oficiais dos fornecedores.
+- Maior transparência sobre o motivo de cada `Unknown`, facilitando auditorias e priorização de melhorias futuras.
+- Base mais estável para evoluir regras de normalização e comparações específicas por fornecedor (Oracle, JetBrains, Neo4j, etc.).

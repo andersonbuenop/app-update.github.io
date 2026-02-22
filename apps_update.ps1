@@ -505,8 +505,21 @@ function Get-WebsiteLatestVersion {
     $finalUrl = if ($OutputUrl) { $OutputUrl } else { $Url }
 
     try {
-        $html = Invoke-WebRequest -Uri $Url -UseBasicParsing -TimeoutSec 5 -ErrorAction Stop -Headers @{ 'User-Agent' = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' }
-        $content = $html.Content
+        $content = $null
+        if ($Url -match '\.pdf(\?|$)') {
+            $tmp = [System.IO.Path]::GetTempFileName()
+            Invoke-WebRequest -Uri $Url -OutFile $tmp -TimeoutSec 10 -ErrorAction Stop -Headers @{ 'User-Agent' = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' }
+            $bytes = [System.IO.File]::ReadAllBytes($tmp)
+            try {
+                $content = [System.Text.Encoding]::UTF8.GetString($bytes)
+            } catch {
+                $content = [System.Text.Encoding]::ASCII.GetString($bytes)
+            }
+            Remove-Item -Path $tmp -Force
+        } else {
+            $html = Invoke-WebRequest -Uri $Url -UseBasicParsing -TimeoutSec 5 -ErrorAction Stop -Headers @{ 'User-Agent' = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' }
+            $content = $html.Content
+        }
     }
     catch {
         Write-Host " [Web] Timeout/Erro: $($_.Exception.Message)" -ForegroundColor Gray
@@ -518,6 +531,16 @@ function Get-WebsiteLatestVersion {
     }
 
     # Extrair TODAS as versões (não apenas a primeira)
+    if ($Url -match '\.pdf(\?|$)') {
+        $preMatches = [regex]::Matches($content, $VersionPattern)
+        if ($preMatches.Count -eq 0) {
+            $proxy = "https://r.jina.ai/http://" + ($Url -replace '^https?://','')
+            try {
+                $txt = Invoke-WebRequest -Uri $proxy -UseBasicParsing -TimeoutSec 10 -ErrorAction Stop -Headers @{ 'User-Agent' = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' }
+                $content = $txt.Content
+            } catch {}
+        }
+    }
     $allMatches = [regex]::Matches($content, $VersionPattern)
     
     if ($allMatches.Count -gt 0) {
@@ -529,12 +552,24 @@ function Get-WebsiteLatestVersion {
         
         # Se múltiplas versões, pegar a máxima
         if ($versions.Count -gt 1) {
-            try {
-                $maxVersion = $versions | Sort-Object { [Version]$_ } -Descending | Select-Object -First 1
+            # Tentar ordenar como [Version], ignorando entradas inválidas
+            $validVersionObjects = @()
+            foreach ($v in $versions) {
+                try {
+                    $validVersionObjects += [Version]$v
+                }
+                catch {
+                    # Ignorar formatos que não convertem para System.Version
+                }
+            }
+
+            if ($validVersionObjects.Count -gt 0) {
+                $maxVersionObj = $validVersionObjects | Sort-Object -Descending | Select-Object -First 1
+                $maxVersion = $maxVersionObj.ToString()
                 Write-Host " [Web] ✓ Versão encontrada (máx de $($versions.Count)): $maxVersion"
             }
-            catch {
-                # Se falhar conversão para Version, usar ordem alfabética
+            else {
+                # Se nenhuma entrada for um System.Version válido, usar ordem alfabética simples
                 $maxVersion = $versions | Sort-Object -Descending | Select-Object -First 1
                 Write-Host " [Web] ✓ Versão encontrada (máx string de $($versions.Count)): $maxVersion"
             }
@@ -775,7 +810,7 @@ $uniqueData = @()    # Lista para armazenar apenas linhas únicas
 
 # Fallbacks de favicon por marca (nomes normalizados)
 $brandFavicons = @{
-    'google chrome'                 = 'https://www.google.com/favicon.ico'
+    'google chrome'                 = 'https://commons.wikimedia.org/wiki/File:Google_Chrome_icon_(February_2022).svg'
     'android studio'                = 'https://developer.android.com/favicon.ico'
     'autenticação.gov'              = 'https://www.autenticacao.gov.pt/favicon.ico'
     'cisco jabber'                  = 'https://www.cisco.com/favicon.ico'
@@ -784,7 +819,7 @@ $brandFavicons = @{
     'dbeaver'                       = 'https://dbeaver.io/favicon.ico'
     'dbvisualizer'                  = 'https://www.dbvis.com/favicon.ico'
     'ffmpeg'                        = 'https://ffmpeg.org/favicon.ico'
-    'eclipse ide'                   = 'https://www.eclipse.org/favicon.ico'
+    'eclipse ide'                   = 'https://download.eclipse.org/eclipse.org-common/themes/solstice/public/images/logo/eclipse-ide/eclipse_logo.svg'
     'freeplane'                     = 'https://www.freeplane.org/favicon.ico'
     'gimp'                          = 'https://www.gimp.org/favicon.ico'
     'git'                           = 'https://git-scm.com/favicon.ico'

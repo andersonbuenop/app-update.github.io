@@ -180,6 +180,12 @@
     "RepoUrl": "https://github.com/microsoft/vscode/releases/latest",
     "OutputUrl": "https://code.visualstudio.com/"
   },
+  "figma": {
+    "Type": "Website",
+    "ScrapeUrl": "https://desktop.figma.com/mac/version.txt",
+    "OutputUrl": "https://www.figma.com/downloads/",
+    "VersionPattern": "([0-9]+\\.[0-9]+\\.[0-9]+)"
+  },
   "ffmpeg": {
     "Type": "Website",
     "ScrapeUrl": "https://ffmpeg.org/download.html",
@@ -206,6 +212,24 @@
     "ScrapeUrl": "https://www.vlc.org/",
     "OutputUrl": "https://www.vlc.org/",
     "VersionPattern": "VLC\\s+([0-9]+\\.[0-9]+\\.[0-9]+)"
+  },
+  "eclipse temurin jdk with hotspot": {
+    "Type": "Website",
+    "ScrapeUrl": "https://adoptium.net/pt-BR/temurin/releases",
+    "OutputUrl": "https://adoptium.net/pt-BR/temurin/releases",
+    "VersionPattern": "Temurin\\s+([0-9]+\\.[0-9]+\\.[0-9]+\\+[0-9]+)-LTS,\\s*Windows 64 bit"
+  },
+  "java se development kit": {
+    "Type": "Website",
+    "ScrapeUrl": "https://www.oracle.com/java/technologies/javase/8u-relnotes.html",
+    "OutputUrl": "https://www.oracle.com/java/technologies/javase/8u-relnotes.html",
+    "VersionPattern": "JDK (8u[0-9]+) \\(GA"
+  },
+  "java(tm) se development kit": {
+    "Type": "Website",
+    "ScrapeUrl": "https://www.oracle.com/java/technologies/javase/17u-relnotes.html",
+    "OutputUrl": "https://www.oracle.com/java/technologies/javase/17u-relnotes.html",
+    "VersionPattern": "JDK (17\\.0\\.[0-9]+) \\(GA"
   },
   "winmerge": {
     "Type": "GitHub",
@@ -308,15 +332,15 @@
   },
   "neo4j-community": {
     "Type": "Website",
-    "ScrapeUrl": "https://neo4j.com/download-center/#community",
-    "OutputUrl": "https://neo4j.com/download-center/#community",
-    "VersionPattern": "Neo4j\\s+([0-9]{4}\\.[0-9]{2}\\.[0-9]+)"
+    "ScrapeUrl": "https://neo4j.com/release-notes/",
+    "OutputUrl": "https://neo4j.com/release-notes/",
+    "VersionPattern": "The most current release of Neo4j is\\s+([0-9]{4}\\.[0-9]{2}\\.[0-9]+)"
   },
   "eclipse ide": {
     "Type": "Website",
-    "ScrapeUrl": "https://www.eclipse.org/downloads/",
+    "ScrapeUrl": "https://www.eclipse.org/downloads/packages/",
     "OutputUrl": "https://www.eclipse.org/downloads/",
-    "VersionPattern": "Eclipse IDE ([0-9]{4}-[0-9]{2})|Latest Release.*?([0-9]+\\.[0-9]+)"
+    "VersionPattern": "The Eclipse Installer ([0-9]{4}-[0-9]{2}) R"
   },
   "intellij idea": {
     "Type": "Website",
@@ -334,12 +358,35 @@
     "Version": "2025.3.3",
     "OutputUrl": "https://www.jetbrains.com/pycharm/download/"
   },
+  "jetbrains-toolbox": {
+    "Type": "Website",
+    "ScrapeUrl": "https://data.services.jetbrains.com/products/releases?code=TBA&latest=true&type=release",
+    "OutputUrl": "https://www.jetbrains.com/toolbox-app/",
+    "VersionPattern": "\"version\"\\s*:\\s*\"([0-9]+(?:\\.[0-9]+){2,3})\""
+  },
   "android studio": {
     "Type": "Website",
     "ScrapeUrl": "https://developer.android.com/studio/releases",
     "OutputUrl": "https://developer.android.com/studio/releases",
     "VersionPattern": "Android Studio[^|]*\\|\\s*([0-9]{4}\\.[0-9]+\\.[0-9]+(?:\\s*Patch\\s*\\d+)?)",
     "License": "Licensed"
+  },
+  "refinitivworkspace": {
+    "Type": "Website",
+    "ScrapeUrl": "https://www.lseg.com/content/dam/data-analytics/en_us/documents/support/workspace/release-notes.pdf",
+    "OutputUrl": "https://workspace.refinitiv.com",
+    "VersionPattern": "LSEG Workspace\\s*([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "AltScrapeUrl": "https://www.lseg.com/content/dam/data-analytics/en_us/documents/support/workspace/release-notes.pdf",
+    "AltVersionPattern": "(?i)Version\\s*([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "AltVersionPattern2": "(?i)What.?s new in version\\s*([0-9]+\\.[0-9]+\\.[0-9]+)"
+  },
+  "vsplayer": {
+    "Type": "Website",
+    "ScrapeUrl": "https://www.hikvision.com/en/support/tools/hitools/",
+    "OutputUrl": "https://www.hikvision.com/en/support/tools/hitools/",
+    "VersionPattern": "class=\\\"info version\\\">V([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)",
+    "AltScrapeUrl": "https://www.hikvision.com/en/support/tools/hitools/",
+    "AltVersionPattern": "V([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)"
   },
   "dbeaver": {
     "Type": "GitHub",
