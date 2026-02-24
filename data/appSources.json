@@ -13,9 +13,9 @@
   },
   "google chrome": {
     "Type": "Website",
-    "ScrapeUrl": "https://googlechromelabs.github.io/chrome-for-testing/",
+    "ScrapeUrl": "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions.json",
     "OutputUrl": "https://chromeenterprise.google/intl/pt_br/download/?modal-id=download-chrome",
-    "VersionPattern": "([0-9]{3}\\.[0-9]+\\.[0-9]+\\.[0-9]+)"
+    "VersionPattern": "Stable\"\\s*:\\s*\\{[^}]*\"version\"\\s*:\\s*\"([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)\""
   },
   "adobe acrobat reader update": {
     "Type": "Fixed",
