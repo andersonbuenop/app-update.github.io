@@ -13,16 +13,16 @@
   },
   "google chrome": {
     "Type": "Website",
-    "ScrapeUrl": "https://googlechromelabs.github.io/chrome-for-testing/",
+    "ScrapeUrl": "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions.json",
     "OutputUrl": "https://chromeenterprise.google/intl/pt_br/download/?modal-id=download-chrome",
-    "VersionPattern": "([0-9]{3}\\.[0-9]+\\.[0-9]+\\.[0-9]+)"
+    "VersionPattern": "Stable\"\\s*:\\s*\\{[^}]*\"version\"\\s*:\\s*\"([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)\""
   },
   "adobe acrobat reader update": {
     "Type": "Fixed",
     "Version": "25.001.21223",
     "OutputUrl": "https://www.adobe.com/devnet-docs/acrobatetk/tools/ReleaseNotesDC/index.html",
     "ScrapeUrl": "",
-    "License": "Licensed"
+    "License": "Free"
   },
   "adobe acrobat xi pro": {
     "Type": "Fixed",
@@ -283,7 +283,6 @@
     "OutputUrl": "https://posit.co/download/rstudio-desktop/",
     "VersionPattern": "RStudio\\s+([0-9]{4}\\.[0-9]+\\.[0-9]+(?:[-+][0-9]+)?)"
   },
-
   "pgadmin": {
     "Type": "Website",
     "ScrapeUrl": "https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'pgadmin4'%20and%20IsLatestVersion",
@@ -294,7 +293,6 @@
       "pgadmin 4"
     ]
   },
-
   "tabular editor": {
     "Type": "GitHub",
     "RepoUrl": "https://github.com/TabularEditor/TabularEditor/releases/latest",

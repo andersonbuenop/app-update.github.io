@@ -127,7 +127,7 @@ function exportCurrentViewToXlsx() {
     return;
   }
 
-  const headers = ['AppName','appversion','LatestVersion','Website','InstalledVersion','Status','License','TipoApp','Observacao','SourceKey','SearchUrl','IsNewVersion','SourceId','IconUrl','IsDeleted'];
+  const headers = ['AppName', 'appversion', 'LatestVersion', 'Website', 'InstalledVersion', 'Status', 'License', 'TipoApp', 'Observacao', 'SourceKey', 'SearchUrl', 'IsNewVersion', 'SourceId', 'IconUrl', 'IsDeleted'];
   const rows = (state.filtered || []).map(row => {
     const obj = {};
     headers.forEach(h => {
@@ -153,21 +153,21 @@ document.getElementById('updateBtn').addEventListener('click', () => {
   const btn = document.getElementById('updateBtn');
   // const feedback = document.getElementById('updateFeedback'); // Removido conforme solicitado
   const originalText = 'Atualizar Agora';
-  
+
   btn.disabled = true;
   btn.innerText = 'Atualizando...';
-  
+
   // Sem feedback externo
-  
+
   fetch('/run-update', { method: 'POST' })
     .then(r => r.json())
     .then(data => {
       if (data.status === 'success') {
         // Sucesso: Atualiza dados e restaura botão
         if (window.loadData) {
-            window.loadData();
+          window.loadData();
         } else {
-            location.reload(); // Fallback
+          location.reload(); // Fallback
         }
       } else {
         console.error(data.output);
@@ -246,11 +246,11 @@ function initChart() {
       afterDraw: (chart) => {
         const { ctx, chartArea } = chart;
         if (!chartArea) return;
-        
+
         const { left, right } = chartArea;
         const x = (left + right) / 2;
         const y = 20; // Posição vertical no topo (dentro do padding)
-        
+
         ctx.save();
         ctx.fillStyle = '#f0f0f0'; // Mesma cor do título original
         ctx.font = 'bold 14px "Segoe UI", sans-serif';
@@ -316,11 +316,11 @@ function renderTable() {
     if (row.Website) {
       statusButton = `<a href="${row.Website}" target="_blank" rel="noopener noreferrer" class="status-button ${statusClass(row.Status)}">${row.Status || 'Unknown'}</a>`;
     }
-    
+
     // Badge de NOVA Versão
     let latestVersionHtml = row.LatestVersion || '';
     if (row.IsNewVersion && row.IsNewVersion.toLowerCase() === 'true') {
-        latestVersionHtml += ' <span class="badge-new">NEW</span>';
+      latestVersionHtml += ' <span class="badge-new">NEW</span>';
     }
 
     let iconUrl = row.IconUrl || '';
@@ -329,7 +329,7 @@ function renderTable() {
       try {
         const u = new URL(urlCandidate);
         iconUrl = `https://www.google.com/s2/favicons?domain=${u.hostname}&sz=64`;
-      } catch (e) {}
+      } catch (e) { }
     }
     tr.innerHTML = `
       <td class="col-num text-center text-white">${index + 1}</td>
@@ -368,16 +368,16 @@ function openEditModal(index) {
   let licVal = item.License || 'Free';
   // Normaliza para Title Case para bater com o <select> (ex: "free" -> "Free")
   if (licVal) {
-      licVal = licVal.charAt(0).toUpperCase() + licVal.slice(1).toLowerCase();
+    licVal = licVal.charAt(0).toUpperCase() + licVal.slice(1).toLowerCase();
   }
   document.getElementById('editLicense').value = licVal;
   const tipoEl = document.getElementById('editTipoApp');
   if (tipoEl) {
     tipoEl.value = item.TipoApp || 'app comercial';
   }
-  
+
   document.getElementById('editObservacao').value = item.Observacao || '';
-  
+
   // Campos de URL
   document.getElementById('editSourceKey').value = item.SourceKey || '';
   document.getElementById('editSearchUrl').value = item.SearchUrl || '';
@@ -396,7 +396,7 @@ function openEditModal(index) {
       deleteBtn.dataset.mode = 'delete';
     }
   }
-  
+
   // Mostra modal
   const modal = document.getElementById('editModal');
   modal.style.display = 'flex';
@@ -407,36 +407,36 @@ function closeModal() {
 }
 
 function calculateStatus(installed, latest) {
-    if (!installed || !latest) return 'Unknown';
-    
-    // Remove caracteres não numéricos (mantém pontos) para comparação simples
-    const cleanInst = installed.replace(/[^0-9.]/g, '');
-    const cleanLatest = latest.replace(/[^0-9.]/g, '');
-    
-    if (!cleanInst || !cleanLatest) return 'Unknown';
+  if (!installed || !latest) return 'Unknown';
 
-    // Comparação simples de versões (ex: 1.2.3 vs 1.2.4)
-    const v1Parts = cleanInst.split('.').map(Number);
-    const v2Parts = cleanLatest.split('.').map(Number);
-    
-    for (let i = 0; i < Math.max(v1Parts.length, v2Parts.length); i++) {
-        const v1 = v1Parts[i] || 0;
-        const v2 = v2Parts[i] || 0;
-        
-        if (v1 > v2) return 'UpToDate'; // Instalada maior que a última (dev/beta?)
-        if (v1 < v2) return 'UpdateAvailable';
-    }
-    
-    return 'UpToDate';
+  // Remove caracteres não numéricos (mantém pontos) para comparação simples
+  const cleanInst = installed.replace(/[^0-9.]/g, '');
+  const cleanLatest = latest.replace(/[^0-9.]/g, '');
+
+  if (!cleanInst || !cleanLatest) return 'Unknown';
+
+  // Comparação simples de versões (ex: 1.2.3 vs 1.2.4)
+  const v1Parts = cleanInst.split('.').map(Number);
+  const v2Parts = cleanLatest.split('.').map(Number);
+
+  for (let i = 0; i < Math.max(v1Parts.length, v2Parts.length); i++) {
+    const v1 = v1Parts[i] || 0;
+    const v2 = v2Parts[i] || 0;
+
+    if (v1 > v2) return 'UpToDate'; // Instalada maior que a última (dev/beta?)
+    if (v1 < v2) return 'UpdateAvailable';
+  }
+
+  return 'UpToDate';
 }
 
 // Manipulador do formulário de edição
-document.getElementById('editForm').addEventListener('submit', function(e) {
+document.getElementById('editForm').addEventListener('submit', function (e) {
   e.preventDefault();
-  
+
   const originalIndex = parseInt(document.getElementById('editIndex').value);
   const row = state.data.find(r => r._originalIndex === originalIndex);
-  
+
   if (row) {
     row.AppName = document.getElementById('editAppName').value;
     row.appversion = document.getElementById('editAppVersion').value;
@@ -446,120 +446,125 @@ document.getElementById('editForm').addEventListener('submit', function(e) {
     row.License = document.getElementById('editLicense').value;
     row.Observacao = document.getElementById('editObservacao').value;
     row.TipoApp = document.getElementById('editTipoApp').value || 'app comercial';
-    
+
     // Atualiza URLs no objeto row (CSV)
     const newSearchUrl = document.getElementById('editSearchUrl').value;
     const newOutputUrl = document.getElementById('editOutputUrl').value;
-    
+
     row.SearchUrl = newSearchUrl;
     row.Website = newOutputUrl;
 
     // Atualiza JSON se tiver chave
     const sourceKey = document.getElementById('editSourceKey').value;
     if (sourceKey && state.appSources[sourceKey]) {
-        const src = state.appSources[sourceKey];
-        src.OutputUrl = newOutputUrl;
-        
-        // Atualiza ScrapeUrl ou RepoUrl dependendo do que existir ou do Type
-        if (src.RepoUrl) {
-            src.RepoUrl = newSearchUrl;
-        } else {
-            src.ScrapeUrl = newSearchUrl;
-        }
-        
-        // Atualiza Licença (sempre Title Case)
-        src.License = document.getElementById('editLicense').value;
+      const src = state.appSources[sourceKey];
+      src.OutputUrl = newOutputUrl;
+
+      // Atualiza ScrapeUrl ou RepoUrl dependendo do que existir ou do Type
+      if (src.RepoUrl) {
+        src.RepoUrl = newSearchUrl;
+      } else {
+        src.ScrapeUrl = newSearchUrl;
+      }
+
+      // Atualiza Licença (sempre Title Case)
+      src.License = document.getElementById('editLicense').value;
     }
-    
+
     // Recalcula campos derivados se necessário
     const installedVer = parseFloat((row.InstalledVersion || '0').replace(/[^0-9.]/g, '')) || 0;
     const appVer = parseFloat((row.appversion || '0').replace(/[^0-9.]/g, '')) || 0;
     const maxVersion = Math.max(installedVer, appVer);
     row.MergedVersion = maxVersion > 0 ? (row.InstalledVersion || row.appversion || '') : '';
-    
+
     // Atualiza Status dinamicamente
     row.Status = calculateStatus(row.InstalledVersion, row.LatestVersion);
 
-    // Atualiza tabela
-    renderTable();
-    updateChart(); // Atualiza gráfico imediatamente
-    
+    // Se for marcado como app interno, exclui automaticamente da lista principal
+    if ((row.TipoApp || '').toLowerCase() === 'app interno') {
+      row.IsDeleted = 'True';
+    }
+
+    // Atualiza tabela reaplicando os filtros para refletir possível exclusão
+    applyFilters();
+    // updateChart() já é chamado por applyFilters()
+
     // Salva no servidor com feedback visual
     const saveBtn = document.getElementById('saveEditBtn');
     const originalText = saveBtn ? saveBtn.textContent : 'Salvar';
     if (saveBtn) {
-        saveBtn.textContent = 'Salvando...';
-        saveBtn.disabled = true;
+      saveBtn.textContent = 'Salvando...';
+      saveBtn.disabled = true;
     }
 
     saveDataToServer()
-        .then(() => {
-            closeModal();
-        })
-        .finally(() => {
-            if (saveBtn) {
-                saveBtn.textContent = originalText;
-                saveBtn.disabled = false;
-            }
-        });
+      .then(() => {
+        closeModal();
+      })
+      .finally(() => {
+        if (saveBtn) {
+          saveBtn.textContent = originalText;
+          saveBtn.disabled = false;
+        }
+      });
   }
 });
 
 function saveDataToServer() {
   const headers = ['AppName', 'appversion', 'LatestVersion', 'Website', 'InstalledVersion', 'Status', 'License', 'SourceKey', 'SearchUrl', 'Observacao', 'IsNewVersion', 'SourceId', 'IconUrl', 'TipoApp', 'IsDeleted'];
-  
+
   let csvContent = headers.map(h => `"${h}"`).join(',') + '\n';
-  
+
   state.data.forEach(row => {
     const line = headers.map(h => {
-        const val = row[h] || '';
-        return `"${String(val).replace(/"/g, '""')}"`;
+      const val = row[h] || '';
+      return `"${String(val).replace(/"/g, '""')}"`;
     }).join(',');
     csvContent += line + '\n';
   });
-  
+
   // Promise para salvar CSV
   const saveCsv = fetch('/save', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-        filename: 'apps_output.csv',
-        content: csvContent
+      filename: 'apps_output.csv',
+      content: csvContent
     })
   }).then(async r => {
-      const res = await r.json();
-      if (!r.ok) throw new Error(res.error || 'Erro ao salvar CSV');
-      return res;
+    const res = await r.json();
+    if (!r.ok) throw new Error(res.error || 'Erro ao salvar CSV');
+    return res;
   });
 
   // 2. Salvar JSON (se houver dados carregados)
   let saveJson = Promise.resolve();
   if (Object.keys(state.appSources).length > 0) {
-      saveJson = fetch('/save', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            filename: 'appSources.json',
-            content: JSON.stringify(state.appSources, null, 2)
-        })
-      }).then(async r => {
-          const res = await r.json();
-          if (!r.ok) throw new Error(res.error || 'Erro ao salvar JSON');
-          return res;
-      });
+    saveJson = fetch('/save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        filename: 'appSources.json',
+        content: JSON.stringify(state.appSources, null, 2)
+      })
+    }).then(async r => {
+      const res = await r.json();
+      if (!r.ok) throw new Error(res.error || 'Erro ao salvar JSON');
+      return res;
+    });
   }
 
   return Promise.all([saveCsv, saveJson])
-  .then(results => {
+    .then(results => {
       console.log('Salvo com sucesso:', results);
       state.lastCsvText = csvContent;
       return results;
-  })
-  .catch(err => {
+    })
+    .catch(err => {
       console.error('Erro ao salvar:', err);
       alert('Erro ao salvar alterações no servidor.');
       throw err;
-  });
+    });
 }
 
 function applyFilters() {
@@ -592,7 +597,7 @@ function applyFilters() {
   } else {
     renderTable();
   }
-  
+
   // Atualiza o gráfico para refletir o filtro aplicado
   updateChart();
 }
@@ -600,7 +605,7 @@ function applyFilters() {
 // Evento do botão cancelar
 const cancelBtn = document.getElementById('cancelEdit');
 if (cancelBtn) {
-    cancelBtn.addEventListener('click', closeModal);
+  cancelBtn.addEventListener('click', closeModal);
 }
 
 const deleteBtn = document.getElementById('deleteAppBtn');
@@ -615,7 +620,30 @@ if (deleteBtn) {
       row.TipoApp = tipoSelect.value || row.TipoApp || 'app comercial';
     }
     if (mode === 'restore' && (row.TipoApp || '').toLowerCase() === 'app interno') {
-      alert("Para restaurar este aplicativo, altere o Tipo para 'app comercial' antes.");
+      const msg = "Para restaurar este aplicativo, altere o Tipo para 'app comercial' antes.";
+
+      // Inline visual alert
+      let alertDiv = document.getElementById('modal-inline-alert');
+      if (!alertDiv) {
+        alertDiv = document.createElement('div');
+        alertDiv.id = 'modal-inline-alert';
+        alertDiv.style.color = '#ff5555';
+        alertDiv.style.backgroundColor = 'rgba(255, 85, 85, 0.1)';
+        alertDiv.style.border = '1px solid #ff5555';
+        alertDiv.style.padding = '10px';
+        alertDiv.style.marginBottom = '15px';
+        alertDiv.style.borderRadius = '4px';
+        alertDiv.style.fontWeight = 'bold';
+        alertDiv.style.textAlign = 'center';
+        const form = document.getElementById('editForm');
+        form.insertBefore(alertDiv, form.firstChild);
+      }
+      alertDiv.innerText = msg;
+      alertDiv.style.display = 'block';
+      setTimeout(() => { if (alertDiv) alertDiv.style.display = 'none'; }, 6000);
+
+      // Fallback
+      alert(msg);
       return;
     }
     row.IsDeleted = mode === 'delete' ? 'True' : '';
@@ -637,11 +665,11 @@ if (deleteBtn) {
 // Fechar modal ao clicar fora
 const modal = document.getElementById('editModal');
 if (modal) {
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            closeModal();
-        }
-    });
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
 }
 
 function sortBy(key, toggleDir = true) {
@@ -721,7 +749,7 @@ if (licenseSelect) {
 document.querySelectorAll('#statusBadges .badge').forEach(badge => {
   badge.addEventListener('click', () => {
     const status = badge.dataset.status;
-    
+
     // Ciclo: neutro -> crescente -> decrescente -> neutro
     if (state.statusFilter === status) {
       if (state.statusDir === 1) {
@@ -734,7 +762,7 @@ document.querySelectorAll('#statusBadges .badge').forEach(badge => {
       state.statusFilter = status;
       state.statusDir = 1;
     }
-    
+
     updateBadgeStyles();
     applyFilters();
   });
@@ -744,7 +772,7 @@ function updateBadgeStyles() {
   document.querySelectorAll('#statusBadges .badge').forEach(badge => {
     badge.style.opacity = '0.6';
     badge.innerHTML = badge.innerHTML.replace(' ↓', '').replace(' ↑', '');
-    
+
     if (state.statusFilter === badge.dataset.status) {
       badge.style.opacity = '1';
       const arrow = state.statusDir === 1 ? ' ↓' : ' ↑';
@@ -762,43 +790,43 @@ document.querySelectorAll('#appsTable thead th').forEach(th => {
 });
 
 // Inicializa tentando carregar apps_output.csv, com fallback para defaultCsv
-  window.loadData = () => {
-    // Carrega Metadados (Timestamp)
-    fetch('data/metadata.json?t=' + Date.now())
-        .then(r => r.ok ? r.json() : {})
-        .then(meta => {
-            if (meta.lastRun) {
-                document.getElementById('lastUpdate').textContent = 'Última Verificação: ' + meta.lastRun;
-            }
-        })
-        .catch(() => console.log('Sem metadados'));
+window.loadData = () => {
+  // Carrega Metadados (Timestamp)
+  fetch('data/metadata.json?t=' + Date.now())
+    .then(r => r.ok ? r.json() : {})
+    .then(meta => {
+      if (meta.lastRun) {
+        document.getElementById('lastUpdate').textContent = 'Última Verificação: ' + meta.lastRun;
+      }
+    })
+    .catch(() => console.log('Sem metadados'));
 
-    fetch('data/apps_output.csv?t=' + Date.now()) // timestamp para evitar cache
-      .then(r => r.ok ? r.text() : Promise.reject())
-      .then(text => {
-        // Verifica se houve mudança para evitar re-renderizar sem necessidade (opcional, mas bom para UX)
-        if (state.lastCsvText !== text) {
-            state.lastCsvText = text;
-            initFromText(text);
-        }
-      })
-      .catch(() => {
-        // Se falhar e ainda não tiver dados carregados, usa o fallback
-        if (!state.data || state.data.length === 0) {
-            initFromText(defaultCsv);
-        }
-      });
-  };
+  fetch('data/apps_output.csv?t=' + Date.now()) // timestamp para evitar cache
+    .then(r => r.ok ? r.text() : Promise.reject())
+    .then(text => {
+      // Verifica se houve mudança para evitar re-renderizar sem necessidade (opcional, mas bom para UX)
+      if (state.lastCsvText !== text) {
+        state.lastCsvText = text;
+        initFromText(text);
+      }
+    })
+    .catch(() => {
+      // Se falhar e ainda não tiver dados carregados, usa o fallback
+      if (!state.data || state.data.length === 0) {
+        initFromText(defaultCsv);
+      }
+    });
+};
 
-  (function init() {
+(function init() {
   // Carrega appSources.json
   fetch('appSources.json')
-      .then(r => r.ok ? r.json() : {})
-      .then(json => {
-          state.appSources = json;
-          console.log('appSources carregado:', Object.keys(json).length);
-      })
-      .catch(err => console.error('Erro ao carregar appSources.json:', err));
+    .then(r => r.ok ? r.json() : {})
+    .then(json => {
+      state.appSources = json;
+      console.log('appSources carregado:', Object.keys(json).length);
+    })
+    .catch(err => console.error('Erro ao carregar appSources.json:', err));
 
   // Carrega a primeira vez
   window.loadData();
