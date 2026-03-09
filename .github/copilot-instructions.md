@@ -14,8 +14,8 @@ Multi-tier application tracking software versions across inventories (CSV from S
   1. **RuckZuck API** (local Windows app catalog)
   2. **appSources config** (custom regex scraping from websites/GitHub/Chocolatey)
   3. **Fallback**: GitHub API, Chocolatey API, direct website scraping
-- **Output**: `data/apps_output.csv` with columns: `AppName`, `appversion`, `LatestVersion`, `Status`, `IsNewVersion`, `Observacao` (persisted from previous run)
-- **Key insight**: Preserves user-edited "Observacao" across executions; detects new versions since last run (badge in UI)
+- **Output**: `data/apps_output.csv` with 15 columns including: `AppName`, `appversion`, `LatestVersion`, `Status`, `IsNewVersion`, `Observacao`, `License`, `TipoApp`, `IsDeleted`
+- **Key insight**: Preserves user-edited `Observacao` + `License` across executions; detects new versions since last run
 
 #### RuckZuck API Behavior
 - **First run**: Downloads full catalog (~10MB), stores in memory. May take 10-30s depending on network.
@@ -26,24 +26,26 @@ Multi-tier application tracking software versions across inventories (CSV from S
 - **When to bypass**: If RuckZuck is slow or unreliable, add entry to `appSources.json` with `Type: "Website"` or `"GitHub"` to use direct scraping instead.
 
 ### 2. **Frontend: Dashboard** ([index.html](../../index.html) + [assets/js/script.js](../../assets/js/script.js) + [assets/css/style.css](../../assets/css/style.css))
-- **Data load**: `fetch('data/apps_output.csv')` → parsed into `state.data` array
+- **Data load**: `fetch('data/apps_output.csv')` → parsed via `parseCsv()` into `state.data` array
 - **Additional metadata**: `data/appSources.json` (loaded for version pattern rules if needed client-side)
 - **State management**: Single `state` object tracks:
-  - `data`: Full dataset
-  - `filtered`: Current filtered/sorted view
+  - `data`: Full dataset (all rows)
+  - `filtered`: Current filtered/sorted view (respects status, license, search filters + view: main/deleted)
   - `sort`: `{key, dir}` for column sorting (persists across filter changes)
-  - `statusFilter`: Dropdown selection (UpdateAvailable/UpToDate/Unknown)
-  - `chart`: Chart.js doughnut chart instance
+  - `statusFilter` / `licenseFilter`: Dropdown selections
+  - `view`: `'main'` or `'deleted'` (rows with `IsDeleted='true'` hidden in main view)
+  - `chart`: Chart.js doughnut chart instance (only counts `state.filtered`)
 
 ### 3. **Backend: HTTP Server** ([server.py](../../server.py))
 - Serves `index.html` and static assets
-- **POST `/run-update`**: Executes `apps_update.ps1` via PowerShell, returns JSON response
-- **Auto-reload**: Watches `apps_output.csv` for changes, restarts server (useful during scraping)
+- **POST `/run-update`**: Executes `apps_update.ps1` via PowerShell, returns JSON response `{status, output}`
+- **Auto-reload**: Watches `apps_output.csv` for changes, restarts server using `os.execv()` (useful during scraping)
 
 ### 4. **UI State Sync**
 - **Edit modal** (inline form): Loads/saves individual app rows via form submission
-- **Filtering**: Status dropdown + text search → updates `state.filtered` and chart
-- **Modal form** preserves hidden fields (`appversion`, `LatestVersion`, `SourceKey`) so CSV round-trips correctly
+- **Filtering**: Status + License dropdowns + text search → updates `state.filtered` and chart
+- **Modal form** preserves hidden fields (`appversion`, `LatestVersion`, `SourceKey`, `IsDeleted`) so CSV round-trips correctly
+- **Export to XLSX**: Current filtered view exported via `XLSX.utils` library (separate sheets for main/deleted views)
 
 ---
 
@@ -56,12 +58,12 @@ System_Name3 → AppName (normalized lowercase for appSources.json matching)
 Version2 → appversion
 ```
 
-Output CSV contains:
+Output CSV (15 columns, order matters for modal form):
 ```
-AppName, appversion, LatestVersion, Status, License, Observacao, IconUrl, SourceId, IsNewVersion, OutputUrl, SearchUrl
+AppName, appversion, LatestVersion, Website, InstalledVersion, Status, License, SourceKey, SearchUrl, Observacao, IsNewVersion, SourceId, IconUrl, TipoApp, IsDeleted
 ```
 
-**Key constraint**: Modal must preserve all fields when editing (including hidden ones).
+**Key constraint**: Modal form must include **hidden inputs** for `appversion`, `LatestVersion`, `SourceKey`, `IsDeleted` so they preserve when user edits only visible fields (`Observacao`, `License`, `TipoApp`).
 
 ### appSources.json Structure
 ```json
@@ -71,15 +73,16 @@ AppName, appversion, LatestVersion, Status, License, Observacao, IconUrl, Source
     "ScrapeUrl": "https://...",
     "VersionPattern": "regex-with-capture-group",
     "OutputUrl": "download-link",
-    "Version": "hardcoded-version (for Type:Fixed)"
+    "Version": "hardcoded-version (for Type:Fixed)",
+    "License": "Free|Licensed"
   }
 }
 ```
 
-**Design rationale**: Decoupled from app display name so SCCM normalization changes don't break scraping.
+**Design rationale**: Decoupled from app display name so SCCM normalization changes don't break scraping. Keys are lowercase, spaces replaced with `-`.
 
 ### Status Logic
-- **Determined by**: Comparing `LatestVersion` vs `InstalledVersion` via `Compare-AppVersion()` function (PowerShell script, not browser)
+- **Determined by**: Comparing `LatestVersion` vs `appversion` via `Compare-AppVersion()` function (PowerShell script, not browser)
 - **Values**: `UpdateAvailable`, `UpToDate`, `Unknown`
 - **Color coding**: CSS classes `.status-UpdateAvailable` (red), `.status-UpToDate` (green), `.status-Unknown` (blue)
 - **⚠️ Important**: Browser-side `calculateStatus()` is a simplified heuristic and may differ from PowerShell logic. Manual editing of version fields via modal can cause discrepancies until next `apps_update.ps1` run.
@@ -88,128 +91,99 @@ AppName, appversion, LatestVersion, Status, License, Observacao, IconUrl, Source
 
 ## Version Normalization Rules (Critical)
 
-PowerShell script applies complex normalization before comparison. Understanding these is essential to debug "wrong status" issues:
+PowerShell applies complex normalization in `Normalize-Version()` before comparison. Understanding these is essential:
 
 ### Year-based versions
 ```powershell
 # 4-digit years: 2025 → 25 (but only if formatted like 20XX)
-# Partial year replacement: 2025.1.21111 → 25.1.21111 (removes "20" prefix)
-# ExFixing Duplicate Apps (Data Loss Prevention)
-**Symptom**: App count decreased after running script, or expected app is missing from output.
-
-1. **Diagnosis**: Open `data/apps_output.csv` and check row count vs `apps.csv`
-2. **Root cause**: Two rows normalize to same app name (e.g., "Visual Studio 2022" vs "visual studio 2022")
-3. **Solution**:
-   - Edit `apps.csv` to ensure unique normalized names (or remove deliberate duplicates)
-   - Re-run `apps_update.ps1`
-   - Verify deduplication message in console output
-
-### Handling Failed Website Scraping
-**Symptom**: App status is `Unknown`, `LatestVersion` is empty.
-
-1. **Check appSources.json**: Does the app have an entry? Is the regex pattern still valid?
-2. **Test regex**: Open PowerShell console, run:
-   ```powershell
-   $url = 'https://example.com/download'
-   $html = (Invoke-WebRequest -Uri $url).Content
-   if ($html -match 'Version\s+([0-9.]+)') { Write-Host $Matches[1] }
-   ```
-3. **If no match**: Update regex in `appSources.json` or switch to GitHub API (`Type: "GitHub"`, add `RepoUrl`)
-4. **If GitHub**: Preferred fallback; requires valid repo URL (e.g., `https://github.com/owner/repo/releases/latest`)
-5. **Re-run**: `./apps_update.ps1` will use updated config
-
-### Correcting Manual Version Edits
-**Symptom**: Edited app version via modal, but status shows wrong value after page reload.
-
-**Why**: Modal uses browser-side `calculateStatus()` (heuristic), PowerShell uses `Compare-AppVersion()` (accurate). They can differ.
-
-**Solution**:
-- Edit via modal is **temporary** until next PowerShell run
-- For permanent changes, either:
-  1. Re-run `./apps_update.ps1` (official version detection)
-  2. Or edit `data/apps_output.csv` directly **and** modify `appSources.json` for consistency
-- Prefer: Let PowerShell scrape the version; edit only `Observacao` and `License` via modal
-
-### ception: 2026.23.3.1 → stays 2026.23.3.1 (second segment ≥ 10, not a minor version)
+# Partial year replacement: 2025.1.21111 → 25.1.21111 (removes "20" prefix only if 2nd segment < 10)
+# Exception: 2026.23.3.1 → stays 2026.23.3.1 (2nd segment ≥ 10, not a minor version)
 ```
 
 ### 3-part semantic versions with trailing zeros
 ```powershell
 # 25.01.00.0 → 25.01 (strips .0.0 suffix)
 # 25.1.0 → 25.01 (pads minor with leading zero if patch == 0)
-# This reconciles Chocolatey (25.1.0) vs official releases (25.01)
+# Reconciles Chocolatey (25.1.0) vs official releases (25.01)
+```
+
+### 7-Zip special case (app-specific normalization)
+```powershell
+# 7-Zip: 25.1 → 25.01 (pads minor only for this app)
+# Reason: Official site publishes "25.01", Chocolatey packages as "25.1.0"
 ```
 
 ### Why it matters
-- **7-Zip example**: Official site publishes "25.01", Chocolatey packages as "25.1.0". Without normalization, both would look like different apps.
-- **GitHub vs Website scraping**: Different sources format versions differently; normalization makes them comparable.
-- **Gotcha**: Manual CSV edits bypassing normalization can cause status mismatches. Always run the PowerShell script to refresh.
+- **Example**: Adobe Reader "25.001.21151" vs "25.1.21151" normalize to same value despite different input
+- **GitHub vs Website scraping**: Different sources format versions differently; normalization makes them comparable
+- **Gotcha**: Manual CSV edits bypass normalization. Always run PowerShell script to refresh official version discovery
 
 ---
 
 ## App Deduplication
 
 When `apps_update.ps1` processes input CSV:
-1. Normalizes each app name via `Get-NormalizedAppName()` (lowercase, removes extra spaces/numbers)
+1. Normalizes each app name via `Get-NormalizedAppName()` (lowercase, removes extra spaces)
 2. **Skips duplicates silently** (only first occurrence is processed)
-3. Example: Both "Adobe Acrobat 11 Pro" and "adobe acrobat 11 pro" normalize to same key → second is ignored
+3. Example: Both "Adobe Acrobat 11 Pro" and "adobe acrobat 11 pro" normalize to same key → second is skipped
 
-**Implication**: Duplicate rows in source CSV can disappear without warning. Check `apps_output.csv` matches expected app count.
+**Implication**: Duplicate rows in source CSV can disappear without warning. Always check `apps_output.csv` row count matches expected.
 
 ---
 
 ## Common Tasks & Patterns
 
 ### Adding a New App Source
-1. Add entry to `data/appSources.json` with lowercase app name as key
-2. Choose scraping strategy (GitHub API is most reliable; website scraping fragile)
-3. Test regex pattern against target website in PowerShell console
-4. Next `apps_update.ps1` run will auto-discover the version
+1. Add entry to `data/appSources.json` with lowercase app name as key (spaces → hyphens)
+2. Choose scraping strategy: GitHub API (most reliable) > Website regex scraping (fragile) > Fixed version (manual)
+3. Test regex pattern in PowerShell console before committing:
+   ```powershell
+   $html = (Invoke-WebRequest -Uri 'https://...').Content
+   if ($html -match 'Version\s+([0-9.]+)') { $Matches[1] }
+   ```
+4. Next `apps_update.ps1` run will auto-discover version
 
 ### Adding UI Columns
-1. Add `<th data-key="FieldName">` to HTML table header
-2. Add `<td>` rendering in `renderTable()` function (around line 248)
-3. Add CSS class for column width (`.col-fieldname`)
-4. **Important**: If data comes from CSV, update modal form to include hidden input for preservation
+1. Add `<th data-key="FieldName">Label</th>` to HTML table header
+2. Add `<td>` cell in `renderTable()` function (around [line 248](../../assets/js/script.js#L248))
+3. Add CSS width class (`.col-fieldname { width: Xpx; }`)
+4. **If data from CSV**: Update modal form to include hidden input to preserve during edits
 
 ### Debugging Version Discovery
-- Run `apps_update.ps1` manually: `./apps_update.ps1 | Tee-Object -FilePath debug.log`
-- Check `data/apps_output.csv` for missing `LatestVersion` values (indicates scraping failure)
-- Enable `Write-Host` statements in PowerShell for tracing which API succeeded
-- RuckZuck delays first-run API response; subsequent runs cache catalog
+- Run manually with logging: `./apps_update.ps1 | Tee-Object -FilePath debug.log`
+- Check `data/apps_output.csv` for empty `LatestVersion` (indicates scraping failed)
+- Use `-Verbose` flag or add `Write-Host` statements to trace API attempts
+- RuckZuck first run is slow (~30s); subsequent runs use lightweight sync
 
 ### Chart Updates
-- Doughnut chart (`state.chart`) counts `state.filtered` rows, not all data
-- Update triggered by `updateChart()` after filter/sort changes
+- Doughnut chart (`state.chart`) counts `state.filtered` rows (respects current filters)
+- Update triggered by `updateChart()` after status/license filter/sort changes
 - Custom title drawn in `afterDatasetsDraw` plugin (hardcoded "Status dos Apps")
 
 ---
 
 ## Workflows & Commands
 
-### Development Workflow
+### Local Development
 ```bash
-# Terminal 1: Python server (auto-reloads on CSV change)
+# Terminal 1: Start Python server (auto-reloads on apps_output.csv change)
 python server.py
+# Access at http://localhost:8000
 
-# Terminal 2: Edit HTML/CSS/JS, refresh browser after each save
-# Cache busting: Increment version in index.html script/link tags (?v=XX)
-- **Version normalization is one-way**: Manual CSV edits skip normalization logic. Always re-run script for official version discovery.
-- **Browser ≠ PowerShell logic**: Editing versions in modal uses simplified comparison; PowerShell uses robust Win32 version parsing. Expect discrepancies.
-- **Deduplication is silent**: Duplicate normalized names are skipped without console warning. Check output CSV row count.
-- **Preserve Observacao manually**: If you edit appSources.json directly (not via modal), ensure you don't lose existing observations from previous runs.
+# Terminal 2: Edit HTML/CSS/JS, refresh browser after save
+# Cache busting: Increment ?v=NN in index.html script/link tags
 ```
 
 ### Running Version Update
 ```powershell
-# Manual update (from project root)
+# Manual (from project root)
 ./apps_update.ps1
 
-# Or via UI: Click "Atualizar Agora" button → POST /run-update → PowerShell runs script
+# Via UI: Click "Atualizar Agora" button → POST /run-update → executes PowerShell
 ```
 
 ### Testing CSV Parsing
-Modify sample `defaultCsv` string in `script.js` (line ~30) to test edge cases (quoted commas, escaped quotes).
+Modify `defaultCsv` string in [script.js (line ~30)](../../assets/js/script.js#L30) to test edge cases (quoted commas, escaped quotes, empty fields).
 
 ---
 
@@ -217,20 +191,24 @@ Modify sample `defaultCsv` string in `script.js` (line ~30) to test edge cases (
 
 | File | Purpose | When to Edit |
 |------|---------|-------------|
-| `index.html` | Table structure, modal form, control layout | Add columns, reorganize controls |
-| `assets/js/script.js` | State, filtering, rendering, form handling | Core business logic, new features |
-| `assets/css/style.css` | Dark theme, responsive layout, status colors | Styling, theme changes |
-| `apps_update.ps1` | Version scraping logic, API fallbacks | Scraping strategies, new data sources |
-| `server.py` | HTTP + script execution | Port changes, route additions |
-| `data/appSources.json` | Per-app scraping rules | Add/update scraping patterns |
+| [index.html](../../index.html) | Table structure, modal form, controls | Add columns, reorganize UI |
+| [assets/js/script.js](../../assets/js/script.js) | State, filtering, rendering, forms | Core business logic, new features |
+| [assets/css/style.css](../../assets/css/style.css) | Dark theme, responsive layout, colors | Styling, theme changes |
+| [apps_update.ps1](../../apps_update.ps1) | Version scraping, normalization, APIs | Scraping strategies, new sources |
+| [server.py](../../server.py) | HTTP server, PowerShell execution | Port changes, route additions |
+| [data/appSources.json](../../data/appSources.json) | Per-app scraping rules | Add/update scraping patterns |
 
 ---
 
 ## Conventions & Gotchas
 
-- **Portuguese UI**: All user-facing text (labels, placeholders, console messages) in Portuguese
-- **Lowercase app keys**: appSources.json keys must match normalized app names (lowercase, spaces as `-`)
-- **Modal persistence**: Form must include hidden inputs for all CSV fields, even if not displayed
-- **Chart data**: Always operates on `state.filtered`, not `state.data` (reflects current filters)
-- **No build step**: Direct file edits; version queries cached by `?v=` parameter
-- **PowerShell v5.1+**: RuckZuck API requires .NET HTTP client; test on target OS
+- **Portuguese UI**: All user-facing text (labels, buttons, placeholders) must be in Portuguese
+- **Lowercase app keys**: `appSources.json` keys must match normalized names (lowercase, spaces → hyphens)
+- **Modal field order matters**: CSV column order must match form input order for proper round-tripping
+- **Hidden form fields**: `appversion`, `LatestVersion`, `SourceKey`, `IsDeleted` must be preserved even if not displayed
+- **Chart data**: Always operates on `state.filtered`, never `state.data` (reflects active filters)
+- **No build step**: Direct file edits; browser cache bypassed via `?v=` query parameter
+- **PowerShell v5.1+**: Required for RuckZuck API (.NET HTTP client); test on target OS
+- **Version normalization is one-way**: Manual CSV edits skip normalization. Always re-run script for official discovery
+- **Browser ≠ PowerShell**: Editing versions in modal uses simplified comparison; PowerShell uses robust Win32 parsing
+- **Deduplication is silent**: No console warning for duplicate app names. Check output CSV row count
