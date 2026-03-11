@@ -2,8 +2,6 @@
 
 Este documento mantém o registro de todas as alterações, melhorias e correções realizadas no projeto **App Update**.
 
-## [Fontes Oficiais para Java, JetBrains e Tratativa de Unknown] - 2026-02-22
-
 ### Adicionado
 - **Fontes oficiais para JDK 8 e JDK 17 (Oracle)**:
     - Entradas `Java SE Development Kit 8 Update 471 (64-bit)` e `Java(TM) SE Development Kit 17.0.17 (64-bit)` passam a usar diretamente as páginas de release notes da Oracle (`8u-relnotes` e `17u-relnotes`) como referência de versão.
