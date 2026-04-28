@@ -1,0 +1,664 @@
+{
+  "7zip": {
+    "Type": "Website",
+    "ScrapeUrl": "",
+    "OutputUrl": "http://www.7-zip.org/",
+    "VersionPattern": "Download 7-Zip\\s+([0-9]+\\.[0-9]+)",
+    "License": "Licensed"
+  },
+  "notepad++": {
+    "Type": "GitHub",
+    "RepoUrl": "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/latest",
+    "OutputUrl": "https://notepad-plus-plus.org/downloads/"
+  },
+  "google chrome": {
+    "Type": "Website",
+    "ScrapeUrl": "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions.json",
+    "OutputUrl": "https://chromeenterprise.google/intl/pt_br/download/?modal-id=download-chrome",
+    "VersionPattern": "Stable\"\\s*:\\s*\\{[^}]*\"version\"\\s*:\\s*\"([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)\""
+  },
+  "adobe acrobat reader update": {
+    "Type": "Fixed",
+    "Version": "25.001.21223",
+    "OutputUrl": "https://www.adobe.com/devnet-docs/acrobatetk/tools/ReleaseNotesDC/index.html",
+    "ScrapeUrl": "",
+    "License": "Free",
+    "MatchRegex": [
+      "adobe acrobat reader.*update.*",
+      "adobe acrobat reader update.*"
+    ]
+  },
+  "adobe acrobat reader": {
+    "Type": "Fixed",
+    "Version": "25.001.21223",
+    "OutputUrl": "https://www.adobe.com/acrobat/free-trial-download.html",
+    "ScrapeUrl": "",
+    "License": "Free",
+    "MatchRegex": [
+      "adobe acrobat reader.*",
+      "adobe acrobat reader - [0-9]{2}-[0-9]{4}.*"
+    ]
+  },
+  "adobe acrobat xi pro": {
+    "Type": "Fixed",
+    "Version": "11.0.23",
+    "OutputUrl": "https://www.adobe.com/products/acrobat/readstep.html",
+    "License": "Licensed"
+  },
+  "apache directory studio": {
+    "Type": "Fixed",
+    "Version": "2.0.0",
+    "OutputUrl": "https://directory.apache.org/studio/download/",
+    "License": "Licensed"
+  },
+  "apache cxf": {
+    "Type": "Website",
+    "ScrapeUrl": "https://cxf.apache.org/download.html",
+    "OutputUrl": "https://cxf.apache.org/download.html",
+    "VersionPattern": "apache-cxf-([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "MatchRegex": [
+      "apache cfx",
+      "apache cxf"
+    ],
+    "License": "Free"
+  },
+  "apache jmeter": {
+    "Type": "Website",
+    "ScrapeUrl": "https://jmeter.apache.org/download_jmeter.cgi",
+    "OutputUrl": "https://jmeter.apache.org/download_jmeter.cgi",
+    "VersionPattern": "apache-jmeter-([0-9]+\\.[0-9]+\\.[0-9])",
+    "License": "Licensed"
+  },
+  "apache kafka": {
+    "Type": "Website",
+    "ScrapeUrl": "https://kafka.apache.org/community/downloads/",
+    "OutputUrl": "https://kafka.apache.org/community/downloads/",
+    "VersionPattern": "Kafka ([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "License": "Licensed"
+  },
+  "apache maven": {
+    "Type": "Website",
+    "ScrapeUrl": "https://maven.apache.org/download.cgi",
+    "OutputUrl": "https://maven.apache.org/download.cgi",
+    "VersionPattern": "apache maven ([0-9]+\\.[0-9]+\\.[0-9]+)"
+  },
+  "dax studio": {
+    "Type": "GitHub",
+    "RepoUrl": "https://github.com/DaxStudio/DaxStudio/releases/latest",
+    "OutputUrl": "https://daxstudio.org/downloads/",
+    "VersionPattern": "DAX Studio v([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "License": "Licensed"
+  },
+  "compareplus (plugin for notepad++)": {
+    "Type": "Website",
+    "ScrapeUrl": "https://github.com/pnedev/comparePlus/releases/latest",
+    "OutputUrl": "https://github.com/pnedev/comparePlus",
+    "VersionPattern": "ComparePlus v([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "License": "Licensed"
+  },
+  "apache netbeans": {
+    "Type": "Website",
+    "ScrapeUrl": "https://netbeans.apache.org/download/index.html",
+    "OutputUrl": "https://netbeans.apache.org/download/index.html",
+    "VersionPattern": "Apache NetBeans\\s*([0-9]+)",
+    "MatchRegex": [
+      "netbeans ide",
+      "netbeans"
+    ]
+  },
+  "appium inspector": {
+    "Type": "GitHub",
+    "RepoUrl": "https://github.com/appium/appium-inspector/releases/latest",
+    "OutputUrl": "https://github.com/appium/appium-inspector",
+    "VersionPattern": "Appium Inspector\\s*([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "License": "Licensed"
+  },
+  "python": {
+    "Type": "Website",
+    "ScrapeUrl": "https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'python'%20and%20IsLatestVersion",
+    "OutputUrl": "https://www.python.org/downloads/",
+    "VersionPattern": "<d:Version>([0-9]+\\.[0-9]+\\.[0-9]+)</d:Version>"
+  },
+  "nvda": {
+    "Type": "Website",
+    "ScrapeUrl": "https://www.nvaccess.org/download/",
+    "OutputUrl": "https://www.nvaccess.org/download/",
+    "VersionPattern": "NVDA version\\s+([0-9]{4}\\.[0-9]+\\.[0-9]+)"
+  },
+  "databrick cli": {
+    "Type": "Website",
+    "ScrapeUrl": "https://anaconda.org/conda-forge/databricks-cli/files",
+    "OutputUrl": "https://anaconda.org/conda-forge/databricks-cli",
+    "VersionPattern": "databricks-cli-([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "License": "Licensed"
+  },
+  "node.js": {
+    "Type": "GitHub",
+    "RepoUrl": "https://github.com/nodejs/node/releases/latest",
+    "OutputUrl": "https://nodejs.org/"
+  },
+  "git": {
+    "Type": "GitHub",
+    "ApiUrl": "https://api.github.com/repos/git-for-windows/git/releases/latest",
+    "OutputUrl": "https://git-scm.com/download/win"
+  },
+  "docker": {
+    "Type": "Website",
+    "ScrapeUrl": "https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'docker-desktop'%20and%20IsLatestVersion",
+    "OutputUrl": "https://www.docker.com/products/docker-desktop",
+    "VersionPattern": "<d:Version>([0-9]+\\.[0-9]+\\.[0-9]+)</d:Version>"
+  },
+  ".net": {
+    "Type": "Website",
+    "ScrapeUrl": "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/releases-index.json",
+    "OutputUrl": "https://dotnet.microsoft.com/download",
+    "VersionPattern": "\"latest-release\":\\s*\"([0-9]+\\.[0-9]+\\.[0-9]+)\"",
+    "License": "Licensed",
+    "MatchRegex": [
+      "\\.net.*4\\.6\\.1.*",
+      "\\.net.*4\\.8\\.1.*",
+      "\\.net.*8\\..*"
+    ]
+  },
+  ".net 4.6.1": {
+    "Type": "Redirect",
+    "RedirectTo": ".net"
+  },
+  ".net 4.8.1": {
+    "Type": "Redirect",
+    "RedirectTo": ".net"
+  },
+  ".net 8.0": {
+    "Type": "Redirect",
+    "RedirectTo": ".net"
+  },
+  ".net 8": {
+    "Type": "Redirect",
+    "RedirectTo": ".net"
+  },
+  "visual studio": {
+    "Type": "Website",
+    "ScrapeUrl": "https://visualstudio.microsoft.com/downloads/",
+    "OutputUrl": "https://visualstudio.microsoft.com/",
+    "VersionPattern": "Visual Studio\\s+([0-9]{4})"
+  },
+  "tesseract ocr": {
+    "Type": "Website",
+    "ScrapeUrl": "https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'tesseract'%20and%20IsLatestVersion",
+    "OutputUrl": "https://github.com/tesseract-ocr/tesseract/releases",
+    "VersionPattern": "<d:Version>([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)</d:Version>",
+    "License": "Licensed"
+  },
+  "translatorx": {
+    "Type": "Website",
+    "ScrapeUrl": "https://translatorx.org/downloads.html",
+    "OutputUrl": "https://translatorx.org/downloads.html",
+    "VersionPattern": "version\\s+([0-9]+\\.[0-9]+)",
+    "License": "Licensed"
+  },
+  "visual studio buildtools": {
+    "Type": "Website",
+    "ScrapeUrl": "https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'visualstudio2022buildtools'%20and%20IsLatestVersion",
+    "OutputUrl": "https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022",
+    "VersionPattern": "<d:Version>([0-9]+\\.[0-9]+\\.[0-9]+)</d:Version>",
+    "License": "Licensed"
+  },
+  "visual vm": {
+    "Type": "Website",
+    "ScrapeUrl": "https://visualvm.github.io/",
+    "OutputUrl": "https://visualvm.github.io/",
+    "VersionPattern": "VisualVM\\s*([0-9]+\\.[0-9]+\\.[0-9]+)\\s*Released",
+    "License": "Licensed"
+  },
+  "vscode": {
+    "Type": "GitHub",
+    "RepoUrl": "https://github.com/microsoft/vscode/releases/latest",
+    "OutputUrl": "https://code.visualstudio.com/"
+  },
+  "figma": {
+    "Type": "Website",
+    "ScrapeUrl": "https://desktop.figma.com/mac/version.txt",
+    "OutputUrl": "https://www.figma.com/downloads/",
+    "VersionPattern": "([0-9]+\\.[0-9]+\\.[0-9]+)"
+  },
+  "ffmpeg": {
+    "Type": "Website",
+    "ScrapeUrl": "https://ffmpeg.org/download.html",
+    "OutputUrl": "https://ffmpeg.org/",
+    "VersionPattern": "ffmpeg-([0-9]+\\.[0-9]+)"
+  },
+  "obsidian": {
+    "Type": "GitHub",
+    "RepoUrl": "https://github.com/obsidianmd/obsidian-releases/releases/latest",
+    "OutputUrl": "https://obsidian.md/"
+  },
+  "keepassxc": {
+    "Type": "GitHub",
+    "RepoUrl": "https://github.com/keepassxreboot/keepassxc/releases/latest",
+    "OutputUrl": "https://keepassxc.org/"
+  },
+  "gimp": {
+    "Type": "GitHub",
+    "RepoUrl": "https://github.com/GNOME/gimp/releases/latest",
+    "OutputUrl": "https://www.gimp.org/"
+  },
+  "vlc": {
+    "Type": "Website",
+    "ScrapeUrl": "https://www.vlc.org/",
+    "OutputUrl": "https://www.vlc.org/",
+    "VersionPattern": "VLC\\s+([0-9]+\\.[0-9]+\\.[0-9]+)"
+  },
+  "eclipse temurin jdk with hotspot": {
+    "Type": "Website",
+    "ScrapeUrl": "https://api.adoptium.net/v3/assets/latest/25/hotspot?vendor=eclipse&os=windows&architecture=x64&image_type=jdk",
+    "OutputUrl": "https://adoptium.net/pt-BR/temurin/releases/",
+    "VersionPattern": "\"openjdk_version\":\\s*\"([^\"]+)\""
+  },
+  "java se development kit 8": {
+    "Type": "Website",
+    "ScrapeUrl": "https://www.oracle.com/java/technologies/downloads/",
+    "OutputUrl": "https://www.oracle.com/java/technologies/downloads/",
+    "VersionPattern": "Java SE Development Kit ([0-9]+u[0-9]+)",
+    "MatchRegex": [
+      "java.*se.*development.*kit.*8u",
+      "java.*se.*8u",
+      "jdk.*8u",
+      "java.*8u"
+    ]
+  },
+  "java se 8u": {
+    "Type": "Redirect",
+    "RedirectTo": "java se development kit 8"
+  },
+  "jdk 8u": {
+    "Type": "Redirect",
+    "RedirectTo": "java se development kit 8"
+  },
+  "java 8u": {
+    "Type": "Redirect",
+    "RedirectTo": "java se development kit 8"
+  },
+  "java se development kit 17": {
+    "Type": "Website",
+    "ScrapeUrl": "https://www.oracle.com/java/technologies/downloads/",
+    "OutputUrl": "https://www.oracle.com/java/technologies/downloads/",
+    "VersionPattern": "Java SE Development Kit ([0-9]+\\.[0-9]+\\.[0-9]+) downloads",
+    "MatchRegex": [
+      "java.*se.*development.*kit.*17",
+      "java.*se.*17",
+      "jdk.*17",
+      "java.*17"
+    ]
+  },
+  "java se 17": {
+    "Type": "Redirect",
+    "RedirectTo": "java se development kit 17"
+  },
+  "jdk 17": {
+    "Type": "Redirect",
+    "RedirectTo": "java se development kit 17"
+  },
+  "java 17": {
+    "Type": "Redirect",
+    "RedirectTo": "java se development kit 17"
+  },
+  "java se development kit 21": {
+    "Type": "Website",
+    "ScrapeUrl": "https://www.oracle.com/java/technologies/downloads/",
+    "OutputUrl": "https://www.oracle.com/java/technologies/downloads/",
+    "VersionPattern": "Java SE Development Kit ([0-9]+\\.[0-9]+\\.[0-9]+) downloads",
+    "MatchRegex": [
+      "java.*se.*development.*kit.*21",
+      "java.*se.*21",
+      "jdk.*21",
+      "java.*21"
+    ]
+  },
+  "java se 21": {
+    "Type": "Redirect",
+    "RedirectTo": "java se development kit 21"
+  },
+  "jdk 21": {
+    "Type": "Redirect",
+    "RedirectTo": "java se development kit 21"
+  },
+  "java 21": {
+    "Type": "Redirect",
+    "RedirectTo": "java se development kit 21"
+  },
+  "winmerge": {
+    "Type": "GitHub",
+    "RepoUrl": "https://github.com/WinMerge/winmerge/releases/latest",
+    "OutputUrl": "https://winmerge.org/"
+  },
+  "freeplane": {
+    "Type": "GitHub",
+    "RepoUrl": "https://github.com/freeplane/freeplane/releases/latest",
+    "OutputUrl": "https://freeplane.org/"
+  },
+  "terraform": {
+    "Type": "Website",
+    "ScrapeUrl": "https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'terraform'%20and%20IsLatestVersion",
+    "OutputUrl": "https://www.terraform.io/downloads",
+    "VersionPattern": "<d:Version>([0-9]+\\.[0-9]+\\.[0-9]+)</d:Version>"
+  },
+  "helm": {
+    "Type": "Website",
+    "ScrapeUrl": "https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'kubernetes-helm'%20and%20IsLatestVersion",
+    "OutputUrl": "https://helm.sh/",
+    "VersionPattern": "<d:Version>([0-9]+\\.[0-9]+\\.[0-9]+)</d:Version>"
+  },
+  "mongodb": {
+    "Type": "Website",
+    "ScrapeUrl": "https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'mongodb'%20and%20IsLatestVersion",
+    "OutputUrl": "https://www.mongodb.com/try/download/community",
+    "VersionPattern": "<d:Version>([0-9]+\\.[0-9]+\\.[0-9]+)</d:Version>"
+  },
+  "mongodb compass": {
+    "Type": "Website",
+    "ScrapeUrl": "https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'mongodb-compass'%20and%20IsLatestVersion",
+    "OutputUrl": "https://www.mongodb.com/products/tools/compass",
+    "VersionPattern": "<d:Version>([0-9]+\\.[0-9]+\\.[0-9]+)</d:Version>"
+  },
+  "mongodb shell": {
+    "Type": "Website",
+    "ScrapeUrl": "https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'mongodb-shell'%20and%20IsLatestVersion",
+    "OutputUrl": "https://www.mongodb.com/try/download/shell",
+    "VersionPattern": "<d:Version>([0-9]+\\.[0-9]+\\.[0-9]+)</d:Version>"
+  },
+  "oracle sql developer": {
+    "Type": "Website",
+    "ScrapeUrl": "https://www.oracle.com/database/sqldeveloper/technologies/download/",
+    "OutputUrl": "https://www.oracle.com/database/sqldeveloper/technologies/download/",
+    "VersionPattern": "sqldeveloper-([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)"
+  },
+  "rstudio": {
+    "Type": "Website",
+    "ScrapeUrl": "https://posit.co/download/rstudio-desktop/",
+    "OutputUrl": "https://posit.co/download/rstudio-desktop/",
+    "VersionPattern": "RStudio\\s+([0-9]{4}\\.[0-9]+\\.[0-9]+(?:[-+][0-9]+)?)"
+  },
+  "pgadmin": {
+    "Type": "Website",
+    "ScrapeUrl": "https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'pgadmin4'%20and%20IsLatestVersion",
+    "OutputUrl": "https://www.pgadmin.org/download/",
+    "VersionPattern": "<d:Version>([0-9]+\\.[0-9]+\\.[0-9]+)</d:Version>",
+    "MatchRegex": [
+      "pgadmin",
+      "pgadmin 4"
+    ]
+  },
+  "tabular editor": {
+    "Type": "GitHub",
+    "RepoUrl": "https://github.com/TabularEditor/TabularEditor/releases/latest",
+    "OutputUrl": "https://www.tabulareditor.com/"
+  },
+  "postgresql": {
+    "Type": "Website",
+    "ScrapeUrl": "https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'postgresql'%20and%20IsLatestVersion",
+    "OutputUrl": "https://www.postgresql.org/download/",
+    "VersionPattern": "<d:Version>([0-9]+\\.[0-9]+\\.[0-9]+[0-9]*)</d:Version>"
+  },
+  "mysql": {
+    "Type": "Website",
+    "ScrapeUrl": "https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'mysql'%20and%20IsLatestVersion",
+    "OutputUrl": "https://dev.mysql.com/downloads/mysql/",
+    "VersionPattern": "<d:Version>([0-9]+\\.[0-9]+\\.[0-9]+)</d:Version>"
+  },
+  "cygwin": {
+    "Type": "Website",
+    "ScrapeUrl": "https://community.chocolatey.org/packages/cygwin",
+    "OutputUrl": "https://www.cygwin.com/",
+    "VersionPattern": "Cygwin ([0-9]+\\.[0-9]+\\.[0-9]+)"
+  },
+  "salesforce cli": {
+    "Type": "Website",
+    "ScrapeUrl": "https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'sfdx-cli'%20and%20IsLatestVersion",
+    "OutputUrl": "https://developer.salesforce.com/tools/salesforcecli",
+    "VersionPattern": "<d:Version>([0-9]+\\.[0-9]+\\.[0-9]+)</d:Version>"
+  },
+  "azure cli": {
+    "Type": "Website",
+    "ScrapeUrl": "https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'azure-cli'%20and%20IsLatestVersion",
+    "OutputUrl": "https://learn.microsoft.com/cli/azure/install-azure-cli",
+    "VersionPattern": "<d:Version>([0-9]+\\.[0-9]+\\.[0-9]+)</d:Version>"
+  },
+  "neo4j-community": {
+    "Type": "Website",
+    "ScrapeUrl": "https://neo4j.com/release-notes/",
+    "OutputUrl": "https://neo4j.com/release-notes/",
+    "VersionPattern": "The most current release of Neo4j is\\s+([0-9]{4}\\.[0-9]{2}\\.[0-9]+)"
+  },
+  "eclipse ide": {
+    "Type": "Website",
+    "ScrapeUrl": "https://www.eclipse.org/downloads/packages/",
+    "OutputUrl": "https://www.eclipse.org/downloads/",
+    "VersionPattern": "The Eclipse Installer ([0-9]{4}-[0-9]{2}) R"
+  },
+  "intellij idea": {
+    "Type": "Website",
+    "ScrapeUrl": "https://data.services.jetbrains.com/products/releases?code=IIU&latest=true&type=release",
+    "OutputUrl": "https://www.jetbrains.com/idea/download/",
+    "VersionPattern": "\"version\":\\s*\"([0-9]+\\.[0-9]+\\.[0-9]+)\""
+  },
+  "datagrip": {
+    "Type": "Website",
+    "ScrapeUrl": "https://data.services.jetbrains.com/products/releases?code=DB&latest=true&type=release",
+    "OutputUrl": "https://www.jetbrains.com/datagrip/download/",
+    "VersionPattern": "\"version\":\\s*\"([0-9]+\\.[0-9]+\\.[0-9]+)\""
+  },
+  "pycharm": {
+    "Type": "Fixed",
+    "Version": "2025.3.3",
+    "OutputUrl": "https://www.jetbrains.com/pycharm/download/"
+  },
+  "pycharm community": {
+    "Type": "Fixed",
+    "Version": "2025.3.3",
+    "OutputUrl": "https://www.jetbrains.com/pycharm/download/"
+  },
+  "jetbrains-toolbox": {
+    "Type": "Website",
+    "ScrapeUrl": "https://data.services.jetbrains.com/products/releases?code=TBA&latest=true&type=release",
+    "OutputUrl": "https://www.jetbrains.com/toolbox-app/",
+    "VersionPattern": "\"version\"\\s*:\\s*\"([0-9]+(?:\\.[0-9]+){2,3})\""
+  },
+  "android studio": {
+    "Type": "Website",
+    "ScrapeUrl": "https://developer.android.com/studio/releases",
+    "OutputUrl": "https://developer.android.com/studio/releases",
+    "VersionPattern": "Android Studio[^|]*\\|\\s*([0-9]{4}\\.[0-9]+\\.[0-9]+(?:\\s*Patch\\s*\\d+)?)",
+    "License": "Free"
+  },
+  "refinitivworkspace": {
+    "Type": "Website",
+    "ScrapeUrl": "https://www.lseg.com/content/dam/data-analytics/en_us/documents/support/workspace/release-notes.pdf",
+    "OutputUrl": "https://workspace.refinitiv.com",
+    "VersionPattern": "LSEG Workspace\\s*([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "AltScrapeUrl": "https://www.lseg.com/content/dam/data-analytics/en_us/documents/support/workspace/release-notes.pdf",
+    "AltVersionPattern": "(?i)Version\\s*([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "AltVersionPattern2": "(?i)What.?s new in version\\s*([0-9]+\\.[0-9]+\\.[0-9]+)"
+  },
+  "vsplayer": {
+    "Type": "Website",
+    "ScrapeUrl": "https://www.hikvision.com/en/support/tools/hitools/",
+    "OutputUrl": "https://www.hikvision.com/en/support/tools/hitools/",
+    "VersionPattern": "class=\\\"info version\\\">V([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)",
+    "AltScrapeUrl": "https://www.hikvision.com/en/support/tools/hitools/",
+    "AltVersionPattern": "V([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)"
+  },
+  "dbeaver": {
+    "Type": "GitHub",
+    "RepoUrl": "https://github.com/dbeaver/dbeaver/releases/latest",
+    "OutputUrl": "https://dbeaver.io/download/"
+  },
+  "dbvisualizer": {
+    "Type": "Website",
+    "ScrapeUrl": "https://www.dbvis.com/download/",
+    "OutputUrl": "https://www.dbvis.com/download/",
+    "VersionPattern": "Recommended Installers for ([0-9]+\\.[0-9]+)"
+  },
+  "sourcetree": {
+    "Type": "Website",
+    "ScrapeUrl": "https://community.chocolatey.org/api/v2/FindPackagesById()?id=%27sourcetree%27&filter=IsLastVersion%20eq%20true",
+    "OutputUrl": "https://www.sourcetreeapp.com/download-archives",
+    "VersionPattern": "<d:Version>([0-9]+\\.[0-9]+\\.[0-9]+)</d:Version>"
+  },
+  "design review": {
+    "Type": "Fixed",
+    "Version": "14.0.0.177",
+    "OutputUrl": "https://www.autodesk.com/products/design-review/download",
+    "License": "Licensed",
+    "Observacao": "Versão estável x86 (Build 14.0.0.177) que não sofre alterações desde 2017 conforme Autodesk Support."
+  },
+  "dcu": {
+    "Type": "Website",
+    "ScrapeUrl": "https://community.chocolatey.org/packages/dellcommandupdate",
+    "OutputUrl": "https://www.dell.com/support/home/en-us/drivers/driversdetails?driverid=2wt0j",
+    "VersionPattern": "Dell Command \\| Update ([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "License": "Licensed"
+  },
+  "hxd": {
+    "Type": "Website",
+    "ScrapeUrl": "https://mh-nexus.de/en/hxd/",
+    "OutputUrl": "https://mh-nexus.de/en/hxd/",
+    "VersionPattern": "([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)",
+    "License": "Licensed"
+  },
+  "keystore explorer": {
+    "Type": "Website",
+    "ScrapeUrl": "https://keystore-explorer.org/downloads.html",
+    "OutputUrl": "https://keystore-explorer.org/downloads.html",
+    "VersionPattern": "kse[-_]([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "License": "Licensed"
+  },
+  "ldapadmin": {
+    "Type": "Website",
+    "ScrapeUrl": "https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'ldapadmin'%20and%20IsLatestVersion",
+    "OutputUrl": "http://www.ldapadmin.org/",
+    "VersionPattern": "<d:Version>([0-9]+\\.[0-9]+\\.[0-9]+)</d:Version>",
+    "License": "Free"
+  },
+  "maven apache": {
+    "Type": "Website",
+    "ScrapeUrl": "https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'maven'%20and%20IsLatestVersion",
+    "OutputUrl": "https://maven.apache.org/download.cgi",
+    "VersionPattern": "<d:Version>([0-9]+\\.[0-9]+\\.[0-9]+)</d:Version>",
+    "License": "Licensed"
+  },
+  "mongodb command line database tools": {
+    "Type": "Website",
+    "ScrapeUrl": "https://www.mongodb.com/try/download/database-tools",
+    "OutputUrl": "https://www.mongodb.com/try/download/database-tools",
+    "VersionPattern": "MongoDB Database Tools[\\s\\S]*?([0-9]{3}\\.[0-9]+\\.[0-9]+)",
+    "License": "Licensed"
+  },
+  "autenticação.gov": {
+    "Type": "Website",
+    "ScrapeUrl": "https://www.autenticacao.gov.pt/cc-aplicacao",
+    "OutputUrl": "https://www.autenticacao.gov.pt/cc-aplicacao",
+    "VersionPattern": "(?:\\(\\s*)?v\\s*([0-9]+(?:\\.[0-9]+){1,2})(?:\\s*\\))?",
+    "AltScrapeUrl": "https://amagovpt.github.io/docs.autenticacao.gov/user_manual.html",
+    "AltOutputUrl": "https://amagovpt.github.io/docs.autenticacao.gov/user_manual.html",
+    "AltVersionPattern": "v\\s*([0-9]+(?:\\.[0-9]+){1,2})",
+    "AltVersionPattern2": "(?i)vers[aã]o\\s*([0-9]+(?:\\.[0-9]+){1,2})",
+    "License": "Licensed"
+  },
+  "dwg true view": {
+    "Type": "Website",
+    "ScrapeUrl": "https://community.chocolatey.org/api/v2/FindPackagesById()?id=%27dwgtrueview%27&filter=IsLastVersion%20eq%20true",
+    "OutputUrl": "https://www.autodesk.com/products/dwg-trueview/overview",
+    "VersionPattern": "(?:<|&lt;)d:Version(?:>|&gt;)\\s*([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)\\s*(?:</|&lt;/)d:Version(?:>|&gt;)",
+    "Observacao": "Versão x64 obtida via Chocolatey OData API."
+  },
+  "bloomberg terminal": {
+    "Type": "Fixed",
+    "Version": "189.3.81",
+    "OutputUrl": "https://www.bloomberg.com/professional/support/documentation/release-notes/",
+    "License": "Licensed"
+  },
+  "blue prism": {
+    "Type": "Website",
+    "ScrapeUrl": "https://documentation.blueprism.com/bp-7-4/en-us/release-notes/rn-home.htm",
+    "OutputUrl": "https://documentation.blueprism.com/bp-7-4/en-us/release-notes/rn-home.htm",
+    "VersionPattern": "([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "License": "Licensed"
+  },
+  "bravo for power bi": {
+    "Type": "GitHub",
+    "RepoUrl": "https://github.com/sql-bi/Bravo/releases/latest",
+    "OutputUrl": "https://www.sqlbi.com/tools/bravo-for-power-bi/",
+    "License": "Licensed"
+  },
+  "cisco secure client": {
+    "Type": "Fixed",
+    "Version": "5.1.15.287",
+    "OutputUrl": "https://www.cisco.com/c/en/us/support/security/anyconnect-secure-mobility-client/series.html",
+    "License": "Licensed"
+  },
+  "crowdstrike": {
+    "Type": "Fixed",
+    "Version": "7.15.18511",
+    "OutputUrl": "https://www.crowdstrike.com/en-us/products/faq/",
+    "License": "Licensed"
+  },
+  "bruno": {
+    "Type": "GitHub",
+    "RepoUrl": "https://github.com/usebruno/bruno/releases/latest",
+    "OutputUrl": "https://www.usebruno.com/downloads"
+  },
+  "jabber": {
+    "Type": "Website",
+    "OutputUrl": "https://www.webex.com/downloads/jabber.html",
+    "ChocolateyId": "jabber"
+  },
+  "webex": {
+    "Type": "Website",
+    "ScrapeUrl": "https://help.webex.com/en-us/article/mqkve8/Webex-App-%7C-Release-notes",
+    "OutputUrl": "https://www.webex.com/downloads/webex-app.html",
+    "VersionPattern": "<p class=\"p\">Windows—([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)</p>"
+  },
+  "vysor": {
+    "Type": "Website",
+    "ScrapeUrl": "https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20%27vysor%27%20and%20IsLatestVersion",
+    "OutputUrl": "https://www.vysor.io/#download",
+    "VersionPattern": "<d:Version>([0-9]+\\.[0-9]+\\.[0-9]+)</d:Version>"
+  },
+  "cloudera odbc driver for impala": {
+    "Type": "Website",
+    "ScrapeUrl": "https://www.cloudera.com/downloads/connectors/impala/odbc.html",
+    "OutputUrl": "https://www.cloudera.com/downloads/connectors/impala/odbc.html",
+    "VersionPattern": "Impala ODBC Connector\\s*([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "License": "Licensed"
+  },
+  "four js genero desktop client": {
+    "Type": "Website",
+    "ScrapeUrl": "https://4js.com/online_documentation/fjs-genero-manual-install-html/genero-install-topics/c_gdc_install.html",
+    "OutputUrl": "https://4js.com/download/",
+    "VersionPattern": "(?i)GDC\\s*([0-9]+\\.[0-9]+(?:\\.[0-9]+)?)"
+  },
+  "pdf24 creator": {
+    "Type": "Website",
+    "ScrapeUrl": "https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'pdf24'%20and%20IsLatestVersion",
+    "OutputUrl": "https://tools.pdf24.org/en/creator",
+    "VersionPattern": "(?:<|&lt;)d:Version(?:>|&gt;)\\s*([0-9]+(?:\\.[0-9]+){1,3})\\s*(?:</|&lt;/)d:Version(?:>|&gt;)"
+  },
+  "gephi": {
+    "Type": "Website",
+    "ScrapeUrl": "https://community.chocolatey.org/api/v2/Packages()?$filter=Id%20eq%20'gephi'%20and%20IsLatestVersion",
+    "OutputUrl": "https://gephi.org/",
+    "VersionPattern": "(?:<|&lt;)d:Version(?:>|&gt;)\\s*([0-9]+(?:\\.[0-9]+){1,3})\\s*(?:</|&lt;/)d:Version(?:>|&gt;)"
+  },
+  "gitkraken": {
+    "Type": "Website",
+    "ScrapeUrl": "https://help.gitkraken.com/gitkraken-desktop/current/",
+    "OutputUrl": "https://www.gitkraken.com/download",
+    "VersionPattern": "Version\\s+([0-9]+\\.[0-9]+\\.[0-9]+)"
+  },
+  "caseware idea": {
+    "Type": "Fixed",
+    "Version": "12.3",
+    "OutputUrl": "https://www.caseware.com/products/idea",
+    "License": "Licensed"
+  }
+}
